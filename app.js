@@ -6,6 +6,12 @@ var pac_color;
 var start_time;
 var time_elapsed;
 var interval;
+var packBody = new Object();
+packBody.x = 0.15;
+packBody.y = 1.85;
+var eye = new Object();
+eye.x = 5;
+eye.y = -15;
 
 $(document).ready(function() {
 	context = canvas.getContext("2d");
@@ -69,7 +75,7 @@ function Start() {
 		},
 		false
 	);
-	interval = setInterval(UpdatePosition, 250);
+	interval = setInterval(UpdatePosition, 100);
 }
 
 function findRandomEmptyCell(board) {
@@ -106,19 +112,36 @@ function Draw() {
 			var center = new Object();
 			center.x = i * 60 + 30;
 			center.y = j * 60 + 30;
-			var direction = new Object();
-			direction.x = 0.15 * Math.PI;
-			direction.y = 1.85 * Math.PI;
+		
 			if (board[i][j] == 2) {
-				if(GetKeyPressed() == 3 || GetKeyPressed() == 4 ){
+				if(GetKeyPressed() == 4){ //Right
+					packBody.x = 0.15;
+					packBody.y = 1.85;
 					context.beginPath();
 					context.arc(center.x, center.y, 30, 0.15 * Math.PI, 1.85 * Math.PI); // half circle
 				}
-				else if (GetKeyPressed() == 1 || GetKeyPressed() == 2 ){
+				else if (GetKeyPressed() == 3){ //Left
+					packBody.x = 1.15;
+					packBody.y = 0.85;
 					context.beginPath();
 					context.arc(center.x, center.y, 30, 1.15 * Math.PI, 0.85 * Math.PI); // half circle
 				}
-				
+				else if(GetKeyPressed() == 2){ //Down
+					packBody.x = 0.65;
+					packBody.y = 0.35;
+					context.beginPath();
+					context.arc(center.x, center.y, 30, 0.65 * Math.PI, 0.35 * Math.PI); // half circle
+				}
+				else if(GetKeyPressed() == 1){ // Up
+					packBody.x = 1.65;
+					packBody.y = 1.35;
+					context.beginPath();
+					context.arc(center.x, center.y, 30, 1.65 * Math.PI, 1.35 * Math.PI); // half circle
+				}
+				else{
+					context.beginPath();
+					context.arc(center.x, center.y, 30, packBody.x * Math.PI, packBody.y * Math.PI); // half circle
+				}
 			//	else if (GetKeyPressed() == 3 || GetKeyPressed() == 4){
 			//		context.beginPath();
 			//		context.arc( center.x, center.y, 30, 0.15 * Math.PI, 1.85 * Math.PI); // half circle
@@ -127,7 +150,21 @@ function Draw() {
 				context.fillStyle = pac_color; //color
 				context.fill();
 				context.beginPath();
-				context.arc(center.x + 5, center.y - 15, 5, 0, 2 * Math.PI); // circle
+				
+				if(GetKeyPressed() == 2 || GetKeyPressed() == 1){
+					eye.x = 15;
+					eye.y = -5;
+					context.arc(center.x + 15, center.y - 5, 5, 0, 2 * Math.PI); // circle
+				}
+				else if(GetKeyPressed() == 4 || GetKeyPressed() == 3){
+					eye.x = 5;
+					eye.y = -15;
+					context.arc(center.x + 5, center.y - 15, 5, 0, 2 * Math.PI); // circle	
+				}
+				else{
+					context.arc(center.x + eye.x, center.y+eye.y, 5, 0, 2 * Math.PI); // circle
+				}
+				
 				context.fillStyle = "black"; //color
 				context.fill();
 			} else if (board[i][j] == 1) {
