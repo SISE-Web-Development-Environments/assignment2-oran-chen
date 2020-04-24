@@ -2,6 +2,7 @@ var context;
 var shape = new Object();
 var board;
 var score;
+var remain_lives;
 var pac_color;
 var start_time;
 var time_elapsed;
@@ -13,6 +14,7 @@ var eye = new Object();
 eye.x = 5;
 eye.y = -15;
 
+
 $(document).ready(function() {
 	context = canvas.getContext("2d");
 	Start();
@@ -21,6 +23,7 @@ $(document).ready(function() {
 function Start() {
 	board = new Array();
 	score = 0;
+	remain_lives = 5;
 	pac_color = "yellow";
 	var cnt = 100;
 	var food_remain = 50;
@@ -35,7 +38,10 @@ function Start() {
 				(i == 3 && j == 4) ||
 				(i == 3 && j == 5) ||
 				(i == 6 && j == 1) ||
-				(i == 6 && j == 2)
+				(i == 6 && j == 2) || 
+				(i == 5 && j == 8) ||
+				(i == 6 && j == 8) ||
+				(i == 7 && j == 8) 
 			) {
 				board[i][j] = 4;
 			} else {
@@ -60,6 +66,10 @@ function Start() {
 		board[emptyCell[0]][emptyCell[1]] = 1;
 		food_remain--;
 	}
+
+	var emptyCell = findRandomEmptyCell(board);
+	board[emptyCell[0]][emptyCell[1]] = 6; //Medicine
+
 	keysDown = {};
 	addEventListener(
 		"keydown",
@@ -107,6 +117,7 @@ function Draw() {
 	canvas.width = canvas.width; //clean board
 	lblScore.value = score;
 	lblTime.value = time_elapsed;
+	lblLifes.value = remain_lives;
 	for (var i = 0; i < 10; i++) {
 		for (var j = 0; j < 10; j++) {
 			var center = new Object();
@@ -142,10 +153,7 @@ function Draw() {
 					context.beginPath();
 					context.arc(center.x, center.y, 30, packBody.x * Math.PI, packBody.y * Math.PI); // half circle
 				}
-			//	else if (GetKeyPressed() == 3 || GetKeyPressed() == 4){
-			//		context.beginPath();
-			//		context.arc( center.x, center.y, 30, 0.15 * Math.PI, 1.85 * Math.PI); // half circle
-			//	}
+			
 				context.lineTo(center.x, center.y);
 				context.fillStyle = pac_color; //color
 				context.fill();
@@ -167,16 +175,30 @@ function Draw() {
 				
 				context.fillStyle = "black"; //color
 				context.fill();
-			} else if (board[i][j] == 1) {
+			} else if (board[i][j] == 1) { //Points
 				context.beginPath();
 				context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // circle
 				context.fillStyle = "black"; //color
 				context.fill();
-			} else if (board[i][j] == 4) {
-				context.beginPath();
-				context.rect(center.x - 30, center.y - 30, 60, 60);
-				context.fillStyle = "grey"; //color
-				context.fill();
+			} else if (board[i][j] == 4) { //Wall
+				var img;
+				//context.beginPath();
+				//context.rect(center.x - 30, center.y - 30, 60, 60);
+				//context.fillStyle = "grey"; //color
+				//context.fill();
+			
+				img = document.getElementById("wall");
+				context.drawImage(img, center.x - 30, center.y - 30,60,60);
+			}
+			else if(board[i][j] == 5){ //Ghost
+				var img;
+				img = document.getElementById("ghost");
+				context.drawImage(img, center.x - 30, center.y - 30,60,60);
+			}
+			else if(board[i][j] == 6){ //Medicine
+				var img;
+				img = document.getElementById("medicine");
+				context.drawImage(img, center.x - 30, center.y - 30,60,60);
 			}
 		}
 	}
@@ -206,7 +228,11 @@ function UpdatePosition() {
 		}
 	}
 	if (board[shape.i][shape.j] == 1) {
-		score++;
+		score+= 2;
+	}
+	
+	if (board[shape.i][shape.j] == 6) { // Medicine
+		remain_lives += 1;
 	}
 	board[shape.i][shape.j] = 2;
 	var currentTime = new Date();
@@ -214,10 +240,23 @@ function UpdatePosition() {
 	if (score >= 20 && time_elapsed <= 10) {
 		pac_color = "green";
 	}
-	if (score == 50) {
+
+	if(time_elapsed >= 60){ //Maximum time game
 		window.clearInterval(interval);
-		window.alert("Game completed");
-	} else {
+		if(score < 100){
+			window.alert("You are better than " + score + " points!");
+		}
+		else{
+			window.alert("Winner!!!");
+		}
+	}
+	else if (score >= 50) {
+		window.clearInterval(interval);
+		window.alert("Winner!!!");
+	} else if(remain_lives == 0){
+		window.alert("Loser!");
+	}
+	else{
 		Draw();
 	}
 }

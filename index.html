@@ -7,10 +7,13 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 		<link rel="stylesheet" type="text/css" href="style.css" />
+		
 	</head>
 	
 	<body>
-		<div id="main_page">
+		<img id="wall" src="images/wall.jpg" alt="wall" width="220" height="277" style="display: none;">
+		<img id="medicine" src="images/medicine.jpg" alt="medicine" width="220" height="277" style="display: none;">
+		<div id="menue_bar">
 			<menu type="toolbar">
 				<nav class="navbar navbar-inverse">
 					<div class="container-fluid">
@@ -35,6 +38,10 @@
 			<div id="time">
 				<label for="lblTime">TIME:</label>
 				<input id="lblTime" type="text" />
+			</div>
+			<div id="Lifes">
+				<label for="lblLifes">Lifes:</label>
+				<input id="lblLifes" type="text" />
 			</div>
 			<canvas id="canvas" height="600" width="600"></canvas>
 		</div>
