@@ -3,19 +3,75 @@
 	<head>
 		<script src="./jquery-3.4.1.slim.min.js"></script>
 		<script type="text/javascript" src="./app.js"></script>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+		
 	</head>
-
+	
 	<body>
-		<div id="score">
-			<label for="lblScore">SCORE:</label>
-			<input id="lblScore" type="text" />
+		<div id="main_page">
+			<menu type="toolbar">
+				<nav class="navbar navbar-inverse">
+					<div class="container-fluid">
+					  <div class="navbar-header">
+						<a class="navbar-brand" href="#">Packman</a>
+					  </div>
+						<button class="tablinks" onclick="replaceWindow(event,'welcome')">Welcome</button>
+						  <button class="tablinks" onclick="replaceWindow(event,'register')">Register</button>
+						  <button class="tablinks" onclick="replaceWindow(event,'login')">Login</button>
+						  <button class="tablinks" onclick="replaceWindow(event,'about')">About</button>
+					</div>
+				  </nav>
+					
+			</menu>
 		</div>
-		<div id="time">
-			<label for="lblTime">TIME:</label>
-			<input id="lblTime" type="text" />
-		</div>
-		<div id="game">
+
+		<div id="game" class="tab">
+			<div id="score">
+				<label for="lblScore">SCORE:</label>
+				<input id="lblScore" type="text" />
+			</div>
+			<div id="time">
+				<label for="lblTime">TIME:</label>
+				<input id="lblTime" type="text" />
+			</div>
 			<canvas id="canvas" height="600" width="600"></canvas>
 		</div>
+		<div id="Welcome" class="tab">
+			<img class="images" src="images/Packman.jpg" alt="images" width="220" height="190">
+			<button class="btn btn-danger navbar-btn" onclick="replaceWindow('game')">Game</button>
+		</div>
+		<div id="register" class="tab">
+
+		</div>
+		<div id="login" class="tab">
+
+		</div>
+
+		<div id="about" class="tab">
+
+		</div>
 	</body>
+	<script>
+		function replaceWindow(evt,param_div){
+			clearWindow();
+			document.getElementById(param_div).style.display = "block";
+			evt.currentTarget.className += " active";
+		}
+
+		function clearWindow(){
+			element = document.getElementsByClassName("tab");
+  			for (i = 0; i < element.length; i++) {
+    			element[i].style.display = "none";
+			  }
+			
+			tablinks = document.getElementsByClassName("tablinks");
+  			for (i = 0; i < tablinks.length; i++) {
+    		tablinks[i].className = tablinks[i].className.replace(" active", "");
+  			}
+		}
+
+		document.getElementById("welcome").click();
+	</script>
 </html>

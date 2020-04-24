@@ -85,7 +85,7 @@ function findRandomEmptyCell(board) {
 function GetKeyPressed() {
 	if (keysDown[38]) {
 		return 1;
-	}
+	}	
 	if (keysDown[40]) {
 		return 2;
 	}
@@ -106,9 +106,23 @@ function Draw() {
 			var center = new Object();
 			center.x = i * 60 + 30;
 			center.y = j * 60 + 30;
+			var direction = new Object();
+			direction.x = 0.15 * Math.PI;
+			direction.y = 1.85 * Math.PI;
 			if (board[i][j] == 2) {
-				context.beginPath();
-				context.arc(center.x, center.y, 30, 0.15 * Math.PI, 1.85 * Math.PI); // half circle
+				if(GetKeyPressed() == 3 || GetKeyPressed() == 4 ){
+					context.beginPath();
+					context.arc(center.x, center.y, 30, 0.15 * Math.PI, 1.85 * Math.PI); // half circle
+				}
+				else if (GetKeyPressed() == 1 || GetKeyPressed() == 2 ){
+					context.beginPath();
+					context.arc(center.x, center.y, 30, 1.15 * Math.PI, 0.85 * Math.PI); // half circle
+				}
+				
+			//	else if (GetKeyPressed() == 3 || GetKeyPressed() == 4){
+			//		context.beginPath();
+			//		context.arc( center.x, center.y, 30, 0.15 * Math.PI, 1.85 * Math.PI); // half circle
+			//	}
 				context.lineTo(center.x, center.y);
 				context.fillStyle = pac_color; //color
 				context.fill();
