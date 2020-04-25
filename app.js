@@ -8,19 +8,30 @@ var start_time;
 var time_elapsed;
 var interval;
 var packBody = new Object();
-packBody.x = 0.15;
-packBody.y = 1.85;
 var eye = new Object();
-eye.x = 5;
-eye.y = -15;
 
+// $(document).ready(function() {
+// 	context = canvas.getContext("2d");
+// 	Start();
+// });
 
-$(document).ready(function() {
-	context = canvas.getContext("2d");
+function stopInterval(){
+	clearInterval(interval);
+}
+
+function startGame() {
+	canvas = document.getElementById("canvas");
+	 context = canvas.getContext("2d");
+	 clearCanvas(context,canvas);
 	Start();
-});
+}
 
 function Start() {
+	packBody.x = 0.15;
+	packBody.y = 1.85;
+	eye.x = 5;
+	eye.y = -15;
+	clearInterval(interval);
 	board = new Array();
 	score = 0;
 	remain_lives = 5;
@@ -259,4 +270,6 @@ function UpdatePosition() {
 	else{
 		Draw();
 	}
+
+	
 }
