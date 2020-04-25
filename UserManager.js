@@ -32,29 +32,29 @@ function addUserToStorage(user){
 //find the logined user in the existing users
 function userManagerLogin(){
     //get values from the login fields
-    var usernameL = $('#uname_log').val();
     var passwordL = $('#psw_log').val();
+    var usernameL = $('#uname_log').val();
 
     var front_display = document.getElementById('front_display');
-    debugger
     //if a user with such user name and password does not exist
     if(!validateUserExists(usernameL, passwordL)){
         alert("The user doesn't exist in the system, please enter the details again");
     }else{ //does exist, connect him
-        session_user = sessionStorage.getItem("usernameL");
-        front_display.innerHTML = "The user " + session_user.fullname + "is currently logged in.";
+        session_user = JSON.parse(sessionStorage.getItem(usernameL));
+        front_display.innerHTML = "The user " + session_user.fullname + " is currently logged in.";
         document.getElementById('login').style.display='none';
     }
 }
 
 //check if the user exists
 function validateUserExists(usernameL, passwordL){
-    var userStored = sessionStorage.getItem(usernameL);
+    var userStored = JSON.parse(sessionStorage.getItem(usernameL));
     //if no such user was found
     if (userStored == null){
         return false;
     }else{  //compare their passwords
-        return userStored.password == passwordL;
+        var pass = userStored.password;
+        return pass == passwordL;
     }
 }
 

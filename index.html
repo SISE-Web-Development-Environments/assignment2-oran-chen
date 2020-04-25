@@ -149,7 +149,7 @@
 		//store users in the session storage
 		var pUser = new User({username:'p', password:'p', fullname:'p_p', email:'p_p@gmail.com'});
 		//default user - p
-		sessionStorage.setItem(pUser.username, pUser);
+		sessionStorage.setItem(pUser.username, JSON.stringify(pUser));
 
 		document.getElementById('front_display').innerHTML = "Please login to start the game ";
 
