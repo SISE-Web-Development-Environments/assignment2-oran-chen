@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		<title>Chen and Oran's Packman </title>
 		<script src="./jquery-3.4.1.slim.min.js"></script>
 		<script type="text/javascript" src="./app.js"></script>
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 		<link rel="stylesheet" type="text/css" href="style.css" />
+		<script type="text/javascript" src="./UserManager.js"></script>
 		
 	</head>
 	
@@ -20,14 +22,17 @@
 					  <div class="navbar-header">
 						<a class="navbar-brand" href="#">Packman</a>
 					  </div>
-						<button class="tablinks" onclick="replaceWindow(event,'welcome')">Welcome</button>
+						  <button class="tablinks" onclick="replaceWindow(event,'welcome')">Welcome</button>
 						  <button class="tablinks" onclick="replaceWindow(event,'register')">Register</button>
 						  <button class="tablinks" onclick="replaceWindow(event,'login')">Login</button>
 						  <button class="tablinks" onclick="replaceWindow(event,'about')">About</button>
 					</div>
-				  </nav>
-					
+				  </nav>	
 			</menu>
+			<br>
+			<br>
+			<p id="front_display" align="center"></p>
+			<br>
 		</div>
 
 		<div id="game" class="tab">
@@ -45,28 +50,87 @@
 			</div>
 			<canvas id="canvas" height="600" width="600"></canvas>
 		</div>
-		<div id="welcome" class="tab">
-			<img class="images" src="images/Packman.jpg" alt="images" width="220" height="190">
-			<button class="btn btn-danger navbar-btn" onclick="replaceWindow(event,'game')">Game</button>
-		</div>
-		<div id="register" class="tab">
 
+		<div id="welcome" class="tab" align="center">
+			<img class="images" src="images/Packman.jpg" alt="images" width="400" height="300" margin-left=30%>
+			<br>
+			<br>
+			<button onclick="replaceWindow(event,'game')" align="center" padding= 10px margin=4px>Start Game</button>
 		</div>
-		<div id="login" class="tab">
 
+		<div id="register" class="tab" style="display:none;">
+			<link rel="stylesheet" type="text/css" href="styleLogin.css"/>
+
+			<form style="border:1px solid #ccc">
+				<div class="container">
+				  <strong><h1>Register</h1></strong> 
+				  <img class="images" src="images/packman.webp" alt="packman" width="60" height="60">
+
+				  <p>Please fill in this form to create a new account for playing our game.</p>
+				  <hr>
+
+				  <label for="uname"><b>Username  </b></label>
+				  <input type="text" placeholder="Enter Username" id="uname_reg" name="uname_register" required align="center">
+				  <br>
+				  <label for="psw"><b>Password  </b></label>
+				  <input type="password" placeholder="Enter Password" id="psw_reg" name="psw_register" required  align="center">
+				  <br>			
+				  <label for="fullname"><b>Full Name  </b></label>
+				  <input type="text" placeholder="Enter Full Name" id="fname_reg" name="fname_register" required  align="center">
+				  <br>
+				  <label for="email"><b>Email  </b></label>
+				  <input type="text" placeholder="Enter Email" id="email_reg" name="email_register" required  align="center">
+				  <br>
+				  <label for="birthday">Birthdate</label>
+				  <input type="date" id="birthday" id="bdate_reg" name="bdate_register" required align="center" width=20%>
+			  			  
+				  <div class="clearfix">
+					<button type="submit" class="signupbtn">Register</button>
+					<br>
+					<button type="button" class="cancelbtn">Cancel</button>
+				  </div>
+				</div>
+			  </form>
+		</div>
+
+		<div id="login" class="tab" style="display:none;">
+			<link rel="stylesheet" type="text/css" href="styleLogin.css"/>
+
+			<form method="post" margin-left=40% margin-right=40%>
+				<strong><h1>Login</h1></strong> 
+				<div class="imgcontainer">
+				  <img src="images/avatar2.webp" alt="Avatar" class="avatar" >
+				</div>
+			  
+				<div class="container">
+				  <label for="uname"><b>Username</b></label>
+				  <input type="text" placeholder="Enter Username" id="uname_log" name="uname_login" required align="center">
+					<br>
+				  <label for="psw"><b>Password</b></label>
+				  <input type="password" placeholder="Enter Password" id="psw_log" name="psw_login" required align="center">
+					<br>
+				</div>
+			  
+				<div class="container" style="background-color:#f1f1f1" align="center">
+					<button type="submit" onclick="userManagerLogin()">Login</button>
+					<br>
+				  	<button type="button" class="cancelbtn" align="center">Cancel</button>
+				</div>
+			  </form>
 		</div>
 
 		<div id="about" class="tab">
 
 		</div>
 	</body>
+
 	<script>
+		//windows
 		function replaceWindow(evt,param_div){
 			clearWindow();
 			document.getElementById(param_div).style.display = "block";
   			evt.currentTarget.className += " active";
 		}
-
 		function clearWindow(){
 			element = document.getElementsByClassName("tab");
   			for (i = 0; i < element.length; i++) {
@@ -78,6 +142,17 @@
     		tablinks[i].className = tablinks[i].className.replace(" active", "");
   			}
 		}
+
+		//variables
+		var session_user;
+
+		//store users in the session storage
+		var pUser = new User({username:'p', password:'p', fullname:'p_p', email:'p_p@gmail.com'});
+		//default user - p
+		sessionStorage.setItem(pUser.username, pUser);
+
+		document.getElementById('front_display').innerHTML = "Please login to start the game ";
+
 
 
 	</script>
