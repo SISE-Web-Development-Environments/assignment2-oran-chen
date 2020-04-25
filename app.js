@@ -17,7 +17,7 @@ var eye = new Object();
 
 function stopInterval(){
 	clearInterval(interval);
-}
+} 
 
 function startGame() {
 	canvas = document.getElementById("canvas");
