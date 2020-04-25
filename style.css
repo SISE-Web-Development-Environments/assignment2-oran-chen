@@ -1,0 +1,16 @@
+#game{
+   display: none; 
+}
+
+#welcome{
+    display: block;
+}
+#front_display{
+    background-color: rgb(176, 188, 206);
+    color: black;
+    font-family: 'Calibri';
+    font-weight: bold;
+    font-size: 20px;
+    text-align: center;
+}
+
