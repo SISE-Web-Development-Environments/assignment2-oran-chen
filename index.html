@@ -125,6 +125,13 @@
 	</body>
 
 	<script>
+		//variables
+		var session_user;
+		var pUser = new User({username: 'p', password: 'p', fullname: 'p_p', email: 'p_p@gmail.com'});
+		//default user - p
+		sessionStorage.setItem(pUser.username, JSON.stringify(pUser));
+		document.getElementById('front_display').innerHTML = "Please login to start the game ";
+
 		//windows
 		function replaceWindow(evt,param_div){
 			clearWindow();
@@ -136,23 +143,11 @@
   			for (i = 0; i < element.length; i++) {
     			element[i].style.display = "none";
 			  }
-			
 			tablinks = document.getElementsByClassName("tablinks");
   			for (i = 0; i < tablinks.length; i++) {
     		tablinks[i].className = tablinks[i].className.replace(" active", "");
   			}
 		}
-
-		//variables
-		var session_user;
-
-		//store users in the session storage
-		var pUser = new User({username:'p', password:'p', fullname:'p_p', email:'p_p@gmail.com'});
-		//default user - p
-		sessionStorage.setItem(pUser.username, JSON.stringify(pUser));
-
-		document.getElementById('front_display').innerHTML = "Please login to start the game ";
-
 
 
 	</script>

@@ -35,14 +35,13 @@ function userManagerLogin(){
     var passwordL = $('#psw_log').val();
     var usernameL = $('#uname_log').val();
 
-    var front_display = document.getElementById('front_display');
     //if a user with such user name and password does not exist
     if(!validateUserExists(usernameL, passwordL)){
         alert("The user doesn't exist in the system, please enter the details again");
     }else{ //does exist, connect him
         session_user = JSON.parse(sessionStorage.getItem(usernameL));
-        front_display.innerHTML = "The user " + session_user.fullname + " is currently logged in.";
-        document.getElementById('login').style.display='none';
+        document.getElementById('front_display').innerHTML = "The user " + session_user.fullname + " is currently logged in.";
+        replaceWindow(event, 'game');
     }
 }
 
