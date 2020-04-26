@@ -1,36 +1,58 @@
 var context;
 var shape = new Object();
 var board;
+var dotsBoard;
 var score;
 var remain_lives;
 var pac_color;
 var start_time;
 var time_elapsed;
 var interval;
+var ghostInterval;
 var packBody = new Object();
-packBody.x = 0.15;
-packBody.y = 1.85;
 var eye = new Object();
-eye.x = 5;
-eye.y = -15;
+var numOfGhosts;
+var ghostPosition;
 
+// $(document).ready(function() {
+// 	context = canvas.getContext("2d");
+// 	Start();
+// });
 
-$(document).ready(function() {
-	context = canvas.getContext("2d");
+function stopInterval(){
+	clearInterval(interval);
+	clearInterval(ghostInterval);
+} 
+
+function startGame() {
+	canvas = document.getElementById("canvas");
+	 context = canvas.getContext("2d");
+	 clearCanvas(context,canvas);
 	Start();
-});
+}
 
 function Start() {
+	packBody.x = 0.15;
+	packBody.y = 1.85;
+	eye.x = 5;
+	eye.y = -15;
+	clearInterval(interval);
+	clearInterval(ghostInterval);
 	board = new Array();
+	dotsBoard = new Array();
 	score = 0;
 	remain_lives = 5;
 	pac_color = "yellow";
+	numOfGhosts = 4;
+	ghostPosition = new Array(numOfGhosts);
+	initializeGhostPos(numOfGhosts);
 	var cnt = 100;
 	var food_remain = 50;
 	var pacman_remain = 1;
 	start_time = new Date();
 	for (var i = 0; i < 10; i++) {
 		board[i] = new Array();
+		dotsBoard[i] = new Array();
 		//put obstacles in (i=3,j=3) and (i=3,j=4) and (i=3,j=5), (i=6,j=1) and (i=6,j=2)
 		for (var j = 0; j < 10; j++) {
 			if (
@@ -48,7 +70,7 @@ function Start() {
 				var randomNum = Math.random();
 				if (randomNum <= (1.0 * food_remain) / cnt) {
 					food_remain--;
-					board[i][j] = 1;
+					dotsBoard[i][j] = 1;
 				} else if (randomNum < (1.0 * (pacman_remain + food_remain)) / cnt) {
 					shape.i = i;
 					shape.j = j;
@@ -63,12 +85,14 @@ function Start() {
 	}
 	while (food_remain > 0) {
 		var emptyCell = findRandomEmptyCell(board);
-		board[emptyCell[0]][emptyCell[1]] = 1;
+		dotsBoard[emptyCell[0]][emptyCell[1]] = 1;
 		food_remain--;
 	}
 
 	var emptyCell = findRandomEmptyCell(board);
 	board[emptyCell[0]][emptyCell[1]] = 6; //Medicine
+
+	placeGhosts();
 
 	keysDown = {};
 	addEventListener(
@@ -86,6 +110,7 @@ function Start() {
 		false
 	);
 	interval = setInterval(UpdatePosition, 100);
+	ghostInterval = setInterval(updateGhostPosition, 800);
 }
 
 function findRandomEmptyCell(board) {
@@ -175,7 +200,7 @@ function Draw() {
 				
 				context.fillStyle = "black"; //color
 				context.fill();
-			} else if (board[i][j] == 1) { //Points
+			} else if (dotsBoard[i][j] == 1 && board[i][j] != 5) { //Points
 				context.beginPath();
 				context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // circle
 				context.fillStyle = "black"; //color
@@ -227,8 +252,9 @@ function UpdatePosition() {
 			shape.i++;
 		}
 	}
-	if (board[shape.i][shape.j] == 1) {
-		score+= 2;
+	if (dotsBoard[shape.i][shape.j] == 1) {
+		score+= 1;
+		dotsBoard[shape.i][shape.j] = 0;
 	}
 	
 	if (board[shape.i][shape.j] == 6) { // Medicine
@@ -237,6 +263,17 @@ function UpdatePosition() {
 	board[shape.i][shape.j] = 2;
 	var currentTime = new Date();
 	time_elapsed = (currentTime - start_time) / 1000;
+
+	if(eatMeGhost()){
+		remain_lives--;
+		board[shape.i][shape.j] = 0;
+		var emptyCell = findRandomEmptyCell(board);
+		shape.i = emptyCell[0];
+		shape.j = emptyCell[1];
+		deleteGhosts();
+		placeGhosts();
+	}
+
 	if (score >= 20 && time_elapsed <= 10) {
 		pac_color = "green";
 	}
@@ -254,9 +291,91 @@ function UpdatePosition() {
 		window.clearInterval(interval);
 		window.alert("Winner!!!");
 	} else if(remain_lives == 0){
+		window.clearInterval(interval);
 		window.alert("Loser!");
 	}
 	else{
 		Draw();
+	}
+}
+
+function placeGhosts() {
+	board[0][0] = 5; // First ghost
+	ghostPosition[0][0] = 0;
+	ghostPosition[0][1] = 0;
+	if(numOfGhosts == 2){
+		board[0][9] = 5;
+		ghostPosition[1][0] = 0;
+		ghostPosition[1][1] = 9;
+	}
+	else if(numOfGhosts == 3){
+		board[0][9] = 5;
+		board[9][9] = 5;
+		ghostPosition[1][0] = 0;
+		ghostPosition[1][1] = 9;
+		ghostPosition[2][0] = 9;
+		ghostPosition[2][1] = 9;
+	}
+	else if(numOfGhosts == 4){
+		board[0][9] = 5;
+		board[9][9] = 5;
+		board[9][0] = 5;
+		ghostPosition[1][0] = 0;
+		ghostPosition[1][1] = 9;
+		ghostPosition[2][0] = 9;
+		ghostPosition[2][1] = 9;
+		ghostPosition[3][0] = 9;
+		ghostPosition[3][1] = 0;
+	}
+}
+
+function updateGhostPosition(){
+
+	for (var i =0; i < numOfGhosts; i++){
+		board[ghostPosition[i][0]][ghostPosition[i][1]] = 0;
+		let currentDistance = distanceSum(shape.i,ghostPosition[i][0],shape.j,ghostPosition[i][1]);
+		if(currentDistance > distanceSum(shape.i,ghostPosition[i][0] + 1,shape.j,ghostPosition[i][1]) &&
+			board[ghostPosition[i][0] + 1][ghostPosition[i][1]] != 4){
+			ghostPosition[i][0]++;
+		}
+		else if(currentDistance > distanceSum(shape.i,ghostPosition[i][0],shape.j,ghostPosition[i][1]+1) &&
+			board[ghostPosition[i][0]][ghostPosition[i][1]+1] != 4){
+			ghostPosition[i][1]++;
+		}
+		else if(currentDistance > distanceSum(shape.i,ghostPosition[i][0] - 1,shape.j,ghostPosition[i][1]) &&
+			board[ghostPosition[i][0] - 1][ghostPosition[i][1]] != 4){
+			ghostPosition[i][0]--;
+		}
+		else if(currentDistance > distanceSum(shape.i,ghostPosition[i][0],shape.j,ghostPosition[i][1]-1) &&
+			board[ghostPosition[i][0]][ghostPosition[i][1]-1] != 4){
+			ghostPosition[i][1]--;
+		}
+		board[ghostPosition[i][0]][ghostPosition[i][1]] = 5;
+	}
+}
+
+function distanceSum(x1,x2,y1,y2){
+	return (Math.abs(x1-x2) + Math.abs(y1-y2));
+}
+
+function initializeGhostPos(numOfGhost){
+	for (var i =0; i < numOfGhosts; i++) {
+		ghostPosition[i] = new Array(2);
+	}
+}
+
+function eatMeGhost(){
+	for (var i =0; i < numOfGhosts; i++) {
+		if(shape.i == ghostPosition[i][0] && shape.j == ghostPosition[i][1]){
+			return true;
+		}
+	}
+
+	return false;
+}
+
+function deleteGhosts(){
+	for (var i =0; i < numOfGhosts; i++) {
+		board[ghostPosition[i][0]][ghostPosition[i][1]] = 0;
 	}
 }

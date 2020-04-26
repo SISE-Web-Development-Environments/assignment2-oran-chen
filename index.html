@@ -15,6 +15,7 @@
 	<body>
 		<img id="wall" src="images/wall.jpg" alt="wall" width="220" height="277" style="display: none;">
 		<img id="medicine" src="images/medicine.jpg" alt="medicine" width="220" height="277" style="display: none;">
+		<img id="ghost" src="images/ghost.jpg" alt="ghost" width="220" height="277" style="display: none;">
 		<div id="menue_bar">
 			<menu type="toolbar">
 				<nav class="navbar navbar-inverse">
@@ -27,7 +28,7 @@
 						  <button class="tablinks" onclick="replaceWindow(event,'login')">Login</button>
 						  <button class="tablinks" onclick="replaceWindow(event,'about')">About</button>
 					</div>
-				  </nav>	
+				  </nav>
 			</menu>
 			<br>
 			<br>
@@ -35,20 +36,24 @@
 			<br>
 		</div>
 
-		<div id="game" class="tab">
+		<div id="game" class="tab" onload="clearCanvas()">
+			<div id="settings">
+				<button class="setting" onclick="showCanvas()">Start Game</button>
+			</div>
 			<div id="score">
 				<label for="lblScore">SCORE:</label>
 				<input id="lblScore" type="text" />
 			</div>
 			<div id="time">
 				<label for="lblTime">TIME:</label>
-				<input id="lblTime" type="text" />
+				<input id="lblTime" type="text"/>
 			</div>
 			<div id="Lifes">
 				<label for="lblLifes">Lifes:</label>
 				<input id="lblLifes" type="text" />
 			</div>
-			<canvas id="canvas" height="600" width="600"></canvas>
+				<canvas id="canvas" height="600" width="600" class="tab"></canvas>
+				<button id= "reset" class="reset" onclick="reset()" style="display: none;">Reset</button>
 		</div>
 
 		<div id="welcome" class="tab" align="center">
@@ -63,7 +68,7 @@
 
 			<form style="border:1px solid #ccc">
 				<div class="container">
-				  <strong><h1>Register</h1></strong> 
+				  <strong><h1>Register</h1></strong>
 				  <img class="images" src="images/packman.webp" alt="packman" width="60" height="60">
 
 				  <p>Please fill in this form to create a new account for playing our game.</p>
@@ -97,11 +102,11 @@
 			<link rel="stylesheet" type="text/css" href="styleLogin.css"/>
 
 			<form method="post" margin-left=40% margin-right=40%>
-				<strong><h1>Login</h1></strong> 
+				<strong><h1>Login</h1></strong>
 				<div class="imgcontainer">
 				  <img src="images/avatar2.webp" alt="Avatar" class="avatar" >
 				</div>
-			  
+
 				<div class="container">
 				  <label for="uname_log"><b>Username</b></label>
 				  <input type="text" placeholder="Enter Username" id="uname_log" name="uname_login" required align="center">
@@ -110,7 +115,7 @@
 				  <input type="password" placeholder="Enter Password" id="psw_log" name="psw_login" required align="center">
 					<br>
 				</div>
-			  
+
 				<div class="container" style="background-color:#f1f1f1" align="center">
 					<button type="submit" onclick="userManagerLogin()">Login</button>
 					<br>
@@ -125,15 +130,10 @@
 	</body>
 
 	<script>
-		//variables
-		var session_user;
-		var pUser = new User({username: 'p', password: 'p', fullname: 'p_p', email: 'p_p@gmail.com'});
-		//default user - p
-		sessionStorage.setItem(pUser.username, JSON.stringify(pUser));
-		document.getElementById('front_display').innerHTML = "Please login to start the game ";
-
 		//windows
 		function replaceWindow(evt,param_div){
+			stopInterval();
+			clearCellsValue();
 			clearWindow();
 			document.getElementById(param_div).style.display = "block";
   			evt.currentTarget.className += " active";
@@ -143,12 +143,45 @@
   			for (i = 0; i < element.length; i++) {
     			element[i].style.display = "none";
 			  }
+			
 			tablinks = document.getElementsByClassName("tablinks");
   			for (i = 0; i < tablinks.length; i++) {
     		tablinks[i].className = tablinks[i].className.replace(" active", "");
   			}
 		}
 
+		function clearCanvas(){
+			element = document.getElementById('canvas');
+			for (i = 0; i < element.length; i++) {
+    			element[i].style.display = "none";
+			  }
+		}
 
+		function showCanvas(){
+			document.getElementById('canvas').style.display = "block";
+			document.getElementById('reset').style.display = "block";
+			startGame();
+		}
+		//variables
+		var session_user;
+
+		//store users in the session storage
+		var pUser = new User({username:'p', password:'p', fullname:'p_p', email:'p_p@gmail.com'});
+		//default user - p
+		sessionStorage.setItem(pUser.username, JSON.stringify(pUser));
+
+		document.getElementById('front_display').innerHTML = "Please login to start the game ";
+
+
+
+		function reset(){
+			Start();
+		}
+
+		function clearCellsValue(){
+			document.getElementById("lblScore").value = "";
+			document.getElementById("lblTime").value = "";
+			document.getElementById("lblLifes").value = "";
+		}
 	</script>
 </html>
