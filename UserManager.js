@@ -1,5 +1,7 @@
-//Define the user class
 
+var session_user;
+
+//Define the user class
 class User{
     //define the variables of the user
     username;
@@ -17,6 +19,17 @@ class User{
         this.birthdate = parameters.birthdate;
     }
 }
+
+//init
+$(document).ready(function () {
+    //store users in the session storage
+    var pUser = new User({username:'p', password:'p', fullname:'p_p', email:'p_p@gmail.com'});
+    //default user - p
+    sessionStorage.setItem(pUser.username, JSON.stringify(pUser));
+    document.getElementById('front_display').innerHTML = "Please login to start the game ";
+})
+
+
 
 //add a new user to the user_storage
 function addUserToStorage(user){
@@ -56,6 +69,7 @@ function validateUserExists(usernameL, passwordL){
         return pass == passwordL;
     }
 }
+
 
 
 

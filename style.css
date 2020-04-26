@@ -6,11 +6,12 @@
     display: block;
 }
 #front_display{
-    background-color: rgb(176, 188, 206);
+    background-color: rgb(193, 201, 213);
     color: black;
-    font-family: 'Calibri';
+    font-family: 'Lucida Fax';
     font-weight: bold;
-    font-size: 20px;
+    font-size: 15px;
     text-align: center;
 }
+
 
