@@ -20,6 +20,7 @@ var ghostPosition;
 
 function stopInterval(){
 	clearInterval(interval);
+	clearInterval(ghostInterval);
 } 
 
 function startGame() {
@@ -35,6 +36,7 @@ function Start() {
 	eye.x = 5;
 	eye.y = -15;
 	clearInterval(interval);
+	clearInterval(ghostInterval);
 	board = new Array();
 	score = 0;
 	remain_lives = 5;
@@ -285,6 +287,7 @@ function UpdatePosition() {
 		window.clearInterval(interval);
 		window.alert("Winner!!!");
 	} else if(remain_lives == 0){
+		window.clearInterval(interval);
 		window.alert("Loser!");
 	}
 	else{
@@ -336,7 +339,7 @@ function updateGhostPosition(){
 			ghostPosition[i][1]++;
 		}
 		else if(currentDistance > distanceSum(shape.i,ghostPosition[i][0] - 1,shape.j,ghostPosition[i][1]) &&
-			board[ghostPosition[i][0] - 1][shape.j - 1] != 4){
+			board[ghostPosition[i][0] - 1][ghostPosition[i][1]] != 4){
 			ghostPosition[i][0]--;
 		}
 		else if(currentDistance > distanceSum(shape.i,ghostPosition[i][0],shape.j,ghostPosition[i][1]-1) &&
