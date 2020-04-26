@@ -1,6 +1,7 @@
 var context;
 var shape = new Object();
 var board;
+var dotsBoard;
 var score;
 var remain_lives;
 var pac_color;
@@ -38,6 +39,7 @@ function Start() {
 	clearInterval(interval);
 	clearInterval(ghostInterval);
 	board = new Array();
+	dotsBoard = new Array();
 	score = 0;
 	remain_lives = 5;
 	pac_color = "yellow";
@@ -50,6 +52,7 @@ function Start() {
 	start_time = new Date();
 	for (var i = 0; i < 10; i++) {
 		board[i] = new Array();
+		dotsBoard[i] = new Array();
 		//put obstacles in (i=3,j=3) and (i=3,j=4) and (i=3,j=5), (i=6,j=1) and (i=6,j=2)
 		for (var j = 0; j < 10; j++) {
 			if (
@@ -67,7 +70,7 @@ function Start() {
 				var randomNum = Math.random();
 				if (randomNum <= (1.0 * food_remain) / cnt) {
 					food_remain--;
-					board[i][j] = 1;
+					dotsBoard[i][j] = 1;
 				} else if (randomNum < (1.0 * (pacman_remain + food_remain)) / cnt) {
 					shape.i = i;
 					shape.j = j;
@@ -82,7 +85,7 @@ function Start() {
 	}
 	while (food_remain > 0) {
 		var emptyCell = findRandomEmptyCell(board);
-		board[emptyCell[0]][emptyCell[1]] = 1;
+		dotsBoard[emptyCell[0]][emptyCell[1]] = 1;
 		food_remain--;
 	}
 
@@ -197,7 +200,7 @@ function Draw() {
 				
 				context.fillStyle = "black"; //color
 				context.fill();
-			} else if (board[i][j] == 1) { //Points
+			} else if (dotsBoard[i][j] == 1 && board[i][j] != 5) { //Points
 				context.beginPath();
 				context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // circle
 				context.fillStyle = "black"; //color
@@ -249,8 +252,9 @@ function UpdatePosition() {
 			shape.i++;
 		}
 	}
-	if (board[shape.i][shape.j] == 1) {
+	if (dotsBoard[shape.i][shape.j] == 1) {
 		score+= 1;
+		dotsBoard[shape.i][shape.j] = 0;
 	}
 	
 	if (board[shape.i][shape.j] == 6) { // Medicine
