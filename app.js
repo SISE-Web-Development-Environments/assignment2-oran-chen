@@ -266,6 +266,7 @@ function UpdatePosition() {
 
 	if(eatMeGhost()){
 		remain_lives--;
+		score = score - 10;
 		board[shape.i][shape.j] = 0;
 		var emptyCell = findRandomEmptyCell(board);
 		shape.i = emptyCell[0];
@@ -330,25 +331,47 @@ function placeGhosts() {
 }
 
 function updateGhostPosition(){
-
-	for (var i =0; i < numOfGhosts; i++){
+	var num = Math.random();
+	for (var i =0; i < numOfGhosts; i++) {
 		board[ghostPosition[i][0]][ghostPosition[i][1]] = 0;
-		let currentDistance = distanceSum(shape.i,ghostPosition[i][0],shape.j,ghostPosition[i][1]);
-		if(currentDistance > distanceSum(shape.i,ghostPosition[i][0] + 1,shape.j,ghostPosition[i][1]) &&
-			board[ghostPosition[i][0] + 1][ghostPosition[i][1]] != 4){
-			ghostPosition[i][0]++;
-		}
-		else if(currentDistance > distanceSum(shape.i,ghostPosition[i][0],shape.j,ghostPosition[i][1]+1) &&
-			board[ghostPosition[i][0]][ghostPosition[i][1]+1] != 4){
-			ghostPosition[i][1]++;
-		}
-		else if(currentDistance > distanceSum(shape.i,ghostPosition[i][0] - 1,shape.j,ghostPosition[i][1]) &&
-			board[ghostPosition[i][0] - 1][ghostPosition[i][1]] != 4){
-			ghostPosition[i][0]--;
-		}
-		else if(currentDistance > distanceSum(shape.i,ghostPosition[i][0],shape.j,ghostPosition[i][1]-1) &&
-			board[ghostPosition[i][0]][ghostPosition[i][1]-1] != 4){
-			ghostPosition[i][1]--;
+		if (num < 0.2) {
+			var direction = getRandomDirection();
+
+			if(direction == 1){ //Up
+				if(ghostPosition[i][1] - 1 > 0 && board[ghostPosition[i][0]][ghostPosition[i][1] - 1] != 4){
+					ghostPosition[i][1]--;
+				}
+			}
+			else if(direction == 2){ //Down
+				if(ghostPosition[i][1] + 1 < 9 && board[ghostPosition[i][0]][ghostPosition[i][1] + 1] != 4){
+					ghostPosition[i][1]++;
+				}
+			}
+			else if(direction == 3){ //Left
+				if(ghostPosition[i][0] - 1 > 0 && board[ghostPosition[i][0] - 1][ghostPosition[i][1]] != 4){
+					ghostPosition[i][0]--;
+				}
+			}
+			else if(direction == 4){ //Right
+				if(ghostPosition[i][0] + 1 < 9 && board[ghostPosition[i][0] + 1][ghostPosition[i][1]] != 4){
+					ghostPosition[i][0]++;
+				}
+			}
+		} else {
+			let currentDistance = distanceSum(shape.i, ghostPosition[i][0], shape.j, ghostPosition[i][1]);
+			if (currentDistance > distanceSum(shape.i, ghostPosition[i][0] + 1, shape.j, ghostPosition[i][1]) &&
+				board[ghostPosition[i][0] + 1][ghostPosition[i][1]] != 4) {
+				ghostPosition[i][0]++;
+			} else if (currentDistance > distanceSum(shape.i, ghostPosition[i][0], shape.j, ghostPosition[i][1] + 1) &&
+				board[ghostPosition[i][0]][ghostPosition[i][1] + 1] != 4) {
+				ghostPosition[i][1]++;
+			} else if (currentDistance > distanceSum(shape.i, ghostPosition[i][0] - 1, shape.j, ghostPosition[i][1]) &&
+				board[ghostPosition[i][0] - 1][ghostPosition[i][1]] != 4) {
+				ghostPosition[i][0]--;
+			} else if (currentDistance > distanceSum(shape.i, ghostPosition[i][0], shape.j, ghostPosition[i][1] - 1) &&
+				board[ghostPosition[i][0]][ghostPosition[i][1] - 1] != 4) {
+				ghostPosition[i][1]--;
+			}
 		}
 		board[ghostPosition[i][0]][ghostPosition[i][1]] = 5;
 	}
@@ -378,4 +401,22 @@ function deleteGhosts(){
 	for (var i =0; i < numOfGhosts; i++) {
 		board[ghostPosition[i][0]][ghostPosition[i][1]] = 0;
 	}
+}
+
+
+
+function getRandomDirection () {
+	var probabilities = [0.25, 0.25, 0.25, 0.25];
+	var results = [1, 2, 3, 4];
+	var num = Math.random();
+	sum = 0;
+
+	for (var i = 0; i < probabilities -1; i++) {
+		sum += probabilities[i];
+		if (num < sum) {
+			return results[i];
+		}
+	}
+
+	return results[3];
 }

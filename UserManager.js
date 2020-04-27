@@ -20,12 +20,12 @@ class User{
 
 //add a new user to the user_storage
 function addUserToStorage(user){
-    //so such user in the storage, can add 
+    //so such user in the storage, can add
     if (sessionStorage.getItem(user.username) == undefined){
         sessionStorage.setItem(user.username, user);
         return true;
     }else{ //already exist
-        return false; 
+        return false;
     }
 }
 
@@ -42,6 +42,7 @@ function userManagerLogin(){
         session_user = JSON.parse(sessionStorage.getItem(usernameL));
         document.getElementById('front_display').innerHTML = "The user " + session_user.fullname + " is currently logged in.";
         replaceWindow(event, 'game');
+
     }
 }
 

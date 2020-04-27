@@ -4,9 +4,9 @@
 		<title>Chen and Oran's Packman </title>
 		<script src="./jquery-3.4.1.slim.min.js"></script>
 		<script type="text/javascript" src="./app.js"></script>
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+		<!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">//-->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+		<!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>//-->
 		<link rel="stylesheet" type="text/css" href="style.css" />
 		<script type="text/javascript" src="./UserManager.js"></script>
 		
@@ -117,9 +117,9 @@
 				</div>
 
 				<div class="container" style="background-color:#f1f1f1" align="center">
-					<button type="submit" onclick="userManagerLogin()">Login</button>
+					<button type="button" onclick="userManagerLogin()">Login</button>
 					<br>
-				  	<button type="button" class="cancelbtn" align="center">Cancel</button>
+				  	<button type="button" class="cancelbtn" align="center" onclick="replaceWindow(event,'game')">Cancel</button>
 				</div>
 			  </form>
 		</div>
@@ -183,5 +183,6 @@
 			document.getElementById("lblTime").value = "";
 			document.getElementById("lblLifes").value = "";
 		}
+
 	</script>
 </html>
