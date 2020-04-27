@@ -13,7 +13,8 @@ var packBody = new Object();
 var eye = new Object();
 var numOfGhosts;
 var ghostPosition;
-
+var monsterLocation = new Object();
+var remain_monster;
 // $(document).ready(function() {
 // 	context = canvas.getContext("2d");
 // 	Start();
@@ -45,10 +46,12 @@ function Start() {
 	pac_color = "yellow";
 	numOfGhosts = 4;
 	ghostPosition = new Array(numOfGhosts);
-	initializeGhostPos(numOfGhosts);
+	initializeGhostPos();
 	var cnt = 100;
 	var food_remain = 50;
 	var pacman_remain = 1;
+	remain_monster = 1;
+
 	start_time = new Date();
 	for (var i = 0; i < 10; i++) {
 		board[i] = new Array();
@@ -89,10 +92,12 @@ function Start() {
 		food_remain--;
 	}
 
-	var emptyCell = findRandomEmptyCell(board);
-	board[emptyCell[0]][emptyCell[1]] = 6; //Medicine
+	// var emptyCell = findRandomEmptyCell(board);
+	// board[emptyCell[0]][emptyCell[1]] = 6; //Medicine
 
 	placeGhosts();
+	monsterLocation.i = 1;
+	monsterLocation.j = 1;
 
 	keysDown = {};
 	addEventListener(
@@ -148,59 +153,53 @@ function Draw() {
 			var center = new Object();
 			center.x = i * 60 + 30;
 			center.y = j * 60 + 30;
-		
+
 			if (board[i][j] == 2) {
-				if(GetKeyPressed() == 4){ //Right
+				if (GetKeyPressed() == 4) { //Right
 					packBody.x = 0.15;
 					packBody.y = 1.85;
 					context.beginPath();
 					context.arc(center.x, center.y, 30, 0.15 * Math.PI, 1.85 * Math.PI); // half circle
-				}
-				else if (GetKeyPressed() == 3){ //Left
+				} else if (GetKeyPressed() == 3) { //Left
 					packBody.x = 1.15;
 					packBody.y = 0.85;
 					context.beginPath();
 					context.arc(center.x, center.y, 30, 1.15 * Math.PI, 0.85 * Math.PI); // half circle
-				}
-				else if(GetKeyPressed() == 2){ //Down
+				} else if (GetKeyPressed() == 2) { //Down
 					packBody.x = 0.65;
 					packBody.y = 0.35;
 					context.beginPath();
 					context.arc(center.x, center.y, 30, 0.65 * Math.PI, 0.35 * Math.PI); // half circle
-				}
-				else if(GetKeyPressed() == 1){ // Up
+				} else if (GetKeyPressed() == 1) { // Up
 					packBody.x = 1.65;
 					packBody.y = 1.35;
 					context.beginPath();
 					context.arc(center.x, center.y, 30, 1.65 * Math.PI, 1.35 * Math.PI); // half circle
-				}
-				else{
+				} else {
 					context.beginPath();
 					context.arc(center.x, center.y, 30, packBody.x * Math.PI, packBody.y * Math.PI); // half circle
 				}
-			
+
 				context.lineTo(center.x, center.y);
 				context.fillStyle = pac_color; //color
 				context.fill();
 				context.beginPath();
-				
-				if(GetKeyPressed() == 2 || GetKeyPressed() == 1){
+
+				if (GetKeyPressed() == 2 || GetKeyPressed() == 1) {
 					eye.x = 15;
 					eye.y = -5;
 					context.arc(center.x + 15, center.y - 5, 5, 0, 2 * Math.PI); // circle
-				}
-				else if(GetKeyPressed() == 4 || GetKeyPressed() == 3){
+				} else if (GetKeyPressed() == 4 || GetKeyPressed() == 3) {
 					eye.x = 5;
 					eye.y = -15;
 					context.arc(center.x + 5, center.y - 15, 5, 0, 2 * Math.PI); // circle	
+				} else {
+					context.arc(center.x + eye.x, center.y + eye.y, 5, 0, 2 * Math.PI); // circle
 				}
-				else{
-					context.arc(center.x + eye.x, center.y+eye.y, 5, 0, 2 * Math.PI); // circle
-				}
-				
+
 				context.fillStyle = "black"; //color
 				context.fill();
-			} else if (dotsBoard[i][j] == 1 && board[i][j] != 5) { //Points
+			} else if (dotsBoard[i][j] == 1 && board[i][j] != 5 && board[i][j] != 7) { //Points
 				context.beginPath();
 				context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // circle
 				context.fillStyle = "black"; //color
@@ -211,19 +210,22 @@ function Draw() {
 				//context.rect(center.x - 30, center.y - 30, 60, 60);
 				//context.fillStyle = "grey"; //color
 				//context.fill();
-			
+
 				img = document.getElementById("wall");
-				context.drawImage(img, center.x - 30, center.y - 30,60,60);
-			}
-			else if(board[i][j] == 5){ //Ghost
+				context.drawImage(img, center.x - 30, center.y - 30, 60, 60);
+			} else if (board[i][j] == 5) { //Ghost
 				var img;
 				img = document.getElementById("ghost");
-				context.drawImage(img, center.x - 30, center.y - 30,60,60);
-			}
-			else if(board[i][j] == 6){ //Medicine
+				context.drawImage(img, center.x - 30, center.y - 30, 60, 60);
+			} //else if (board[i][j] == 6) { //Medicine
+			// 	var img;
+			// 	img = document.getElementById("medicine");
+			// 	context.drawImage(img, center.x - 30, center.y - 30, 60, 60);
+			// }
+			else if (board[i][j] == 7) { //Cute monster
 				var img;
-				img = document.getElementById("medicine");
-				context.drawImage(img, center.x - 30, center.y - 30,60,60);
+				img = document.getElementById("mon");
+				context.drawImage(img, center.x - 30, center.y - 30, 60, 60);
 			}
 		}
 	}
@@ -260,12 +262,19 @@ function UpdatePosition() {
 	if (board[shape.i][shape.j] == 6) { // Medicine
 		remain_lives += 1;
 	}
+
+	if (board[shape.i][shape.j] == 7) { // Monster
+		score = score + 50;
+		remain_monster--;
+	}
+
 	board[shape.i][shape.j] = 2;
 	var currentTime = new Date();
 	time_elapsed = (currentTime - start_time) / 1000;
 
 	if(eatMeGhost()){
 		remain_lives--;
+		score = score - 10;
 		board[shape.i][shape.j] = 0;
 		var emptyCell = findRandomEmptyCell(board);
 		shape.i = emptyCell[0];
@@ -330,27 +339,76 @@ function placeGhosts() {
 }
 
 function updateGhostPosition(){
-
-	for (var i =0; i < numOfGhosts; i++){
+	var num = Math.random();
+	var direction;
+	for (var i =0; i < numOfGhosts; i++) {
 		board[ghostPosition[i][0]][ghostPosition[i][1]] = 0;
-		let currentDistance = distanceSum(shape.i,ghostPosition[i][0],shape.j,ghostPosition[i][1]);
-		if(currentDistance > distanceSum(shape.i,ghostPosition[i][0] + 1,shape.j,ghostPosition[i][1]) &&
-			board[ghostPosition[i][0] + 1][ghostPosition[i][1]] != 4){
-			ghostPosition[i][0]++;
-		}
-		else if(currentDistance > distanceSum(shape.i,ghostPosition[i][0],shape.j,ghostPosition[i][1]+1) &&
-			board[ghostPosition[i][0]][ghostPosition[i][1]+1] != 4){
-			ghostPosition[i][1]++;
-		}
-		else if(currentDistance > distanceSum(shape.i,ghostPosition[i][0] - 1,shape.j,ghostPosition[i][1]) &&
-			board[ghostPosition[i][0] - 1][ghostPosition[i][1]] != 4){
-			ghostPosition[i][0]--;
-		}
-		else if(currentDistance > distanceSum(shape.i,ghostPosition[i][0],shape.j,ghostPosition[i][1]-1) &&
-			board[ghostPosition[i][0]][ghostPosition[i][1]-1] != 4){
-			ghostPosition[i][1]--;
+		if (num < 0.2) {
+			direction = getRandomDirection();
+
+			if(direction == 1){ //Up
+				if(ghostPosition[i][1] - 1 > 0 && board[ghostPosition[i][0]][ghostPosition[i][1] - 1] != 4){
+					ghostPosition[i][1]--;
+				}
+			}
+			else if(direction == 2){ //Down
+				if(ghostPosition[i][1] + 1 < 9 && board[ghostPosition[i][0]][ghostPosition[i][1] + 1] != 4){
+					ghostPosition[i][1]++;
+				}
+			}
+			else if(direction == 3){ //Left
+				if(ghostPosition[i][0] - 1 > 0 && board[ghostPosition[i][0] - 1][ghostPosition[i][1]] != 4){
+					ghostPosition[i][0]--;
+				}
+			}
+			else if(direction == 4){ //Right
+				if(ghostPosition[i][0] + 1 < 9 && board[ghostPosition[i][0] + 1][ghostPosition[i][1]] != 4){
+					ghostPosition[i][0]++;
+				}
+			}
+		} else {
+			let currentDistance = distanceSum(shape.i, ghostPosition[i][0], shape.j, ghostPosition[i][1]);
+			if (currentDistance > distanceSum(shape.i, ghostPosition[i][0] + 1, shape.j, ghostPosition[i][1]) &&
+				board[ghostPosition[i][0] + 1][ghostPosition[i][1]] != 4) {
+				ghostPosition[i][0]++;
+			} else if (currentDistance > distanceSum(shape.i, ghostPosition[i][0], shape.j, ghostPosition[i][1] + 1) &&
+				board[ghostPosition[i][0]][ghostPosition[i][1] + 1] != 4) {
+				ghostPosition[i][1]++;
+			} else if (currentDistance > distanceSum(shape.i, ghostPosition[i][0] - 1, shape.j, ghostPosition[i][1]) &&
+				board[ghostPosition[i][0] - 1][ghostPosition[i][1]] != 4) {
+				ghostPosition[i][0]--;
+			} else if (currentDistance > distanceSum(shape.i, ghostPosition[i][0], shape.j, ghostPosition[i][1] - 1) &&
+				board[ghostPosition[i][0]][ghostPosition[i][1] - 1] != 4) {
+				ghostPosition[i][1]--;
+			}
 		}
 		board[ghostPosition[i][0]][ghostPosition[i][1]] = 5;
+	}
+
+
+	if(remain_monster > 0) {
+		//Update monster move
+		direction = getRandomDirection();
+		board[monsterLocation.i][monsterLocation.j] = 0;
+		if (direction == 1) { //Up
+
+			if (monsterLocation.j - 1 > 0 && board[monsterLocation.i][monsterLocation.j - 1] != 4) {
+				monsterLocation.j--;
+			}
+		} else if (direction == 2) { //Down
+			if (monsterLocation.j + 1 < 9 && board[monsterLocation.i][monsterLocation.j + 1] != 4) {
+				monsterLocation.j++;
+			}
+		} else if (direction == 3) { //Left
+			if (monsterLocation.i - 1 > 0 && board[monsterLocation.i - 1][monsterLocation.j] != 4) {
+				monsterLocation.i--;
+			}
+		} else if (direction == 4) { //Right
+			if (monsterLocation.i + 1 < 9 && board[monsterLocation.i + 1][monsterLocation.j] != 4) {
+				monsterLocation.i++;
+			}
+		}
+		board[monsterLocation.i][monsterLocation.j] = 7;
 	}
 }
 
@@ -358,7 +416,7 @@ function distanceSum(x1,x2,y1,y2){
 	return (Math.abs(x1-x2) + Math.abs(y1-y2));
 }
 
-function initializeGhostPos(numOfGhost){
+function initializeGhostPos(){
 	for (var i =0; i < numOfGhosts; i++) {
 		ghostPosition[i] = new Array(2);
 	}
@@ -378,4 +436,23 @@ function deleteGhosts(){
 	for (var i =0; i < numOfGhosts; i++) {
 		board[ghostPosition[i][0]][ghostPosition[i][1]] = 0;
 	}
+	board[monsterLocation.i][monsterLocation.j] = 0;
+}
+
+
+
+function getRandomDirection () {
+	var probabilities = [0.25, 0.25, 0.25, 0.25];
+	var results = [1, 2, 3, 4];
+	var num = Math.random();
+	sum = 0;
+
+	for (var i = 0; i < probabilities.length -1; i++) {
+		sum += probabilities[i];
+		if (num < sum) {
+			return results[i];
+		}
+	}
+
+	return results[3];
 }
