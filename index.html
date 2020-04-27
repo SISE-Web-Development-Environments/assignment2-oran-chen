@@ -73,7 +73,7 @@
 		</div>
 
 		<div id="welcome" class="tab" align="center">
-			<img class="images" src="images/logopac.png" id="logo" alt="images" width="410" height="250" margin-left=30%>
+			<img class="images" src="images/logopac.png" id="logo" alt="images" width="430" height="250" margin-left=30%>
 			<br>
 			<button id="reg" class="btn btn-info btn-lg" onclick="replaceWindow(event,'register')" align="center" padding= 10px margin=4px>Register</button>
 			<button id="log" class="btn btn-info btn-lg" onclick="replaceWindow(event,'login')" align="center" padding= 10px margin=4px>Login</button>
@@ -111,9 +111,9 @@
 					<select id="Bmonth" name="Bmonth" class='group' ></select>
 					<select id="Byear" name="Byear" class='group' ></select>
 				  <div class="clearfix">
-					<button type="submit" class="submit" id="submit_reg">Register</button>
+					<button type="submit" class="btn btn-info btn-lg" id="submit_reg">Register</button>
 					<br>
-					<button type="button" onclick="replaceWindow(event,'welcome')" class="cancelbtn">Cancel</button>
+					<button type="button" onclick="replaceWindow(event,'welcome')" class="btn btn-danger btn-lg">Cancel</button>
 				  </div>
 				</div>
 			  </form>
@@ -135,14 +135,13 @@
 				  <label for="psw_log"><b>Password</b></label>
 				  <input type="password" placeholder="Enter Password" id="psw_log" name="psw_login" required align="center">
 					<br>
-				</div>
-
-				<div class="container" style="background-color:#f1f1f1" align="center">
-					<button type="button" onclick="userManagerLogin()">Login</button>
+				<div class="clearfix">
+				<button type="button" class="btn btn-info btn-lg"onclick="userManagerLogin()">Login</button>
 					<br>
-				  	<button type="button" onclick="replaceWindow(event,'welcome')" class="cancelbtn" align="center">Cancel</button>
+				  	<button type="button" onclick="replaceWindow(event,'welcome')" class="btn btn-danger btn-lg" align="center">Cancel</button>
 				</div>
-			  </form>
+				</div>
+			</form>
 		</div>
 
 <!--		onload="appear()"-->
