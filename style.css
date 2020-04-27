@@ -1,17 +1,75 @@
 #game{
    display: none; 
 }
-
 #welcome{
     display: block;
 }
 #front_display{
-    background-color: rgb(193, 201, 213);
-    color: black;
+    background-color: rgb(32, 32, 33);
+    color: white;
     font-family: 'Lucida Fax';
     font-weight: bold;
     font-size: 15px;
     text-align: center;
 }
+.footer {
+    position: fixed;
+    margin: 0 auto;
+    padding: 5px 0 5px 0;
+    clear: both;
+    overflow: hidden;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background: url(images/back2.webp)repeat;
+    color: white;
+    text-align: left;
+    text-indent: 1%;
+    font-size: 14px;
+    font-family: 'source_sans_proregular', Arial, Helvetica, sans-serif;
+}
+#footerright {
+    float: right;
+    text-align: center;
+}
+#footerleft {
+    float: left;
+    list-style: none;
+    position: relative;
+    width: 440px;
+    text-indent: 2%;
+}
+#ftrcontact a:hover {
+    text-decoration: none;
+    color: #e20822;
+}
+#ftrcontact {
+    font-family: 'source_sans_problack', "Arial Black", Gadget, sans-serif;
+    font-weight: normal;
+}
+body{
+    background: url(images/background2.webp)
+}
+
+.btn:hover {
+    background-color: black;
+}
+.btn{
+    font-family: Calibri;
+    text-emphasis: #2f80eb;
+}
+logo{
+    border: 5px solid #555555;
+}
+#log,#reg{
+    padding: 10px 0 10px 0;
+    text-align: center;
+    font-size: 24px;
+    color: #0a0b5c;
+    text-shadow: #2f80eb;
+    font-family: Calibri;
+    font-weight: bold;
+}
+
 
 

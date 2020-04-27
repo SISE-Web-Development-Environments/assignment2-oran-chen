@@ -27,19 +27,32 @@
 					  <div class="navbar-header">
 						<a class="navbar-brand" href="#">Packman</a>
 					  </div>
-						  <button class="tablinks" onclick="replaceWindow(event,'welcome')">Welcome</button>
-						  <button class="tablinks" onclick="replaceWindow(event,'register')">Register</button>
-						  <button class="tablinks" onclick="replaceWindow(event,'login')">Login</button>
-						  <button class="tablinks" onclick="about()">About</button>
+						  <button class="btn btn-info btn-lg" onclick="replaceWindow(event,'welcome')">Welcome</button>
+						  <button class="btn btn-info btn-lg" onclick="replaceWindow(event,'register')">Register</button>
+						  <button class="btn btn-info btn-lg" onclick="replaceWindow(event,'login')">Login</button>
+						  <button class="btn btn-info btn-lg" onclick="about()">About</button>
 					</div>
 				  </nav>
 			</menu>
 			<br>
-			<br>
 			<p id="front_display" align="center"></p>
 			<br>
 		</div>
-
+		<div class="footer">
+			<div id="footerright">
+				<div id=ftrcontact">
+					<strong><p>Contact us at:</p></strong>
+					<strong>Chen: </strong><a href="mailto:chengal@post.bgu.ac.il">chengal@post.bgu.ac.il</a>
+					<br>
+					<strong>Oran: </strong><a href="mailto:shichman@post.bgu.ac.il">shichman@post.bgu.ac.il</a>
+				</div>
+			</div>
+			<div id="footerleft">
+				<br>
+				<strong> &copy; All rights reserved to Chen Galed and Oran Shichman </strong>
+				<p>Created on April,2020.</p>
+			</div>
+		</div>
 		<div id="game" class="tab" onload="clearCanvas()">
 			<div id="settings">
 				<button class="setting" onclick="showCanvas()">Start Game</button>
@@ -61,12 +74,10 @@
 		</div>
 
 		<div id="welcome" class="tab" align="center">
-			<img class="images" src="images/Packman.jpg" alt="images" width="400" height="300" margin-left=30%>
+			<img class="images" src="images/logopac.png" id="logo" alt="images" width="430" height="250" margin-left=30%>
 			<br>
-			<br>
-			<button class="btn btn-primary" onclick="replaceWindow(event,'register')" align="center" padding= 10px margin=4px>Register</button>
-			<br>
-			<button class="btn btn-primary" onclick="replaceWindow(event,'login')" align="center" padding= 10px margin=4px>Login</button>
+			<button id="reg" class="btn btn-info btn-lg" onclick="replaceWindow(event,'register')" align="center" padding= 10px margin=4px>Register</button>
+			<button id="log" class="btn btn-info btn-lg" onclick="replaceWindow(event,'login')" align="center" padding= 10px margin=4px>Login</button>
 			<br>
 			<br>
 		</div>
@@ -85,25 +96,25 @@
 				  <hr>
 
 				  <label for="uname_reg"><b>Username  </b></label>
-				  <input type="text" placeholder="Enter Username" id="uname_reg" name="uname_reg" required align="center">
+				  <input type="text" placeholder="Enter Username" id="uname_reg" name="uname_reg" align="center">
 				  <br>
 				  <label for="psw_reg"><b>Password  </b></label>
-				  <input type="password" placeholder="Enter Password" id="psw_reg" name="psw_reg" required  align="center">
-				  <br>			
+				  <input type="password" placeholder="Enter Password" id="psw_reg" name="psw_reg"  align="center">
+				  <br>
 				  <label for="fname_reg"><b>Full Name  </b></label>
-				  <input type="text" placeholder="Enter Full Name" id="fname_reg" name="fname_reg" required  align="center">
+				  <input type="text" placeholder="Enter Full Name" id="fname_reg" name="fname_reg" align="center">
 				  <br>
 				  <label for="email_reg"><b>Email  </b></label>
-				  <input type="email" placeholder="Enter Email" id="email_reg" name="email_reg" required  align="center">
+				  <input type="email" placeholder="Enter Email" id="email_reg" name="email_reg" align="center">
 				  <br>
 				  <label for="bdate_reg" id="bdate_reg">Birth date</label>
-					<select id="Bday" name="Bday" class='group' width="40%"></select>
-					<select id="Bmonth" name="Bmonth" class='group'width="40%" ></select>
-					<select id="Byear" name="Byear" class='group'width="40%" ></select>
+					<select id="Bday" name="Bday" class='group' ></select>
+					<select id="Bmonth" name="Bmonth" class='group' ></select>
+					<select id="Byear" name="Byear" class='group' ></select>
 				  <div class="clearfix">
-					<button type="submit" class="submit" id="submit_reg">Register</button>
+					<button type="submit" class="btn btn-info btn-lg" id="submit_reg">Register</button>
 					<br>
-					<button type="button" onclick="replaceWindow(event,'welcome')" class="cancelbtn">Cancel</button>
+					<button type="button" onclick="replaceWindow(event,'welcome')" class="btn btn-danger btn-lg">Cancel</button>
 				  </div>
 				</div>
 			  </form>
@@ -125,14 +136,13 @@
 				  <label for="psw_log"><b>Password</b></label>
 				  <input type="password" placeholder="Enter Password" id="psw_log" name="psw_login" required align="center">
 					<br>
-				</div>
-
-				<div class="container" style="background-color:#f1f1f1" align="center">
-					<button type="button" onclick="userManagerLogin()">Login</button>
+				<div class="clearfix">
+				<button type="button" class="btn btn-info btn-lg"onclick="userManagerLogin()">Login</button>
 					<br>
-				  	<button type="button" onclick="replaceWindow(event,'welcome')" class="cancelbtn" align="center">Cancel</button>
+				  	<button type="button" onclick="replaceWindow(event,'welcome')" class="btn btn-danger btn-lg" align="center">Cancel</button>
 				</div>
-			  </form>
+				</div>
+			</form>
 		</div>
 
 <!--		onload="appear()"-->
@@ -153,7 +163,6 @@
 				<br>
 			</div>
 		</div>
-
 	</body>
 
 	<script>
