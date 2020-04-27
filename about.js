@@ -9,7 +9,6 @@ function about(){
 }
 
 $(document).keydown(function(event) {
-    debugger
     if (event.keyCode == 27) {
         $("#about").fadeOut(50);
         replaceWindow(event, 'welcome');
@@ -18,7 +17,6 @@ $(document).keydown(function(event) {
 
 // When the user clicks anywhere outside of the modal, close it
 window.onclick = function(event) {
-    debugger
     modal = document.getElementById("about");
     if (event.target == modal) {
         $("#about").fadeOut(50);

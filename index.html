@@ -10,6 +10,7 @@
 		<link rel="stylesheet" type="text/css" href="style.css" />
 		<script type="text/javascript" src="./UserManager.js"></script>
 		<script type="text/javascript" src="./about.js"></script>
+		<script type="text/javascript" src="dobpicker.js"></script>
 
 
 	</head>
@@ -70,9 +71,11 @@
 		</div>
 
 		<div id="register" class="tab" style="display:none;">
+			<script type="text/javascript" src="jqueryvalidation.js"></script>
+			<script type="text/javascript" src="form.js"></script>
 			<link rel="stylesheet" type="text/css" href="styleLogin.css"/>
 
-			<form style="border:1px solid #ccc">
+			<form id="reg_form" style="border:1px solid #ccc">
 				<div class="container">
 				  <strong><h1>Register</h1></strong>
 				  <img class="images" src="images/packman.webp" alt="packman" width="60" height="60">
@@ -81,22 +84,23 @@
 				  <hr>
 
 				  <label for="uname_reg"><b>Username  </b></label>
-				  <input type="text" placeholder="Enter Username" id="uname_reg" name="uname_register" required align="center">
+				  <input type="text" placeholder="Enter Username" id="uname_reg" name="uname_reg" required align="center">
 				  <br>
 				  <label for="psw_reg"><b>Password  </b></label>
-				  <input type="password" placeholder="Enter Password" id="psw_reg" name="psw_register" required  align="center">
+				  <input type="password" placeholder="Enter Password" id="psw_reg" name="psw_reg" required  align="center">
 				  <br>			
 				  <label for="fname_reg"><b>Full Name  </b></label>
-				  <input type="text" placeholder="Enter Full Name" id="fname_reg" name="fname_register" required  align="center">
+				  <input type="text" placeholder="Enter Full Name" id="fname_reg" name="fname_reg" required  align="center">
 				  <br>
 				  <label for="email_reg"><b>Email  </b></label>
-				  <input type="text" placeholder="Enter Email" id="email_reg" name="email_register" required  align="center">
+				  <input type="email" placeholder="Enter Email" id="email_reg" name="email_reg required  align="center">
 				  <br>
-				  <label for="birthday">Birthdate</label>
-				  <input type="date" id="birthday" id="bdate_reg" name="bdate_register" required align="center" width=20%>
-
+				  <label for="bdate_reg" id="bdate_reg">Birth date</label>
+					<select id="Bday" name="Bday" class='group' width="40%"></select>
+					<select id="Bmonth" name="Bmonth" class='group'width="40%" ></select>
+					<select id="Byear" name="Byear" class='group'width="40%" ></select>
 				  <div class="clearfix">
-					<button type="button" onclick="replaceWindow(event,'welcome')" class="signupbtn">Register</button>
+					<button type="submit" class="submit" id="submit_reg">Register</button>
 					<br>
 					<button type="button" onclick="replaceWindow(event,'welcome')" class="cancelbtn">Cancel</button>
 				  </div>
