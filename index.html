@@ -9,9 +9,12 @@
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 		<link rel="stylesheet" type="text/css" href="style.css" />
 		<script type="text/javascript" src="./UserManager.js"></script>
+		<script type="text/javascript" src="./about.js"></script>
+		<script type="text/javascript" src="dobpicker.js"></script>
+
 
 	</head>
-
+	
 	<body>
 		<img id="wall" src="images/wall.jpg" alt="wall" width="220" height="277" style="display: none;">
 		<img id="medicine" src="images/medicine.jpg" alt="medicine" width="220" height="277" style="display: none;">
@@ -26,7 +29,7 @@
 						  <button class="tablinks" onclick="replaceWindow(event,'welcome')">Welcome</button>
 						  <button class="tablinks" onclick="replaceWindow(event,'register')">Register</button>
 						  <button class="tablinks" onclick="replaceWindow(event,'login')">Login</button>
-						  <button class="tablinks" onclick="replaceWindow(event,'about')">About</button>
+						  <button class="tablinks" onclick="about()">About</button>
 					</div>
 				  </nav>
 			</menu>
@@ -60,13 +63,19 @@
 			<img class="images" src="images/Packman.jpg" alt="images" width="400" height="300" margin-left=30%>
 			<br>
 			<br>
-			<button onclick="replaceWindow(event,'game')" align="center" padding= 10px margin=4px>Start Game</button>
+			<button class="btn btn-primary" onclick="replaceWindow(event,'register')" align="center" padding= 10px margin=4px>Register</button>
+			<br>
+			<button class="btn btn-primary" onclick="replaceWindow(event,'login')" align="center" padding= 10px margin=4px>Login</button>
+			<br>
+			<br>
 		</div>
 
 		<div id="register" class="tab" style="display:none;">
+			<script type="text/javascript" src="jqueryvalidation.js"></script>
+			<script type="text/javascript" src="form.js"></script>
 			<link rel="stylesheet" type="text/css" href="styleLogin.css"/>
 
-			<form style="border:1px solid #ccc">
+			<form id="reg_form" style="border:1px solid #ccc">
 				<div class="container">
 				  <strong><h1>Register</h1></strong>
 				  <img class="images" src="images/packman.webp" alt="packman" width="60" height="60">
@@ -75,24 +84,25 @@
 				  <hr>
 
 				  <label for="uname_reg"><b>Username  </b></label>
-				  <input type="text" placeholder="Enter Username" id="uname_reg" name="uname_register" required align="center">
+				  <input type="text" placeholder="Enter Username" id="uname_reg" name="uname_reg" required align="center">
 				  <br>
 				  <label for="psw_reg"><b>Password  </b></label>
-				  <input type="password" placeholder="Enter Password" id="psw_reg" name="psw_register" required  align="center">
+				  <input type="password" placeholder="Enter Password" id="psw_reg" name="psw_reg" required  align="center">
 				  <br>			
 				  <label for="fname_reg"><b>Full Name  </b></label>
-				  <input type="text" placeholder="Enter Full Name" id="fname_reg" name="fname_register" required  align="center">
+				  <input type="text" placeholder="Enter Full Name" id="fname_reg" name="fname_reg" required  align="center">
 				  <br>
 				  <label for="email_reg"><b>Email  </b></label>
-				  <input type="text" placeholder="Enter Email" id="email_reg" name="email_register" required  align="center">
+				  <input type="email" placeholder="Enter Email" id="email_reg" name="email_reg required  align="center">
 				  <br>
-				  <label for="birthday">Birthdate</label>
-				  <input type="date" id="birthday" id="bdate_reg" name="bdate_register" required align="center" width=20%>
-
+				  <label for="bdate_reg" id="bdate_reg">Birth date</label>
+					<select id="Bday" name="Bday" class='group' width="40%"></select>
+					<select id="Bmonth" name="Bmonth" class='group'width="40%" ></select>
+					<select id="Byear" name="Byear" class='group'width="40%" ></select>
 				  <div class="clearfix">
-					<button type="submit" class="signupbtn">Register</button>
+					<button type="submit" class="submit" id="submit_reg">Register</button>
 					<br>
-					<button type="button" class="cancelbtn">Cancel</button>
+					<button type="button" onclick="replaceWindow(event,'welcome')" class="cancelbtn">Cancel</button>
 				  </div>
 				</div>
 			  </form>
@@ -101,7 +111,7 @@
 		<div id="login" class="tab" style="display:none;">
 			<link rel="stylesheet" type="text/css" href="styleLogin.css"/>
 
-			<form method="post" margin-left=40% margin-right=40%>
+			<form margin-left=40% margin-right=40%>
 				<strong><h1>Login</h1></strong>
 				<div class="imgcontainer">
 				  <img src="images/avatar2.webp" alt="Avatar" class="avatar" >
@@ -117,16 +127,32 @@
 				</div>
 
 				<div class="container" style="background-color:#f1f1f1" align="center">
-					<button type="submit" onclick="userManagerLogin()">Login</button>
+					<button type="button" onclick="userManagerLogin()">Login</button>
 					<br>
-				  	<button type="button" class="cancelbtn" align="center">Cancel</button>
+				  	<button type="button" onclick="replaceWindow(event,'welcome')" class="cancelbtn" align="center">Cancel</button>
 				</div>
 			  </form>
 		</div>
 
-		<div id="about" class="tab">
-
+<!--		onload="appear()"-->
+		<div id="about" class="modal" >
+			<link rel="stylesheet" type="text/css" href="styleModal.css"/>
+			<div class="modal-content">
+				<span class="close">&times;</span>
+				<img class="images" src="images/packman.webp" alt="packman" width="20" height="20" align="left">
+				<img class="images" src="images/packman.webp" alt="packman" width="20" height="20" align="right">
+				<br>
+				<strong><h2>About the game</h2></strong>
+				<p>This packman game was created by Oran and Chen.</p>
+				<p>The challenges we encountered while creating the game were: </p>
+				<br>
+				<br>
+				<img class="images" src="images/packman.webp" alt="packman" width="20" height="20" align="left">
+				<img class="images" src="images/packman.webp" alt="packman" width="20" height="20" align="right">
+				<br>
+			</div>
 		</div>
+
 	</body>
 
 	<script>
@@ -162,17 +188,6 @@
 			document.getElementById('reset').style.display = "block";
 			startGame();
 		}
-		//variables
-		var session_user;
-
-		//store users in the session storage
-		var pUser = new User({username:'p', password:'p', fullname:'p_p', email:'p_p@gmail.com'});
-		//default user - p
-		sessionStorage.setItem(pUser.username, JSON.stringify(pUser));
-
-		document.getElementById('front_display').innerHTML = "Please login to start the game ";
-
-
 
 		function reset(){
 			Start();
