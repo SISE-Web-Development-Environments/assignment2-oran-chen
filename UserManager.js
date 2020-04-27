@@ -30,7 +30,7 @@ $(document).ready(function () {
     var pUser = new User({username:'p', password:'p', fullname:'p_p', email:'p_p@gmail.com'});
     //default user - p
     sessionStorage.setItem(pUser.username, JSON.stringify(pUser));
-    document.getElementById('front_display').innerHTML = "Please login to start the game ";
+    document.getElementById('front_display').innerHTML = "Please login/register to start the game ";
 })
 
 function userManagerRegSubmit() {
