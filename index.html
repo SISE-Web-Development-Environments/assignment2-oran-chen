@@ -11,7 +11,7 @@
 		<script type="text/javascript" src="./UserManager.js"></script>
 		<script type="text/javascript" src="./about.js"></script>
 		<script type="text/javascript" src="dobpicker.js"></script>
-
+		<script type="text/javascript" src="settings.js"></script>
 
 	</head>
 	
@@ -71,6 +71,24 @@
 			</div>
 				<canvas id="canvas" height="600" width="600" class="tab"></canvas>
 				<button id= "reset" class="reset" onclick="reset()" style="display: none;">Reset</button>
+				<div class="container" id="setsettings">
+					<h2>Game Settings</h2>
+					<strong>Key Right: </strong>
+					<label id="rightkey"></label>
+					<button id="rightkeybtn" class="btn btn-info btn-sm" onclick="chooseRight()" width="20%">Choose right</button>
+
+					<strong>Key Left: </strong>
+					<label id="leftkey"></label>
+					<button id="leftkeybtn" class="btn btn-info btn-sm" onclick="chooseLeft()" width="20%">Choose left</button>
+
+					<strong>Key Up: </strong>
+					<label id="upkey"></label>
+					<button id="upkeybtn" class="btn btn-info btn-sm" onclick="chooseUp()" width="20%">Choose up</button>
+
+					<strong>Key Down: </strong>
+					<label id="downkey"></label>
+					<button id="downkeybtn" class="btn btn-info btn-sm" onclick="chooseDown()" width="20%">Choose down</button>
+				</div>
 		</div>
 
 		<div id="welcome" class="tab" align="center">

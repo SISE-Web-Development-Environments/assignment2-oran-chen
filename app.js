@@ -19,6 +19,10 @@ var numOfGhosts;
 var ghostPosition;
 var monsterLocation = new Object();
 var remain_monster;
+var keyUp;
+var keyDown;
+var keyRight;
+var keyLeft;
 // $(document).ready(function() {
 // 	context = canvas.getContext("2d");
 // 	Start();
