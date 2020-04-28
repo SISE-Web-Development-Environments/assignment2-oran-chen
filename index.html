@@ -15,7 +15,7 @@
 
 	</head>
 	
-	<body>
+	<body onresize="resize_canvas()">
 		<img id="wall" src="images/wall.jpg" alt="wall" width="220" height="277" style="display: none;">
 		<img id="medicine" src="images/medicine.jpg" alt="medicine" width="220" height="277" style="display: none;">
 		<img id="ghost" src="images/ghost.jpg" alt="ghost" width="220" height="277" style="display: none;">
@@ -209,5 +209,17 @@
 			document.getElementById("lblLifes").value = "";
 		}
 
+		function resize_canvas(){
+			canvas = document.getElementById("canvas");
+			if (canvas.width  < window.innerWidth)
+			{
+				canvas.width  = window.innerWidth;
+			}
+
+			if (canvas.height < window.innerHeight)
+			{
+				canvas.height = window.innerHeight;
+			}
+		}
 	</script>
 </html>
