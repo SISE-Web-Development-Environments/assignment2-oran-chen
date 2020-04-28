@@ -5,10 +5,14 @@ var dotsBoard;
 var score;
 var remain_lives;
 var pac_color;
+var sixtyPercentColor;
+var thirtyPercentColor;
+var tenPercentColor;
 var start_time;
 var time_elapsed;
 var interval;
 var ghostInterval;
+var labelInterval;
 var packBody = new Object();
 var eye = new Object();
 var numOfGhosts;
@@ -27,8 +31,8 @@ function stopInterval(){
 
 function startGame() {
 	canvas = document.getElementById("canvas");
-	 context = canvas.getContext("2d");
-	 clearCanvas(context,canvas);
+	context = canvas.getContext("2d");
+	clearCanvas(context,canvas);
 	Start();
 }
 
@@ -39,16 +43,23 @@ function Start() {
 	eye.y = -15;
 	clearInterval(interval);
 	clearInterval(ghostInterval);
+	//clearInterval(labelInterval);
 	board = new Array();
 	dotsBoard = new Array();
 	score = 0;
 	remain_lives = 5;
 	pac_color = "yellow";
+	sixtyPercentColor = "blue";
+	thirtyPercentColor = "red";
+	tenPercentColor = "green";
 	numOfGhosts = 4;
 	ghostPosition = new Array(numOfGhosts);
 	initializeGhostPos();
 	var cnt = 100;
 	var food_remain = 50;
+	var numSixtyPercent = food_remain*0.6;
+	var numThirtyPercent = food_remain*0.3;
+	var numTenPercent = food_remain*0.1;
 	var pacman_remain = 1;
 	remain_monster = 1;
 
@@ -73,7 +84,21 @@ function Start() {
 				var randomNum = Math.random();
 				if (randomNum <= (1.0 * food_remain) / cnt) {
 					food_remain--;
-					dotsBoard[i][j] = 1;
+					var num = Math.random();
+
+					if(num < 0.6){
+						numSixtyPercent--;
+						dotsBoard[i][j] = 1;
+					}
+					else if(num < 0.9){
+						numThirtyPercent--;
+						dotsBoard[i][j] = 2;
+					}
+					else{
+						numTenPercent--;
+						dotsBoard[i][j] = 3;
+					}
+
 				} else if (randomNum < (1.0 * (pacman_remain + food_remain)) / cnt) {
 					shape.i = i;
 					shape.j = j;
@@ -88,7 +113,20 @@ function Start() {
 	}
 	while (food_remain > 0) {
 		var emptyCell = findRandomEmptyCell(board);
-		dotsBoard[emptyCell[0]][emptyCell[1]] = 1;
+		var num = Math.random();
+
+		if(num < 0.6){
+			numSixtyPercent--;
+			dotsBoard[emptyCell[0]][emptyCell[1]] = 1;
+		}
+		else if(num < 0.9){
+			numThirtyPercent--;
+			dotsBoard[emptyCell[0]][emptyCell[1]] = 2;
+		}
+		else{
+			numTenPercent--;
+			dotsBoard[emptyCell[0]][emptyCell[1]] = 3;
+		}
 		food_remain--;
 	}
 
@@ -116,6 +154,7 @@ function Start() {
 	);
 	interval = setInterval(UpdatePosition, 100);
 	ghostInterval = setInterval(updateGhostPosition, 800);
+	//labelInterval = setInterval(updateLabels, 10);
 }
 
 function findRandomEmptyCell(board) {
@@ -145,9 +184,7 @@ function GetKeyPressed() {
 
 function Draw() {
 	canvas.width = canvas.width; //clean board
-	lblScore.value = score;
-	lblTime.value = time_elapsed;
-	lblLifes.value = remain_lives;
+
 	for (var i = 0; i < 10; i++) {
 		for (var j = 0; j < 10; j++) {
 			var center = new Object();
@@ -199,10 +236,20 @@ function Draw() {
 
 				context.fillStyle = "black"; //color
 				context.fill();
-			} else if (dotsBoard[i][j] == 1 && board[i][j] != 5 && board[i][j] != 7) { //Points
+			} else if ((dotsBoard[i][j] == 1 || dotsBoard[i][j] == 2 || dotsBoard[i][j] == 3) && board[i][j] != 5 && board[i][j] != 7) { //Points
 				context.beginPath();
 				context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // circle
-				context.fillStyle = "black"; //color
+
+				if(dotsBoard[i][j] == 1){
+					context.fillStyle = sixtyPercentColor; //color
+				}
+				else if (dotsBoard[i][j] == 2){
+					context.fillStyle = thirtyPercentColor; //color
+				}
+				else if(dotsBoard[i][j] == 3){
+					context.fillStyle = tenPercentColor; //color
+				}
+
 				context.fill();
 			} else if (board[i][j] == 4) { //Wall
 				var img;
@@ -217,11 +264,12 @@ function Draw() {
 				var img;
 				img = document.getElementById("ghost");
 				context.drawImage(img, center.x - 30, center.y - 30, 60, 60);
-			} //else if (board[i][j] == 6) { //Medicine
-			// 	var img;
-			// 	img = document.getElementById("medicine");
-			// 	context.drawImage(img, center.x - 30, center.y - 30, 60, 60);
-			// }
+			}
+			else if (board[i][j] == 6) { //Medicine
+				var img;
+				img = document.getElementById("medicine");
+				context.drawImage(img, center.x - 30, center.y - 30, 60, 60);
+			}
 			else if (board[i][j] == 7) { //Cute monster
 				var img;
 				img = document.getElementById("mon");
@@ -255,7 +303,15 @@ function UpdatePosition() {
 		}
 	}
 	if (dotsBoard[shape.i][shape.j] == 1) {
-		score+= 1;
+		score+= 5;
+		dotsBoard[shape.i][shape.j] = 0;
+	}
+	else if(dotsBoard[shape.i][shape.j] == 2){
+		score+= 15;
+		dotsBoard[shape.i][shape.j] = 0;
+	}
+	else if(dotsBoard[shape.i][shape.j] == 3){
+		score+= 25;
 		dotsBoard[shape.i][shape.j] = 0;
 	}
 	
@@ -283,6 +339,10 @@ function UpdatePosition() {
 		placeGhosts();
 	}
 
+	lblScore.value = score;
+	lblTime.value = time_elapsed;
+	lblLifes.value = remain_lives;
+
 	if (score >= 20 && time_elapsed <= 10) {
 		pac_color = "green";
 	}
@@ -290,18 +350,22 @@ function UpdatePosition() {
 	if(time_elapsed >= 60){ //Maximum time game
 		window.clearInterval(interval);
 		if(score < 100){
-			window.alert("You are better than " + score + " points!");
+			setTimeout(function () {window.alert("You are better than " + score + " points!");},50);
 		}
 		else{
-			window.alert("Winner!!!");
+				setTimeout(function () {window.alert("Winner!!!");},50);
 		}
 	}
-	else if (score >= 50) {
+	else if (score >= 100) {
 		window.clearInterval(interval);
-		window.alert("Winner!!!");
+		setTimeout(function () {window.alert("Winner!!!");},50);
+
 	} else if(remain_lives == 0){
-		window.clearInterval(interval);
-		window.alert("Loser!");
+
+		setTimeout(function () {
+			window.alert("Loser!");
+			window.clearInterval(interval);
+		},50);
 	}
 	else{
 		Draw();
@@ -339,9 +403,10 @@ function placeGhosts() {
 }
 
 function updateGhostPosition(){
-	var num = Math.random();
+	var num;
 	var direction;
 	for (var i =0; i < numOfGhosts; i++) {
+		num = Math.random();
 		board[ghostPosition[i][0]][ghostPosition[i][1]] = 0;
 		if (num < 0.2) {
 			direction = getRandomDirection();
@@ -455,4 +520,10 @@ function getRandomDirection () {
 	}
 
 	return results[3];
+}
+
+function updateLabels() {
+	lblScore.value = score;
+	lblTime.value = time_elapsed;
+	lblLifes.value = remain_lives;
 }
