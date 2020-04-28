@@ -65,7 +65,6 @@ function transferToLogin(username,password){
 
 //add a new user to the user_storage
 function addUserToStorage(user){
-    debugger
     //so such user in the storage, can add
     if (JSON.parse(sessionStorage.getItem(user.username)) == undefined){
         sessionStorage.setItem(user.username, JSON.stringify(user));
@@ -86,7 +85,6 @@ function userManagerLogin(){
 
 //check if the user exists
 function validateUserExists(usernameL, passwordL){
-    debugger
     var userStored = JSON.parse(sessionStorage.getItem(usernameL));
     //if no such user was found
     if (userStored == null){
