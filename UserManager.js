@@ -58,8 +58,11 @@ function transferToLogin(username,password){
         alert("The user doesn't exist in the system, please enter the details again");
     }else{ //does exist, connect him
         session_user = JSON.parse(sessionStorage.getItem(username));
-        document.getElementById('front_display').innerHTML = "The user " + session_user.fullname + " is currently logged in.";
+        document.getElementById('front_display').innerHTML = "The user " + session_user.username + " is currently logged in.";
         replaceWindow(event, 'game');
+        document.getElementById('gameright').style.display='block';
+        document.getElementById('gameleft').style.display='block';
+        document.getElementById('canvas').style.display='block';
     }
 }
 
