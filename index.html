@@ -4,14 +4,12 @@
     <title>Chen and Oran's Packman </title>
     <script src="./jquery-3.4.1.slim.min.js"></script>
     <script type="text/javascript" src="./app.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <link rel="stylesheet" type="text/css" href="style.css"/>
     <script type="text/javascript" src="./UserManager.js"></script>
     <script type="text/javascript" src="./about.js"></script>
-    <script type="text/javascript" src="dobpicker.js"></script>
-    <script type="text/javascript" src="settings.js"></script>
 </head>
 
 <body onresize="resize_canvas()">
@@ -52,9 +50,11 @@
 </div>
 
 <div id="game" class="tab" onload="clearCanvas()">
+	<script type="text/javascript" src="settings.js"></script>
+
     <div class="container" id="gameleft" style="display:none;">
         <div id="startandreset">
-            <button class="btn btn-info" onclick="showCanvas()">Start Game</button>
+            <button class="btn btn-info" id="startgame" onclick="showCanvas()" disabled>Start Game</button>
             <button class="btn btn-info" id="reset" class="reset" onclick="reset()" style="display: none;">
                 Reset
             </button>
@@ -89,10 +89,11 @@
         <br>
 		<div id="ballsnum">
 			<form id="ballsnumform">
+				<script type="text/javascript" src="jqueryvalidation.js"></script>
 				<strong><p>&diams;  Choose number of balls:</p></strong>
-				<input id="ballsnumin" type="text">
+				<input type="text" id="ballsnumin" name="ballsnumin" placeholder="50 to 90" size="3">
+				<button type="submit" class="btn btn-info btn-sm" id="okballsnum">OK</button>
 			</form>
-
 		</div>
 		<div id="ballscolor">
 			<strong><p>&diams;  Choose colors for balls:</p></strong>
@@ -132,9 +133,10 @@
 </div>
 
 <div id="register" class="tab" style="display:none;">
-    <script type="text/javascript" src="jqueryvalidation.js"></script>
-    <script type="text/javascript" src="form.js"></script>
-    <link rel="stylesheet" type="text/css" href="styleLogin.css"/>
+	<script type="text/javascript" src="jqueryvalidation.js"></script>
+	<script type="text/javascript" src="form.js"></script>
+	<script type="text/javascript" src="dobpicker.js"></script>
+	<link rel="stylesheet" type="text/css" href="styleLogin.css"/>
 
     <form id="reg_form" style="border:1px solid #ccc">
         <div class="container" id="containerForm">
