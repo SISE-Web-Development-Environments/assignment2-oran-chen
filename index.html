@@ -54,7 +54,7 @@
 
     <div class="container" id="gameleft" style="display:none;">
         <div id="startandreset">
-            <button class="btn btn-info" id="startgame" onclick="showCanvas()" disabled>Start Game</button>
+			<button class="btn btn-info" id="startgame" onclick="showCanvas()" disabled>Start Game</button>
             <button class="btn btn-info" id="reset" class="reset" onclick="reset()" style="display: none;">
                 Reset
             </button>
@@ -251,11 +251,13 @@
         }
     }
 
-    function showCanvas() {
-        document.getElementById('canvas').style.display = "block";
-        document.getElementById('reset').style.display = "block";
-        startGame();
-    }
+		function showCanvas(){
+			document.getElementById("startgame").className.replace("active","");
+    		startGame();
+			document.getElementById('canvas').style.display = "block";
+			document.getElementById('reset').style.display = "block";
+
+		}
 
     function reset() {
         Start();
