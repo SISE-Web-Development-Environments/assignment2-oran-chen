@@ -360,13 +360,13 @@ function UpdatePosition() {
 				setTimeout(function () {window.alert("Winner!!!");},50);
 		}
 	}
-	else if (score >= 100) {
-		window.clearInterval(interval);
-		setTimeout(function () {window.alert("Winner!!!");},50);
-
-	} else if(remain_lives == 0){
-
-		setTimeout(function () {
+	// else if (score >= 100) {
+	// 	window.clearInterval(interval);
+	// 	setTimeout(function () {window.alert("Winner!!!");},50);
+	//
+	// } else
+		if(remain_lives == 0){
+			setTimeout(function () {
 			window.alert("Loser!");
 			window.clearInterval(interval);
 		},50);
