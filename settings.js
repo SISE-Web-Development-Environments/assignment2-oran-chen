@@ -63,7 +63,7 @@ $().ready(function () {
         submitHandler: function () {
             var isFormValid = $("#ballsnumform").valid();
             if (isFormValid) {
-               food_remain= $('#ballsnumin').val();
+               food_remain = $('#ballsnumin').val();
                $('#startgame').prop('disabled', false); //to enable playing the game
             }
         }
