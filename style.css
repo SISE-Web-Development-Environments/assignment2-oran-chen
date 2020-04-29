@@ -15,12 +15,12 @@
 #gameleft{
     float: left;
     list-style: none;
-    width: 40%;
+    width: 60%;
     /*margin: 14px 0 12px 0;*/
 }
 #gameright{
     float: right;
-    width:30%;
+    width:32%;
 }
 .footer {
     position: fixed;
@@ -86,6 +86,28 @@ logo{
 }
 #canvas{
     padding-bottom: 50px;
+}
+#ghosts{
+    padding: 14px 20px;
+    margin: 10px 0;
+    align-content: center;
+    text-align: center;
+    font-size: 10px;
+    font-weight: bold;
+}
+h3 {
+    font-family: Calibri;
+    color: #0b1b6c;
+    text-align: left;
+    font-size: 30px;
+    font-weight: bold;
+}
+h4{
+    font-family: Calibri;
+    color: #e20822;
+    font-size: 16px;
+    font-weight: bold;
+
 }
 
 
