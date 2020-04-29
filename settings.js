@@ -1,26 +1,47 @@
-//keys
+let rightPressed;
+let leftPressed;
+let upPressed;
+let downPressed;
+
+//choose keys
 function chooseRight() {
+    rightPressed = false;
     $(document).keydown(function (event) {
-        keyRight = event.keyCode;
-        document.getElementById("rightkeybtn").innerText=event.key;
+        if (rightPressed == false) {
+            keyRight = event.keyCode;
+            rightPressed = true;
+            document.getElementById("rightkeybtn").innerText = event.key;
+        }
     });
 }
 function chooseLeft() {
+    leftPressed = false;
     $(document).keydown(function (event) {
-        keyLeft = event.keyCode;
-        document.getElementById("leftkeybtn").innerText=event.key;
+        if (leftPressed == false) {
+            keyLeft = event.keyCode;
+            leftPressed=true
+            document.getElementById("leftkeybtn").innerText = event.key;
+        }
     });
 }
 function chooseDown() {
+    downPressed = false;
     $(document).keydown(function (event) {
-        keyDown = event.keyCode;
-        document.getElementById("downkeybtn").innerText=event.key;
+        if(downPressed==false) {
+            keyDown = event.keyCode;
+            downPressed=true;
+            document.getElementById("downkeybtn").innerText = event.key;
+        }
     });
 }
 function chooseUp() {
+    upPressed = false;
     $(document).keydown(function (event) {
-        keyUp = event.keyCode;
-        document.getElementById("upkeybtn").innerText=event.key;
+        if (upPressed==false) {
+            keyUp = event.keyCode;
+            upPressed=true;
+            document.getElementById("upkeybtn").innerText = event.key;
+        }
     });
 }
 
@@ -39,4 +60,6 @@ $().ready(function () {
         }
     });
 });
+
+
 
