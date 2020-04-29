@@ -247,7 +247,7 @@ function Draw() {
 				context.fill();
 			} else if ((dotsBoard[i][j] == 1 || dotsBoard[i][j] == 2 || dotsBoard[i][j] == 3) && board[i][j] != 5 && board[i][j] != 7) { //Points
 				context.beginPath();
-				context.arc(center.x, center.y, 12, 0, 2 * Math.PI); // circle
+				context.arc(center.x, center.y, 13, 0, 2 * Math.PI); // circle
 
 				if(dotsBoard[i][j] == 1){
 					context.fillStyle = sixtyPercentColor; //color
