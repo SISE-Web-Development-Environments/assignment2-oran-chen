@@ -45,6 +45,21 @@ function chooseUp() {
     });
 }
 
+$().ready(function () {
+//validate the register form on keyup and submit
+    $('#setsettings').validate({
+        rules: {
+            numOfBallsInput:{
+                required: true,
+                regex: /^[0-9]{1,45}$/
+            }
+
+        },
+        messages: {
+            numOfBallsInput:"Please enter a number ctween 50 and 90"
+        }
+    });
+});
 
 
 
