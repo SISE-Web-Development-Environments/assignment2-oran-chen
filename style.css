@@ -82,7 +82,9 @@ logo{
     font-weight: bold;
 }
 #welcomeCon{
-    float: top;
+    padding-bottom: 100px;
+}
+#canvas{
     padding-bottom: 100px;
 }
 
