@@ -19,10 +19,10 @@ var numOfGhosts;
 var ghostPosition;
 var monsterLocation = new Object();
 var remain_monster;
-var keyUp;
-var keyDown;
-var keyRight;
-var keyLeft;
+var keyUp = 38;
+var keyDown = 40;
+var keyRight = 39;
+var keyLeft = 37;
 // $(document).ready(function() {
 // 	context = canvas.getContext("2d");
 // 	Start();
@@ -55,9 +55,9 @@ function Start() {
 	score = 0;
 	remain_lives = 5;
 	pac_color = "yellow";
-	sixtyPercentColor = "blue";
-	thirtyPercentColor = "red";
-	tenPercentColor = "green";
+	sixtyPercentColor = document.getElementById("sixtyColor").value;;
+	thirtyPercentColor = document.getElementById("thirtyColor").value;;
+	tenPercentColor = document.getElementById("tenColor").value;
 	numOfGhosts = 4;
 	ghostPosition = new Array(numOfGhosts);
 	initializeGhostPos();
@@ -90,13 +90,13 @@ function Start() {
 				var randomNum = Math.random();
 				if (randomNum <= (1.0 * food_remain) / cnt) {
 					food_remain--;
-					var num = Math.random();
+					//var num = Math.random();
 
-					if(num < 0.6){
+					if(numSixtyPercent > 0){
 						numSixtyPercent--;
 						dotsBoard[i][j] = 1;
 					}
-					else if(num < 0.9){
+					else if(numThirtyPercent > 0){
 						numThirtyPercent--;
 						dotsBoard[i][j] = 2;
 					}
@@ -119,13 +119,12 @@ function Start() {
 	}
 	while (food_remain > 0) {
 		var emptyCell = findRandomEmptyCell(board);
-		var num = Math.random();
 
-		if(num < 0.6){
+		if(numSixtyPercent > 0){
 			numSixtyPercent--;
 			dotsBoard[emptyCell[0]][emptyCell[1]] = 1;
 		}
-		else if(num < 0.9){
+		else if(numThirtyPercent > 0){
 			numThirtyPercent--;
 			dotsBoard[emptyCell[0]][emptyCell[1]] = 2;
 		}
@@ -142,6 +141,9 @@ function Start() {
 	placeGhosts();
 	monsterLocation.i = 1;
 	monsterLocation.j = 1;
+
+	var emptyCell = findRandomEmptyCell(board);
+	board[emptyCell[0]][emptyCell[1]] = 6;
 
 	keysDown = {};
 	addEventListener(
@@ -251,7 +253,7 @@ function Draw() {
 				context.fill();
 			} else if ((dotsBoard[i][j] == 1 || dotsBoard[i][j] == 2 || dotsBoard[i][j] == 3) && board[i][j] != 5 && board[i][j] != 7) { //Points
 				context.beginPath();
-				context.arc(center.x, center.y, 13, 0, 2 * Math.PI); // circle
+				context.arc(center.x, center.y, 14, 0, 2 * Math.PI); // circle
 
 				if(dotsBoard[i][j] == 1){
 					context.fillStyle = sixtyPercentColor; //color
@@ -425,38 +427,42 @@ function updateGhostPosition(){
 			direction = getRandomDirection();
 
 			if(direction == 1){ //Up
-				if(ghostPosition[i][1] - 1 > 0 && board[ghostPosition[i][0]][ghostPosition[i][1] - 1] != 4 && board[ghostPosition[i][0]][ghostPosition[i][1] - 1]!= 5){
+				if(ghostPosition[i][1] - 1 >= 0 && board[ghostPosition[i][0]][ghostPosition[i][1] - 1] != 4 && board[ghostPosition[i][0]][ghostPosition[i][1] - 1]!= 5){
 					ghostPosition[i][1]--;
 				}
 			}
 			else if(direction == 2){ //Down
-				if(ghostPosition[i][1] + 1 < 9 && board[ghostPosition[i][0]][ghostPosition[i][1] + 1] != 4&& board[ghostPosition[i][0]][ghostPosition[i][1] + 1]!= 5){
+				if(ghostPosition[i][1] + 1 < 10 && board[ghostPosition[i][0]][ghostPosition[i][1] + 1] != 4&& board[ghostPosition[i][0]][ghostPosition[i][1] + 1]!= 5){
 					ghostPosition[i][1]++;
 				}
 			}
 			else if(direction == 3){ //Left
-				if(ghostPosition[i][0] - 1 > 0 && board[ghostPosition[i][0] - 1][ghostPosition[i][1]] != 4&& board[ghostPosition[i][0] - 1][ghostPosition[i][1]]!= 5){
+				if(ghostPosition[i][0] - 1 >= 0 && board[ghostPosition[i][0] - 1][ghostPosition[i][1]] != 4&& board[ghostPosition[i][0] - 1][ghostPosition[i][1]]!= 5){
 					ghostPosition[i][0]--;
 				}
 			}
 			else if(direction == 4){ //Right
-				if(ghostPosition[i][0] + 1 < 9 && board[ghostPosition[i][0] + 1][ghostPosition[i][1]] != 4 && board[ghostPosition[i][0] + 1][ghostPosition[i][1]]!= 5){
+				if(ghostPosition[i][0] + 1 < 10 && board[ghostPosition[i][0] + 1][ghostPosition[i][1]] != 4 && board[ghostPosition[i][0] + 1][ghostPosition[i][1]]!= 5){
 					ghostPosition[i][0]++;
 				}
 			}
 		} else {
 			let currentDistance = distanceSum(shape.i, ghostPosition[i][0], shape.j, ghostPosition[i][1]);
 			if (currentDistance > distanceSum(shape.i, ghostPosition[i][0] + 1, shape.j, ghostPosition[i][1]) &&
-				board[ghostPosition[i][0] + 1][ghostPosition[i][1]] != 4 && board[ghostPosition[i][0] + 1][ghostPosition[i][1]]!= 5) {
+				board[ghostPosition[i][0] + 1][ghostPosition[i][1]] != 4 && board[ghostPosition[i][0] + 1][ghostPosition[i][1]]!= 5 &&
+				ghostPosition[i][0] + 1 < 10) {
 				ghostPosition[i][0]++;
 			} else if (currentDistance > distanceSum(shape.i, ghostPosition[i][0], shape.j, ghostPosition[i][1] + 1) &&
-				board[ghostPosition[i][0]][ghostPosition[i][1] + 1] != 4 && board[ghostPosition[i][0]][ghostPosition[i][1] + 1]!= 5) {
+				board[ghostPosition[i][0]][ghostPosition[i][1] + 1] != 4 && board[ghostPosition[i][0]][ghostPosition[i][1] + 1]!= 5 &&
+				ghostPosition[i][1] + 1 < 10) {
 				ghostPosition[i][1]++;
 			} else if (currentDistance > distanceSum(shape.i, ghostPosition[i][0] - 1, shape.j, ghostPosition[i][1]) &&
-				board[ghostPosition[i][0] - 1][ghostPosition[i][1]] != 4 && board[ghostPosition[i][0] - 1][ghostPosition[i][1]]!= 5) {
+				board[ghostPosition[i][0] - 1][ghostPosition[i][1]] != 4 && board[ghostPosition[i][0] - 1][ghostPosition[i][1]]!= 5 &&
+				ghostPosition[i][0] - 1 >= 0) {
 				ghostPosition[i][0]--;
 			} else if (currentDistance > distanceSum(shape.i, ghostPosition[i][0], shape.j, ghostPosition[i][1] - 1) &&
-				board[ghostPosition[i][0]][ghostPosition[i][1] - 1] != 4 && board[ghostPosition[i][0] - 1][ghostPosition[i][1]]!= 5) {
+				board[ghostPosition[i][0]][ghostPosition[i][1] - 1] != 4 && board[ghostPosition[i][0]][ghostPosition[i][1] - 1]!= 5 &&
+				ghostPosition[i][1] - 1 >= 0) {
 				ghostPosition[i][1]--;
 			}
 		}
@@ -470,19 +476,19 @@ function updateGhostPosition(){
 		board[monsterLocation.i][monsterLocation.j] = 0;
 		if (direction == 1) { //Up
 
-			if (monsterLocation.j - 1 > 0 && board[monsterLocation.i][monsterLocation.j - 1] != 4) {
+			if (monsterLocation.j - 1 >= 0 && board[monsterLocation.i][monsterLocation.j - 1] != 4) {
 				monsterLocation.j--;
 			}
 		} else if (direction == 2) { //Down
-			if (monsterLocation.j + 1 < 9 && board[monsterLocation.i][monsterLocation.j + 1] != 4) {
+			if (monsterLocation.j + 1 < 10 && board[monsterLocation.i][monsterLocation.j + 1] != 4) {
 				monsterLocation.j++;
 			}
 		} else if (direction == 3) { //Left
-			if (monsterLocation.i - 1 > 0 && board[monsterLocation.i - 1][monsterLocation.j] != 4) {
+			if (monsterLocation.i - 1 >= 0 && board[monsterLocation.i - 1][monsterLocation.j] != 4) {
 				monsterLocation.i--;
 			}
 		} else if (direction == 4) { //Right
-			if (monsterLocation.i + 1 < 9 && board[monsterLocation.i + 1][monsterLocation.j] != 4) {
+			if (monsterLocation.i + 1 < 10 && board[monsterLocation.i + 1][monsterLocation.j] != 4) {
 				monsterLocation.i++;
 			}
 		}
