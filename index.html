@@ -12,7 +12,6 @@
 		<script type="text/javascript" src="./about.js"></script>
 		<script type="text/javascript" src="dobpicker.js"></script>
 		<script type="text/javascript" src="settings.js"></script>
-
 	</head>
 	
 	<body onresize="resize_canvas()">
@@ -34,7 +33,6 @@
 					</div>
 				  </nav>
 			</menu>
-			<br>
 			<p id="front_display" align="center"></p>
 		</div>
 		<div class="footer">
@@ -69,7 +67,6 @@
 					<br>
 				</div>
 			</div>
-			</div>
 
 		<div class="container" id="gameright" style="display:none;">
 				<h2>Game Settings</h2>
@@ -84,10 +81,8 @@
 				<strong>Key Down: </strong>
 				<button id="downkeybtn" class="btn btn-info btn-sm" onclick="chooseDown()" width="5%">Down</button>
 			</div>
+		</div>
 		<canvas id="canvas" height="600" width="600" class="tab" style="display:none;"></canvas>
-		<br>
-		<br>
-		<br>
 
 		</div>
 		<div id="welcome" class="tab" align="center">
@@ -109,22 +104,23 @@
 			<form id="reg_form" style="border:1px solid #ccc">
 				<div class="container" id="containerForm">
 				  <strong><h1>Register</h1></strong>
-				  <img class="images" src="images/packman.webp" alt="packman" width="60" height="60">
+				  <img class="images" src="images/packman.webp" alt="packman" width="50" height="50">
 
-				  <p>Please fill in this form to create a new account for playing our game.</p>
-				  <hr>
+				  <strong> <p> Please fill in this form to create a new account for playing our game </p></strong>
+					<p> ---------------------------------------------------------------------------------------------------</p>
+<!--				  <hr>-->
 
 				  <label for="uname_reg"><b>Username  </b></label>
-				  <input type="text" placeholder="Enter Username" id="uname_reg" name="uname_reg" align="center" size="45">
+				  <input type="text" placeholder="Enter Username" id="uname_reg" name="uname_reg"  size="45">
 				  <br>
 				  <label for="psw_reg"><b>Password  </b></label>
-				  <input type="password" placeholder="Enter Password" id="psw_reg" name="psw_reg"  align="center" size="45">
+				  <input type="password" placeholder="Enter Password" id="psw_reg" name="psw_reg" size="45">
 				  <br>
 				  <label for="fname_reg"><b>Full Name  </b></label>
-				  <input type="text" placeholder="Enter Full Name" id="fname_reg" name="fname_reg" align="center" size="45">
+				  <input type="text" placeholder="Enter Full Name" id="fname_reg" name="fname_reg"  size="45">
 				  <br>
-				  <label for="email_reg" ><b>Email  </b></label>
-				  <input type="email" placeholder="Enter Email" id="email_reg" name="email_reg" align="center" size="45">
+				  <label for="email_reg" ><b>Email </b></label>
+				  <input type="email" placeholder="Enter Email" id="email_reg" name="email_reg" size="45">
 				  <br>
 				  <label for="bdate_reg" id="bdate_reg">Birth date</label>
 					<select id="Bday" name="Bday" class='group' ></select>
@@ -164,8 +160,7 @@
 			</form>
 		</div>
 
-<!--		onload="appear()"-->
-		<div id="about" class="modal" >
+\		<div id="about" class="modal" >
 			<link rel="stylesheet" type="text/css" href="styleModal.css"/>
 			<div class="modal-content">
 				<span class="close">&times;</span>
