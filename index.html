@@ -36,7 +36,6 @@
 			</menu>
 			<br>
 			<p id="front_display" align="center"></p>
-			<br>
 		</div>
 		<div class="footer">
 			<div id="footerright">
@@ -54,50 +53,52 @@
 			</div>
 		</div>
 		<div id="game" class="tab" onload="clearCanvas()">
-			<div id="settings">
-				<button class="setting" onclick="showCanvas()">Start Game</button>
-			</div>
-			<div id="score">
-				<label for="lblScore">SCORE:</label>
-				<input id="lblScore" type="text" />
-			</div>
-			<div id="time">
-				<label for="lblTime">TIME:</label>
-				<input id="lblTime" type="text"/>
-			</div>
-			<div id="Lifes">
-				<label for="lblLifes">Lifes:</label>
-				<input id="lblLifes" type="text" />
-			</div>
-				<canvas id="canvas" height="600" width="600" class="tab"></canvas>
-				<button id= "reset" class="reset" onclick="reset()" style="display: none;">Reset</button>
-				<div class="container" id="setsettings">
-					<h2>Game Settings</h2>
-					<strong>Key Right: </strong>
-					<label id="rightkey"></label>
-					<button id="rightkeybtn" class="btn btn-info btn-sm" onclick="chooseRight()" width="20%">Choose right</button>
-
-					<strong>Key Left: </strong>
-					<label id="leftkey"></label>
-					<button id="leftkeybtn" class="btn btn-info btn-sm" onclick="chooseLeft()" width="20%">Choose left</button>
-
-					<strong>Key Up: </strong>
-					<label id="upkey"></label>
-					<button id="upkeybtn" class="btn btn-info btn-sm" onclick="chooseUp()" width="20%">Choose up</button>
-
-					<strong>Key Down: </strong>
-					<label id="downkey"></label>
-					<button id="downkeybtn" class="btn btn-info btn-sm" onclick="chooseDown()" width="20%">Choose down</button>
+			<div class="container" id="gameleft" style="display:none;">
+				<div id="startandreset">
+					<button class="btn btn-outline-info" onclick="showCanvas()">Start Game</button>
+					<button class="btn btn-outline-info" id= "reset" class="reset" onclick="reset()" style="display: none;">Reset</button>
 				</div>
-		</div>
+				<div id="labels">
+					<label for="lblScore">SCORE:</label>
+					<input id="lblScore" type="text" height="3" size="4"/>
+					<label for="lblTime">TIME:</label>
+					<input id="lblTime" type="text" height="3" size="4"/>
+					<label for="lblLifes" width="10px">LIVES:</label>
+					<input id="lblLifes" type="text" height="3" size="4"/>
+					<br>
+					<br>
+				</div>
+			</div>
+			</div>
 
+		<div class="container" id="gameright" style="display:none;">
+				<h2>Game Settings</h2>
+				<p>Choose Keys</p>
+				<strong>Key Right: </strong>
+				<button id="rightkeybtn" class="btn btn-info btn-sm" onclick="chooseRight()" width="5%">Right</button>
+				<strong>Key Left: </strong>
+				<button id="leftkeybtn" class="btn btn-info btn-sm" onclick="chooseLeft()" width="5%">Left</button>
+				<br>
+				<strong>Key Up: </strong>
+				<button id="upkeybtn" class="btn btn-info btn-sm" onclick="chooseUp()" width="5%">Up</button>
+				<strong>Key Down: </strong>
+				<button id="downkeybtn" class="btn btn-info btn-sm" onclick="chooseDown()" width="5%">Down</button>
+			</div>
+		<canvas id="canvas" height="600" width="600" class="tab" style="display:none;"></canvas>
+		<br>
+		<br>
+		<br>
+
+		</div>
 		<div id="welcome" class="tab" align="center">
-			<img class="images" src="images/logopac.png" id="logo" alt="images" width="430" height="250" margin-left=30%>
-			<br>
-			<button id="reg" class="btn btn-info btn-lg" onclick="replaceWindow(event,'register')" align="center" padding= 10px margin=4px>Register</button>
-			<button id="log" class="btn btn-info btn-lg" onclick="replaceWindow(event,'login')" align="center" padding= 10px margin=4px>Login</button>
-			<br>
-			<br>
+			<div class="imgcontainer" id="welcomeCon">
+				<img class="images" src="images/logopac.png" id="logo" alt="images" width="430" height="250" margin-left=30%>
+				<br>
+				<button id="reg" class="btn btn-info btn-lg" onclick="replaceWindow(event,'register')" align="center" padding= 10px margin=4px>Register</button>
+				<button id="log" class="btn btn-info btn-lg" onclick="replaceWindow(event,'login')" align="center" padding= 10px margin=4px>Login</button>
+				<br>
+				<br>
+			</div>
 		</div>
 
 		<div id="register" class="tab" style="display:none;">
@@ -106,7 +107,7 @@
 			<link rel="stylesheet" type="text/css" href="styleLogin.css"/>
 
 			<form id="reg_form" style="border:1px solid #ccc">
-				<div class="container">
+				<div class="container" id="containerForm">
 				  <strong><h1>Register</h1></strong>
 				  <img class="images" src="images/packman.webp" alt="packman" width="60" height="60">
 
@@ -114,16 +115,16 @@
 				  <hr>
 
 				  <label for="uname_reg"><b>Username  </b></label>
-				  <input type="text" placeholder="Enter Username" id="uname_reg" name="uname_reg" align="center">
+				  <input type="text" placeholder="Enter Username" id="uname_reg" name="uname_reg" align="center" size="45">
 				  <br>
 				  <label for="psw_reg"><b>Password  </b></label>
-				  <input type="password" placeholder="Enter Password" id="psw_reg" name="psw_reg"  align="center">
+				  <input type="password" placeholder="Enter Password" id="psw_reg" name="psw_reg"  align="center" size="45">
 				  <br>
 				  <label for="fname_reg"><b>Full Name  </b></label>
-				  <input type="text" placeholder="Enter Full Name" id="fname_reg" name="fname_reg" align="center">
+				  <input type="text" placeholder="Enter Full Name" id="fname_reg" name="fname_reg" align="center" size="45">
 				  <br>
-				  <label for="email_reg"><b>Email  </b></label>
-				  <input type="email" placeholder="Enter Email" id="email_reg" name="email_reg" align="center">
+				  <label for="email_reg" ><b>Email  </b></label>
+				  <input type="email" placeholder="Enter Email" id="email_reg" name="email_reg" align="center" size="45">
 				  <br>
 				  <label for="bdate_reg" id="bdate_reg">Birth date</label>
 					<select id="Bday" name="Bday" class='group' ></select>
@@ -147,12 +148,12 @@
 				  <img src="images/avatar2.webp" alt="Avatar" class="avatar" >
 				</div>
 
-				<div class="container">
+				<div class="container" id="containerForm2">
 				  <label for="uname_log"><b>Username</b></label>
-				  <input type="text" placeholder="Enter Username" id="uname_log" name="uname_login" required align="center">
+				  <input type="text" placeholder="Enter Username" id="uname_log" name="uname_login" required align="center" size="45">
 					<br>
 				  <label for="psw_log"><b>Password</b></label>
-				  <input type="password" placeholder="Enter Password" id="psw_log" name="psw_login" required align="center">
+				  <input type="password" placeholder="Enter Password" id="psw_log" name="psw_login" required align="center" size="45">
 					<br>
 				<div class="clearfix">
 				<button type="button" class="btn btn-info btn-lg"onclick="userManagerLogin()">Login</button>

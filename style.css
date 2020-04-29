@@ -12,6 +12,16 @@
     font-size: 15px;
     text-align: center;
 }
+#gameleft{
+    float: left;
+    list-style: none;
+    width: 40%;
+    /*margin: 14px 0 12px 0;*/
+}
+#gameright{
+    float: right;
+    width:30%;
+}
 .footer {
     position: fixed;
     margin: 0 auto;
@@ -31,6 +41,7 @@
 #footerright {
     float: right;
     text-align: center;
+
 }
 #footerleft {
     float: left;
@@ -69,6 +80,10 @@ logo{
     text-shadow: #2f80eb;
     font-family: Calibri;
     font-weight: bold;
+}
+#welcomeCon{
+    float: top;
+    padding-bottom: 100px;
 }
 
 
