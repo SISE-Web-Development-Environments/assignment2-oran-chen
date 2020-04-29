@@ -70,6 +70,7 @@ $().ready(function () {
             yearDefault: 'Year',
         });
 
+
 });
 $(function () {
     $.validator.addMethod(

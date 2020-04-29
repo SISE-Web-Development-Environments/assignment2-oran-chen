@@ -15,52 +15,57 @@ function chooseRight() {
         }
     });
 }
+
 function chooseLeft() {
     leftPressed = false;
     $(document).keydown(function (event) {
         if (leftPressed == false) {
             keyLeft = event.keyCode;
-            leftPressed=true
+            leftPressed = true
             document.getElementById("leftkeybtn").innerText = event.key;
         }
     });
 }
+
 function chooseDown() {
     downPressed = false;
     $(document).keydown(function (event) {
-        if(downPressed==false) {
+        if (downPressed == false) {
             keyDown = event.keyCode;
-            downPressed=true;
+            downPressed = true;
             document.getElementById("downkeybtn").innerText = event.key;
         }
     });
 }
+
 function chooseUp() {
     upPressed = false;
     $(document).keydown(function (event) {
-        if (upPressed==false) {
+        if (upPressed == false) {
             keyUp = event.keyCode;
-            upPressed=true;
+            upPressed = true;
             document.getElementById("upkeybtn").innerText = event.key;
         }
     });
 }
 
-
 $().ready(function () {
-//validate the register form on keyup and submit
-    $('#setsettings').validate({
+    $('#ballsnumform').validate({
         rules: {
-            numOfBallsInput:{
+            ballsnumin: {
                 required: true,
-                regex: /^[0-9]{1,45}$/
+                regex: /^[5-9][0-9]$|^100$/
             }
         },
         messages: {
-            numOfBallsInput:"Please enter a number between 50 and 90"
+            ballsnumin: "Please enter a number between 50 and 90"
+        },
+        submitHandler: function () {
+            var isFormValid = $("#ballsnumform").valid();
+            if (isFormValid) {
+               food_remain= $('#ballsnumin').val();
+               $('#startgame').prop('disabled', false); //to enable playing the game
+            }
         }
     });
 });
-
-
-

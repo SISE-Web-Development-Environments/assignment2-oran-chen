@@ -107,7 +107,11 @@ h4{
     color: #e20822;
     font-size: 16px;
     font-weight: bold;
-
+}
+#ballsnumin{
+    max-height: 40px;
+    font-size: 10px;
+    color: black;
 }
 
 
