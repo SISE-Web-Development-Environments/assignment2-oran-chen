@@ -19,7 +19,7 @@ h1{
     border: 1px solid #ccc;
     box-sizing: border-box;
   }
-  select{
+  #Bday, #Bmonth, #Byear{
     width: 10%;
     padding: 12px 20px;
     margin: 8px 0;

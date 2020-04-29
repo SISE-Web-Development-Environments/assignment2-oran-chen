@@ -3,6 +3,7 @@ let leftPressed;
 let upPressed;
 let downPressed;
 
+
 //choose keys
 function chooseRight() {
     rightPressed = false;
@@ -45,6 +46,7 @@ function chooseUp() {
     });
 }
 
+
 $().ready(function () {
 //validate the register form on keyup and submit
     $('#setsettings').validate({
@@ -53,10 +55,9 @@ $().ready(function () {
                 required: true,
                 regex: /^[0-9]{1,45}$/
             }
-
         },
         messages: {
-            numOfBallsInput:"Please enter a number ctween 50 and 90"
+            numOfBallsInput:"Please enter a number between 50 and 90"
         }
     });
 });

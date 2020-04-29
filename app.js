@@ -19,10 +19,10 @@ var numOfGhosts;
 var ghostPosition;
 var monsterLocation = new Object();
 var remain_monster;
-var keyUp;
-var keyDown;
-var keyRight;
-var keyLeft;
+var keyRight= 39;
+var keyLeft = 37;
+var keyUp = 38;
+var keyDown = 40;
 // $(document).ready(function() {
 // 	context = canvas.getContext("2d");
 // 	Start();
@@ -58,7 +58,7 @@ function Start() {
 	sixtyPercentColor = "blue";
 	thirtyPercentColor = "red";
 	tenPercentColor = "green";
-	numOfGhosts = 4;
+	numOfGhosts = $('#ghostsNumber :selected').val();
 	ghostPosition = new Array(numOfGhosts);
 	initializeGhostPos();
 	var cnt = 100;
