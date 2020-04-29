@@ -55,8 +55,8 @@ function Start() {
 	score = 0;
 	remain_lives = 5;
 	pac_color = "yellow";
-	sixtyPercentColor = document.getElementById("sixtyColor").value;;
-	thirtyPercentColor = document.getElementById("thirtyColor").value;;
+	sixtyPercentColor = document.getElementById("sixtyColor").value;
+	thirtyPercentColor = document.getElementById("thirtyColor").value;
 	tenPercentColor = document.getElementById("tenColor").value;
 	numOfGhosts = 4;
 	ghostPosition = new Array(numOfGhosts);
