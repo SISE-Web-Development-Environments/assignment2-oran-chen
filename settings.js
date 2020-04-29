@@ -49,15 +49,15 @@ function chooseUp() {
 
 $().ready(function () {
 //validate the register form on keyup and submit
-    $('#setsettings').validate({
+    $('#ballsnumform').validate({
         rules: {
-            numOfBallsInput:{
+            ballsnumin:{
                 required: true,
-                regex: /^[0-9]{1,45}$/
+                regex: /^[5-9][0-9]$|^100$/
             }
         },
         messages: {
-            numOfBallsInput:"Please enter a number between 50 and 90"
+            ballsnumin:"Please enter a number between 50 and 90"
         }
     });
 });
