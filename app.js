@@ -37,6 +37,8 @@ function startGame() {
 	canvas = document.getElementById("canvas");
 	context = canvas.getContext("2d");
 	clearCanvas(context,canvas);
+	//canvas.style.width = window.innerWidth;
+	//canvas.style.height = window.innerHeight;
 	Start();
 }
 
@@ -146,6 +148,9 @@ function Start() {
 		"keydown",
 		function(e) {
 			keysDown[e.keyCode] = true;
+			if([32, 37, 38, 39, 40].indexOf(e.keyCode) > -1) {
+				e.preventDefault();
+			}
 		},
 		false
 	);
@@ -192,33 +197,33 @@ function Draw() {
 	for (var i = 0; i < 10; i++) {
 		for (var j = 0; j < 10; j++) {
 			var center = new Object();
-			center.x = i * 60 + 30;
-			center.y = j * 60 + 30;
+			center.x = i * 50 + 25;
+			center.y = j * 50 + 25;
 
 			if (board[i][j] == 2) {
 				if (GetKeyPressed() == 4) { //Right
 					packBody.x = 0.15;
 					packBody.y = 1.85;
 					context.beginPath();
-					context.arc(center.x, center.y, 30, 0.15 * Math.PI, 1.85 * Math.PI); // half circle
+					context.arc(center.x, center.y, 25, 0.15 * Math.PI, 1.85 * Math.PI); // half circle
 				} else if (GetKeyPressed() == 3) { //Left
 					packBody.x = 1.15;
 					packBody.y = 0.85;
 					context.beginPath();
-					context.arc(center.x, center.y, 30, 1.15 * Math.PI, 0.85 * Math.PI); // half circle
+					context.arc(center.x, center.y, 25, 1.15 * Math.PI, 0.85 * Math.PI); // half circle
 				} else if (GetKeyPressed() == 2) { //Down
 					packBody.x = 0.65;
 					packBody.y = 0.35;
 					context.beginPath();
-					context.arc(center.x, center.y, 30, 0.65 * Math.PI, 0.35 * Math.PI); // half circle
+					context.arc(center.x, center.y, 25, 0.65 * Math.PI, 0.35 * Math.PI); // half circle
 				} else if (GetKeyPressed() == 1) { // Up
 					packBody.x = 1.65;
 					packBody.y = 1.35;
 					context.beginPath();
-					context.arc(center.x, center.y, 30, 1.65 * Math.PI, 1.35 * Math.PI); // half circle
+					context.arc(center.x, center.y, 25, 1.65 * Math.PI, 1.35 * Math.PI); // half circle
 				} else {
 					context.beginPath();
-					context.arc(center.x, center.y, 30, packBody.x * Math.PI, packBody.y * Math.PI); // half circle
+					context.arc(center.x, center.y, 25, packBody.x * Math.PI, packBody.y * Math.PI); // half circle
 				}
 
 				context.lineTo(center.x, center.y);
@@ -229,20 +234,20 @@ function Draw() {
 				if (GetKeyPressed() == 2 || GetKeyPressed() == 1) {
 					eye.x = 15;
 					eye.y = -5;
-					context.arc(center.x + 15, center.y - 5, 5, 0, 2 * Math.PI); // circle
+					context.arc(center.x + 15, center.y - 5, 4, 0, 2 * Math.PI); // circle
 				} else if (GetKeyPressed() == 4 || GetKeyPressed() == 3) {
 					eye.x = 5;
 					eye.y = -15;
-					context.arc(center.x + 5, center.y - 15, 5, 0, 2 * Math.PI); // circle	
+					context.arc(center.x + 5, center.y - 15, 4, 0, 2 * Math.PI); // circle
 				} else {
-					context.arc(center.x + eye.x, center.y + eye.y, 5, 0, 2 * Math.PI); // circle
+					context.arc(center.x + eye.x, center.y + eye.y, 4, 0, 2 * Math.PI); // circle
 				}
 
 				context.fillStyle = "black"; //color
 				context.fill();
 			} else if ((dotsBoard[i][j] == 1 || dotsBoard[i][j] == 2 || dotsBoard[i][j] == 3) && board[i][j] != 5 && board[i][j] != 7) { //Points
 				context.beginPath();
-				context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // circle
+				context.arc(center.x, center.y, 12, 0, 2 * Math.PI); // circle
 
 				if(dotsBoard[i][j] == 1){
 					context.fillStyle = sixtyPercentColor; //color
@@ -263,21 +268,21 @@ function Draw() {
 				//context.fill();
 
 				img = document.getElementById("wall");
-				context.drawImage(img, center.x - 30, center.y - 30, 60, 60);
+				context.drawImage(img, center.x - 25, center.y - 25, 50, 50);
 			} else if (board[i][j] == 5) { //Ghost
 				var img;
 				img = document.getElementById("ghost");
-				context.drawImage(img, center.x - 30, center.y - 30, 60, 60);
+				context.drawImage(img, center.x - 25, center.y - 25, 50, 50);
 			}
 			else if (board[i][j] == 6) { //Medicine
 				var img;
 				img = document.getElementById("medicine");
-				context.drawImage(img, center.x - 30, center.y - 30, 60, 60);
+				context.drawImage(img, center.x - 25, center.y - 25, 50, 50);
 			}
 			else if (board[i][j] == 7) { //Cute monster
 				var img;
 				img = document.getElementById("mon");
-				context.drawImage(img, center.x - 30, center.y - 30, 60, 60);
+				context.drawImage(img, center.x - 25, center.y - 25, 50, 50);
 			}
 		}
 	}
