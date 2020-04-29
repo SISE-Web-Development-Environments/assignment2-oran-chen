@@ -19,6 +19,7 @@ var numOfGhosts;
 var ghostPosition;
 var monsterLocation = new Object();
 var remain_monster;
+var food_remain;
 var keyRight= 39;
 var keyLeft = 37;
 var keyUp = 38;
@@ -62,7 +63,6 @@ function Start() {
 	ghostPosition = new Array(numOfGhosts);
 	initializeGhostPos();
 	var cnt = 100;
-	var food_remain;
 	var numSixtyPercent = food_remain*0.6;
 	var numThirtyPercent = food_remain*0.3;
 	var numTenPercent = food_remain*0.1;
