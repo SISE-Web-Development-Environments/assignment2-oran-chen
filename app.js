@@ -62,7 +62,7 @@ function Start() {
 	ghostPosition = new Array(numOfGhosts);
 	initializeGhostPos();
 	var cnt = 100;
-	var food_remain = 50;
+	var food_remain;
 	var numSixtyPercent = food_remain*0.6;
 	var numThirtyPercent = food_remain*0.3;
 	var numTenPercent = food_remain*0.1;
