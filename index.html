@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Chen and Oran's Packman </title>
+    <title>Chen and Oran's Pacman </title>
     <script src="./jquery-3.4.1.slim.min.js"></script>
     <script type="text/javascript" src="./app.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -22,14 +22,14 @@
         <nav class="navbar navbar-inverse">
             <div class="container-fluid">
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="#" style="font-family: myFont">Packman</a>
+                    <a class="navbar-brand" id="logopac" href="#">Pacman</a>
                 </div>
                 <button id="tabW" class="btn btn-info btn-lg" onclick="replaceWindow(event,'welcome')">Welcome</button>
                 <button id="tabR" class="btn btn-info btn-lg" onclick="replaceWindow(event,'register')">Register
                 </button>
                 <button id="tabL" class="btn btn-info btn-lg" onclick="replaceWindow(event,'login')">Login</button>
                 <button id="tabA" class="btn btn-info btn-lg" onclick="about()">About</button>
-                <button id="tabS" class="btn btn-info btn-lg" onclick="replaceWindow(event,'settings')" disabled>Game settings
+                <button id="tabS" class="btn btn-info btn-lg" onclick="replaceWindow(event,'settings')" disabled="true">Game settings
                 </button>
             </div>
         </nav>
@@ -39,10 +39,9 @@
 <div class="footer">
     <div id="footerright">
         <div id=ftrcontact">
-            <strong><p>Contact us at:</p></strong>
-            <strong>Chen: </strong><a href="mailto:chengal@post.bgu.ac.il">chengal@post.bgu.ac.il</a>
-            <br>
-            <strong>Oran: </strong><a href="mailto:shichman@post.bgu.ac.il">shichman@post.bgu.ac.il</a>
+            <strong><p>Contact us at: <br>
+            Chen: <a href="mailto:chengal@post.bgu.ac.il">chengal@post.bgu.ac.il&nbsp;</a>
+            <br>Oran: <a href="mailto:shichman@post.bgu.ac.il">shichman@post.bgu.ac.il&nbsp;</a></p></strong>
         </div>
     </div>
     <div id="footerleft">
@@ -112,12 +111,16 @@
         </p>
     </div>
     <canvas id="canvas" height="600" width="600" class="tab" style="display:none;"></canvas>
+    <embed id="music" src="music/PacMan.mp3"  autostart="true" loop="false" width="200" height="100" >
+
 </div>
 
 
 <div id="welcome" class="tab" align="center">
     <div class="imgcontainer" id="welcomeCon">
+        <br>
         <img class="images" src="images/logopac.png" id="logo" alt="images" width="460" height="250" margin-left=30%>
+        <br>
         <br>
         <button id="reg" class="btn btn-info btn-lg" onclick="replaceWindow(event,'register')" align="center"
                 padding=10px margin=4px>Register
