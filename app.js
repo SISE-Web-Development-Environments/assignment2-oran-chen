@@ -24,6 +24,7 @@ var keyRight= 39;
 var keyLeft = 37;
 var keyUp = 38;
 var keyDown = 40;
+var time;
 // $(document).ready(function() {
 // 	context = canvas.getContext("2d");
 // 	Start();
@@ -61,6 +62,7 @@ function Start() {
 	thirtyPercentColor = $("#thirtyColor").val();
 	tenPercentColor = $("#tenColor").val();
 	numOfGhosts = $('#ghostsNumber :selected').val();
+	time = $("#timenumin").val();
 	ghostPosition = new Array(numOfGhosts);
 	initializeGhostPos();
 	var cnt = 400;
@@ -364,7 +366,7 @@ function UpdatePosition() {
 		pac_color = "green";
 	}
 
-	if(time_elapsed >= 60){ //Maximum time game
+	if(time_elapsed >= time){ //Maximum time game
 		window.clearInterval(interval);
 		if(score < 100){
 			setTimeout(function () {window.alert("You are better than " + score + " points!");},50);
