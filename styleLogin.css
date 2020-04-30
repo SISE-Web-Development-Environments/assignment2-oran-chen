@@ -7,7 +7,7 @@ h1{
     color: #2f80eb;
     font-family: 'Calibri';
     font-weight: bold;
-    font-size: 50px;
+    font-size: 40px;
     text-align: center;
 }
   /* Full-width inputs */
@@ -64,13 +64,13 @@ h1{
   /* Center the avatar image inside this container */
   .imgcontainer {
     text-align: center;
-    margin: 24px 0 12px 0;
+    margin: 14px 0 12px 0;
   }
   
   /* Avatar image */
   img.avatar {
-    width: 15%;
-    border-radius: 20%;
+    width: 12%;
+    border-radius: 10%;
   }
   
   /* Add padding to containers */

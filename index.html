@@ -18,18 +18,20 @@
 <img id="ghost" src="images/ghostGreen.webp" alt="ghost" width="220" height="277" style="display: none;">
 <img id="mon" src="images/covid19-cart.jpg" alt="mon" width="220" height="277" style="display: none;">
 <div id="menue_bar">
-    <menu type="toolbar">
+    <menu type="toolbar" align="left">
         <nav class="navbar navbar-inverse">
             <div class="container-fluid">
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="#">Packman</a>
+                    <a class="navbar-brand" href="#" style="font-family: myFont">Packman</a>
                 </div>
                 <button id="tabW" class="btn btn-info btn-lg" onclick="replaceWindow(event,'welcome')">Welcome</button>
-                <button id="tabR" class="btn btn-info btn-lg" onclick="replaceWindow(event,'register')">Register</button>
+                <button id="tabR" class="btn btn-info btn-lg" onclick="replaceWindow(event,'register')">Register
+                </button>
                 <button id="tabL" class="btn btn-info btn-lg" onclick="replaceWindow(event,'login')">Login</button>
                 <button id="tabA" class="btn btn-info btn-lg" onclick="about()">About</button>
-				<button id="tabS" class="btn btn-info btn-lg" onclick="replaceWindow(event,'settings')">Game settings</button>
-			</div>
+                <button id="tabS" class="btn btn-info btn-lg" onclick="replaceWindow(event,'settings')">Game settings
+                </button>
+            </div>
         </nav>
     </menu>
     <p id="front_display" align="center"></p>
@@ -51,72 +53,75 @@
 </div>
 
 <div id="settings" class="tab" style="display:none;">
-	<script type="text/javascript" src="settings.js"></script>
-	<script type="text/javascript" src="jqueryvalidation.js"></script>
+    <script type="text/javascript" src="settings.js"></script>
+    <script type="text/javascript" src="jqueryvalidation.js"></script>
 
-	<h3 align="center">Game Settings </h3>
-	<h4 align="center">Change the game settings and click on "Start game"</h4>
-	<form id="settingsform" align="center">
+    <h3>Game Settings </h3>
+    <h4>Change the game settings and click on "Start game"</h4><br>
+    <form id="settingsform" align="center">
 
-		<strong><p>&diams;  Choose Keys:</p></strong>
-		<strong>Key Right </strong>
-		<button id="rightkeybtn" class="btn btn-info btn-sm" onclick="chooseRight()" width="5%">Right</button>
-		<strong>Key Left </strong>
-		<button id="leftkeybtn" class="btn btn-info btn-sm" onclick="chooseLeft()" width="5%">Left</button>
-		<br>
-		<strong>Key Up </strong>
-		<button id="upkeybtn" class="btn btn-info btn-sm" onclick="chooseUp()" width="5%">Up</button>
-		<strong>Key Down </strong>
-		<button id="downkeybtn" class="btn btn-info btn-sm" onclick="chooseDown()" width="5%">Down</button>
+        <strong>
+            <p>&diams; Choose Keys: &nbsp;&nbsp; Key Right &rarr; &nbsp;
+                <button id="rightkeybtn" class="btn btn-info btn-sm" onclick="chooseRight()" width="5%">Right</button>&nbsp;
+                <strong>Key Left &larr; &nbsp;</strong>
+                <button id="leftkeybtn" class="btn btn-info btn-sm" onclick="chooseLeft()" width="5%">Left</button>&nbsp;
+                <!--		<br>-->
+                <strong>Key Up &uarr; &nbsp;</strong>
+                <button id="upkeybtn" class="btn btn-info btn-sm" onclick="chooseUp()" width="5%">Up</button>&nbsp;
+                <strong>Key Down &darr;&nbsp; </strong>
+                <button id="downkeybtn" class="btn btn-info btn-sm" onclick="chooseDown()" width="5%">Down</button>
+            </p>
+        </strong>
 
-		<strong><p>&diams;  Choose number of balls and hit enter:</p></strong>
-		<input type="text" id="ballsnumin" name="ballsnumin" placeholder="50 to 90" size="3">
-		<br>
-		<strong><p>&diams;  Choose colors for balls:</p></strong>
-		<strong>5 points balls color:</strong>
-		<input id="sixtyColor" type="color" value="#33ffbd"><br>
-		<strong>10 points balls color:</strong>
-		<input id="thirtyColor" type="color" value="#333EFF"><br>
-		<strong>15 points balls color:</strong>
-		<input id="tenColor" type="color" value="#FF333F">
-		<br>
-		<label for="ghostsNumber">&diams;  Choose number of ghosts:</label>
-		<select id="ghostsNumber">
-			<option value=1>1</option>
-			<option value=2>2</option>
-			<option value=3>3</option>
-			<option value=4>4</option>
-		</select>
-		<br>
-        <strong><p>&diams;  Choose time for the game:</p></strong>
-        <input type="number" id="timenumin" name="timenumin" placeholder="min 60" size="3" min="60" value="60">
-		<br>
+        <strong><p> &diams; Choose colors for balls: &nbsp;&nbsp;
+            5 points balls color: <input id="sixtyColor" type="color" value="#33ffbd">&nbsp;&nbsp;&nbsp;
+            10 points balls color: <input id="thirtyColor" type="color" value="#333EFF">&nbsp;&nbsp;&nbsp;
+            15 points balls color: <input id="tenColor" type="color" value="#FF333F"></p></strong>&nbsp;&nbsp;&nbsp;
+        <strong>
+            <p>&diams; Choose number of balls:
+                <input type="text" id="ballsnumin" name="ballsnumin" placeholder="50 to 90" size="3">&nbsp;&nbsp;&nbsp;
+                <label for="ghostsNumber">&diams; Choose number of ghosts:</label>
+                <select id="ghostsNumber">
+                    <option value=1>1</option>
+                    <option value=2>2</option>
+                    <option value=3>3</option>
+                    <option value=4>4</option>
+                </select></p>
+        </strong>
+
+        <strong><p>&diams; Choose time for the game: &nbsp;&nbsp;
+            <input type="number" id="timenumin" name="timenumin" placeholder="min 60" size="2" min="60" value="60"></p>
+        </strong>
         <br>
-		<button type="submit" class="btn btn-info btn-" id="startgame" onclick="replaceWindow(event,'game')">Start game</button>
-<!--		<button class="btn btn-info" id="startgame" onclick="showCanvas()" disabled>Start Game</button>-->
-	</form>
+
+        <button type="submit" class="btn btn-danger btn-lg" id="startgame">Start game
+        </button>
+        <!--		<button class="btn btn-info" id="startgame" onclick="showCanvas()" disabled>Start Game</button>-->
+    </form>
 </div>
 
 
 <div id="game" class="tab" onload="clearCanvas()">
-        <div id="labels">
-		<label for="lblScore">SCORE:</label>
-		<input id="lblScore" type="text" height="3" size="4"/>
-		<label for="lblTime">TIME:</label>
-		<input id="lblTime" type="text" height="3" size="4"/>
-		<label for="lblLifes" width="10px">LIVES:</label>
-		<input id="lblLifes" type="text" height="3" size="4"/>
-		<br>
-		<br>
-	</div>
-	<button class="btn btn-info" id="reset" class="reset" onclick="reset()" style="display: none;">Reset</button>
-	<canvas id="canvas" height="600" width="600" class="tab" style="display:none;" ></canvas>
+    <div id="labels" align="center">
+        <p>
+            <label for="lblScore">SCORE:</label>
+            <input id="lblScore" type="text"/>
+            <label for="lblTime">TIME:</label>
+            <input id="lblTime" type="text"/>
+            <label for="lblLifes" width="10px">LIVES:</label>
+            <input id="lblLifes" type="text"/>
+            <button class="btn btn-danger btn-lg" id="reset" class="reset" size="2" onclick="reset()" style="display: none;">Reset
+            </button>
+        </p>
+    </div>
+    <canvas id="canvas" height="600" width="600" class="tab" style="display:none;"></canvas>
+
 </div>
 
 
 <div id="welcome" class="tab" align="center">
     <div class="imgcontainer" id="welcomeCon">
-        <img class="images" src="images/logopac.png" id="logo" alt="images" width="430" height="250" margin-left=30%>
+        <img class="images" src="images/logopac.png" id="logo" alt="images" width="460" height="250" margin-left=30%>
         <br>
         <button id="reg" class="btn btn-info btn-lg" onclick="replaceWindow(event,'register')" align="center"
                 padding=10px margin=4px>Register
@@ -153,7 +158,7 @@
             <label for="fname_reg"><b>Full Name </b></label>
             <input type="text" placeholder="Enter Full Name" id="fname_reg" name="fname_reg" size="45">
             <br>
-            <label for="email_reg"><b>Email </b></label>
+            <label for="email_reg"><b>Email&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; </b></label>
             <input type="email" placeholder="Enter Email" id="email_reg" name="email_reg" size="45">
             <br>
             <label for="bdate_reg" id="bdate_reg">Birth date</label>
@@ -182,11 +187,11 @@
         <div class="container" id="containerForm2">
             <label for="uname_log"><b>Username</b></label>
             <input type="text" placeholder="Enter Username" id="uname_log" name="uname_login" required align="center"
-                   size="45">
+                   size="40">
             <br>
             <label for="psw_log"><b>Password</b></label>
             <input type="password" placeholder="Enter Password" id="psw_log" name="psw_login" required align="center"
-                   size="45">
+                   size="40">
             <br>
             <div class="clearfix">
                 <button type="button" class="btn btn-info btn-lg" onclick="userManagerLogin()">Login</button>
@@ -206,7 +211,6 @@
         <span class="close">&times;</span>
         <img class="images" src="images/packman.webp" alt="packman" width="20" height="20" align="left">
         <img class="images" src="images/packman.webp" alt="packman" width="20" height="20" align="right">
-        <br>
         <strong><h2>About the game</h2></strong>
         <p>This packman game was created by Oran and Chen.</p>
         <p>The challenges we encountered while creating the game were: </p>

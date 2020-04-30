@@ -11,7 +11,7 @@ function chooseRight() {
         if (rightPressed == false) {
             keyRight = event.keyCode;
             rightPressed = true;
-            document.getElementById("rightkeybtn").innerText = event.key;
+           $("#rightkeybtn").innerText = event.key;
         }
     });
 }
@@ -22,7 +22,7 @@ function chooseLeft() {
         if (leftPressed == false) {
             keyLeft = event.keyCode;
             leftPressed = true
-            document.getElementById("leftkeybtn").innerText = event.key;
+            $("#leftkeybtn").innerText = event.key;
         }
     });
 }
@@ -33,7 +33,7 @@ function chooseDown() {
         if (downPressed == false) {
             keyDown = event.keyCode;
             downPressed = true;
-            document.getElementById("downkeybtn").innerText = event.key;
+           $("#downkeybtn").innerText = event.key;
         }
     });
 }
@@ -44,7 +44,7 @@ function chooseUp() {
         if (upPressed == false) {
             keyUp = event.keyCode;
             upPressed = true;
-            document.getElementById("upkeybtn").innerText = event.key;
+            $("#upkeybtn").innerText = event.key;
         }
     });
 }
@@ -54,17 +54,22 @@ $().ready(function () {
         rules: {
             ballsnumin: {
                 required: true,
-                regex: /^[5-9][0-9]$|^100$/
+                regex: /^[5-8][0-9]$|^90$/
             }
         },
         messages: {
-            ballsnumin: "Please enter a number between 50 and 90"
+            ballsnumin:{
+                required: "Please enter a number between 50 and 90",
+                regex: "Please enter a number between 50 and 90"
+            }
         },
         submitHandler: function () {
-            var isFormValid = $("#settingsform").valid();
-            if (isFormValid) {
+            debugger
+            var validSettings = $("#settingsform").valid();
+            if (validSettings) {
                 numOfBalls = $('#ballsnumin').val();
                // $('#startgame').prop('disabled', false); //to enable playing the game
+                replaceWindow(event, 'game');
                 showCanvas();
             }
         }

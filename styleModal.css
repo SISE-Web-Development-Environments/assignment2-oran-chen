@@ -13,20 +13,24 @@
 
 /* Modal Content/Box */
 .modal-content {
-    font-size: 20px;
-    background-color: #e5f1f8;
+    color: black;
+    font-size: 24px;
+    font-weight: bold;
+    background-image: url(images/back8.webp);
+    background-color: rgba(255,255,255,0.8);
+    background-blend-mode: lighten;
     font-family: Calibri;
     margin: 10% auto; /* 15% from the top and centered */
     padding: 20px;
-    border: 1px solid #888;
-    width: 50%; /* Could be more or less, depending on screen size */
+    border: white;
+    width: 60%; /* Could be more or less, depending on screen size */
 }
 
 /* The Close Button */
 .close {
     color: #0a0b5c;
     float: right;
-    font-size: 24px;
+    font-size: 34px;
     font-weight: bold;
 }
 .close:hover,
@@ -36,9 +40,9 @@
     cursor: pointer;
 }
 h2 {
-    font-family: Calibri;
+    font-family: myFont;
     color: #0b1b6c;
     text-align: center;
-    font-size: 30px;
+    font-size: 24px;
     font-weight: bold;
 }
