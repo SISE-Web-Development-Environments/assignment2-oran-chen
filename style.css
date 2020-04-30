@@ -85,7 +85,10 @@ logo{
     padding-bottom: 100px;
 }
 #canvas{
-    padding-bottom: 50px;
+    padding-bottom: 100px;
+    padding-left: 500px;
+    float:top;
+    top: auto;
 }
 #ghosts{
     padding: 14px 20px;
@@ -121,8 +124,13 @@ h4{
 }
 #startgame{
     width:100px;
-
+    display: inline-block;
 }
+
+#labels{
+    display: inline-block;
+}
+
 
 
 

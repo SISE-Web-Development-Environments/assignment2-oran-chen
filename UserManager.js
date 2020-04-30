@@ -59,7 +59,7 @@ function transferToLogin(username,password){
     }else{ //does exist, connect him
         session_user = JSON.parse(sessionStorage.getItem(username));
         document.getElementById('front_display').innerHTML = "The user " + session_user.username + " is currently logged in.";
-        replaceWindow(event, 'game');
+        replaceWindow(event, 'settings');
         document.getElementById('gameright').style.display='block';
         document.getElementById('gameleft').style.display='block';
         document.getElementById('canvas').style.display='block';

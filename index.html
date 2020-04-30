@@ -89,14 +89,14 @@
 		</select>
 		<br>
 		<br>
-		<button type="submit" class="btn btn-info btn-" id="startgame">Start game</button>
+		<button type="submit" class="btn btn-info btn-" id="startgame" onclick="replaceWindow(event,'game')">Start game</button>
 <!--		<button class="btn btn-info" id="startgame" onclick="showCanvas()" disabled>Start Game</button>-->
 	</form>
 </div>
 
 
 <div id="game" class="tab" onload="clearCanvas()">
-	<div id="labels">
+        <div id="labels">
 		<label for="lblScore">SCORE:</label>
 		<input id="lblScore" type="text" height="3" size="4"/>
 		<label for="lblTime">TIME:</label>
@@ -107,7 +107,7 @@
 		<br>
 	</div>
 	<button class="btn btn-info" id="reset" class="reset" onclick="reset()" style="display: none;">Reset</button>
-	<canvas id="canvas" height="600" width="600" class="tab" style="display:none;"></canvas>
+	<canvas id="canvas" height="600" width="600" class="tab" style="display:none;" ></canvas>
 </div>
 
 

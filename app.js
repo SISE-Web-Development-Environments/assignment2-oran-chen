@@ -47,7 +47,7 @@ function Start() {
 	packBody.x = 0.15;
 	packBody.y = 1.85;
 	eye.x = 5;
-	eye.y = -15;
+	eye.y = -10;
 	clearInterval(interval);
 	clearInterval(ghostInterval);
 	//clearInterval(labelInterval);
@@ -56,6 +56,7 @@ function Start() {
 	score = 0;
 	remain_lives = 5;
 	pac_color = "yellow";
+	var food_remain= numOfBalls;
 	sixtyPercentColor = $("#sixtyColor").val();
 	thirtyPercentColor = $("#thirtyColor").val();
 	tenPercentColor = $("#tenColor").val();
@@ -68,7 +69,6 @@ function Start() {
 	var numTenPercent = food_remain*0.1;
 	var pacman_remain = 1;
 	remain_monster = 1;
-	var food_remain= numOfBalls;
 	start_time = new Date();
 	for (var i = 0; i < 20; i++) {
 		board[i] = new Array();
@@ -204,8 +204,8 @@ function Draw() {
 	for (var i = 0; i < 20; i++) {
 		for (var j = 0; j < 20; j++) {
 			var center = new Object();
-			center.x = i * 20 + 15;
-			center.y = j * 20 + 15;
+			center.x = i * 30 + 15;
+			center.y = j * 30 + 15;
 
 			if (board[i][j] == 2) {
 				if (GetKeyPressed() == 4) { //Right
@@ -239,13 +239,13 @@ function Draw() {
 				context.beginPath();
 
 				if (GetKeyPressed() == 2 || GetKeyPressed() == 1) {
-					eye.x = 15;
+					eye.x = 10;
 					eye.y = -5;
-					context.arc(center.x + 15, center.y - 5, 3, 0, 2 * Math.PI); // circle
+					context.arc(center.x + 10, center.y - 5, 3, 0, 2 * Math.PI); // circle
 				} else if (GetKeyPressed() == 4 || GetKeyPressed() == 3) {
 					eye.x = 5;
-					eye.y = -15;
-					context.arc(center.x + 5, center.y - 15, 3, 0, 2 * Math.PI); // circle
+					eye.y = -10;
+					context.arc(center.x + 5, center.y - 10, 3, 0, 2 * Math.PI); // circle
 				} else {
 					context.arc(center.x + eye.x, center.y + eye.y, 3, 0, 2 * Math.PI); // circle
 				}
@@ -275,21 +275,21 @@ function Draw() {
 				//context.fill();
 
 				img = document.getElementById("wall");
-				context.drawImage(img, center.x - 15, center.y - 15, 20, 20);
+				context.drawImage(img, center.x - 15, center.y - 15, 30, 30);
 			} else if (board[i][j] == 5) { //Ghost
 				var img;
 				img = document.getElementById("ghost");
-				context.drawImage(img, center.x - 15, center.y - 15, 20, 20);
+				context.drawImage(img, center.x - 15, center.y - 15, 30, 30);
 			}
 			else if (dotsBoard[i][j] == 6) { //Medicine
 				var img;
 				img = document.getElementById("medicine");
-				context.drawImage(img, center.x - 15, center.y - 15, 20, 20);
+				context.drawImage(img, center.x - 15, center.y - 15, 30, 30);
 			}
 			else if (board[i][j] == 7) { //Cute monster
 				var img;
 				img = document.getElementById("mon");
-				context.drawImage(img, center.x - 15, center.y - 15, 20, 20);
+				context.drawImage(img, center.x - 15, center.y - 15, 30, 30);
 			}
 		}
 	}
@@ -304,7 +304,7 @@ function UpdatePosition() {
 		}
 	}
 	if (x == 2) {
-		if (shape.j < 20 && board[shape.i][shape.j + 1] != 4) {
+		if (shape.j < 19 && board[shape.i][shape.j + 1] != 4) {
 			shape.j++;
 		}
 	}
@@ -314,7 +314,7 @@ function UpdatePosition() {
 		}
 	}
 	if (x == 4) {
-		if (shape.i < 20 && board[shape.i + 1][shape.j] != 4) {
+		if (shape.i < 19 && board[shape.i + 1][shape.j] != 4) {
 			shape.i++;
 		}
 	}
