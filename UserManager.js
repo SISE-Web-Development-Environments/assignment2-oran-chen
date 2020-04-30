@@ -30,7 +30,7 @@ $(document).ready(function () {
     var pUser = new User({username:'p', password:'p', fullname:'p_p', email:'p_p@gmail.com'});
     //default user - p
     sessionStorage.setItem(pUser.username, JSON.stringify(pUser));
-    $('#front_display').innerHTML = "Please login/register to start the game ";
+    document.getElementById('front_display').innerHTML = "Please login/register to start the game ";
 })
 
 function userManagerRegSubmit() {
@@ -58,7 +58,8 @@ function transferToLogin(username,password){
         alert("The user doesn't exist in the system, please enter the details again");
     }else{ //does exist, connect him
         session_user = JSON.parse(sessionStorage.getItem(username));
-        $('#front_display').innerHTML = "The user " + session_user.username + " is currently logged in.";
+        $('#tabS').prop('disabled', false); //to enable playing the game
+        document.getElementById('front_display').innerHTML = "The user " + session_user.username + " is currently logged in.";
         replaceWindow(event, 'settings');
     }
 }
