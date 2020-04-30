@@ -50,7 +50,7 @@ function chooseUp() {
 }
 
 $().ready(function () {
-    $('#ballsnumform').validate({
+    $('#settingsform').validate({
         rules: {
             ballsnumin: {
                 required: true,
@@ -61,10 +61,11 @@ $().ready(function () {
             ballsnumin: "Please enter a number between 50 and 90"
         },
         submitHandler: function () {
-            var isFormValid = $("#ballsnumform").valid();
+            var isFormValid = $("#settingsform").valid();
             if (isFormValid) {
-               food_remain = $('#ballsnumin').val();
-               $('#startgame').prop('disabled', false); //to enable playing the game
+                numOfBalls = $('#ballsnumin').val();
+               // $('#startgame').prop('disabled', false); //to enable playing the game
+                showCanvas();
             }
         }
     });

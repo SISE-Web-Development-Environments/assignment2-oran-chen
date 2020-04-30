@@ -19,7 +19,7 @@ var numOfGhosts;
 var ghostPosition;
 var monsterLocation = new Object();
 var remain_monster;
-var food_remain;
+var numOfBalls;
 var keyRight= 39;
 var keyLeft = 37;
 var keyUp = 38;
@@ -68,7 +68,7 @@ function Start() {
 	var numTenPercent = food_remain*0.1;
 	var pacman_remain = 1;
 	remain_monster = 1;
-
+	var food_remain= numOfBalls;
 	start_time = new Date();
 	for (var i = 0; i < 10; i++) {
 		board[i] = new Array();

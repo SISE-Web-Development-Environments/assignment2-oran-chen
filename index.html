@@ -4,7 +4,7 @@
     <title>Chen and Oran's Packman </title>
     <script src="./jquery-3.4.1.slim.min.js"></script>
     <script type="text/javascript" src="./app.js"></script>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <link rel="stylesheet" type="text/css" href="style.css"/>
@@ -24,11 +24,12 @@
                 <div class="navbar-header">
                     <a class="navbar-brand" href="#">Packman</a>
                 </div>
-                <button class="btn btn-info btn-lg" onclick="replaceWindow(event,'welcome')">Welcome</button>
-                <button class="btn btn-info btn-lg" onclick="replaceWindow(event,'register')">Register</button>
-                <button class="btn btn-info btn-lg" onclick="replaceWindow(event,'login')">Login</button>
-                <button class="btn btn-info btn-lg" onclick="about()">About</button>
-            </div>
+                <button id="tabW" class="btn btn-info btn-lg" onclick="replaceWindow(event,'welcome')">Welcome</button>
+                <button id="tabR" class="btn btn-info btn-lg" onclick="replaceWindow(event,'register')">Register</button>
+                <button id="tabL" class="btn btn-info btn-lg" onclick="replaceWindow(event,'login')">Login</button>
+                <button id="tabA" class="btn btn-info btn-lg" onclick="about()">About</button>
+				<button id="tabS" class="btn btn-info btn-lg" onclick="replaceWindow(event,'settings')">Game settings</button>
+			</div>
         </nav>
     </menu>
     <p id="front_display" align="center"></p>
@@ -49,74 +50,67 @@
     </div>
 </div>
 
-<div id="game" class="tab" onload="clearCanvas()">
+<div id="settings" class="tab" style="display:none;">
 	<script type="text/javascript" src="settings.js"></script>
+	<script type="text/javascript" src="jqueryvalidation.js"></script>
 
-    <div class="container" id="gameleft" style="display:none;">
-        <div id="startandreset">
-			<button class="btn btn-info" id="startgame" onclick="showCanvas()" disabled>Start Game</button>
-            <button class="btn btn-info" id="reset" class="reset" onclick="reset()" style="display: none;">
-                Reset
-            </button>
-        </div>
-        <div id="labels">
-            <label for="lblScore">SCORE:</label>
-            <input id="lblScore" type="text" height="3" size="4"/>
-            <label for="lblTime">TIME:</label>
-            <input id="lblTime" type="text" height="3" size="4"/>
-            <label for="lblLifes" width="10px">LIVES:</label>
-            <input id="lblLifes" type="text" height="3" size="4"/>
-            <br>
-            <br>
-        </div>
-    </div>
+	<h3 align="center">Game Settings </h3>
+	<h4 align="center">Change the game settings and click on "Start game"</h4>
+	<form id="settingsform" align="center">
 
-    <div class="container" id="gameright" style="display:none;">
-        <h3>Game Settings </h3>
-        <h4>Change the game settings and click on "Start game"</h4>
-        <div id="keys">
-            <strong><p>&diams;  Choose Keys:</p></strong>
-            <strong>Key Right </strong>
-            <button id="rightkeybtn" class="btn btn-info btn-sm" onclick="chooseRight()" width="5%">Right</button>
-            <strong>Key Left </strong>
-            <button id="leftkeybtn" class="btn btn-info btn-sm" onclick="chooseLeft()" width="5%">Left</button>
-            <br>
-            <strong>Key Up </strong>
-            <button id="upkeybtn" class="btn btn-info btn-sm" onclick="chooseUp()" width="5%">Up</button>
-            <strong>Key Down </strong>
-            <button id="downkeybtn" class="btn btn-info btn-sm" onclick="chooseDown()" width="5%">Down</button>
-        </div>
-        <br>
-		<div id="ballsnum">
-			<form id="ballsnumform">
-				<script type="text/javascript" src="jqueryvalidation.js"></script>
-				<strong><p>&diams;  Choose number of balls and hit enter:</p></strong>
-				<input type="text" id="ballsnumin" name="ballsnumin" placeholder="50 to 90" size="3">
-<!--				<button type="submit" class="btn btn-info btn-sm" id="okballsnum">OK</button>-->
-			</form>
-		</div>
-		<div id="ballscolor">
-			<strong><p>&diams;  Choose colors for balls:</p></strong>
-			<strong>5 points balls color:</strong>
-			<input id="sixtyColor" type="color" value="#33ffbd"><br>
-			<strong>10 points balls color:</strong>
-			<input id="thirtyColor" type="color" value="#333EFF"><br>
-			<strong>15 points balls color:</strong>
-			<input id="tenColor" type="color" value="#FF333F">
-		</div>
+		<strong><p>&diams;  Choose Keys:</p></strong>
+		<strong>Key Right </strong>
+		<button id="rightkeybtn" class="btn btn-info btn-sm" onclick="chooseRight()" width="5%">Right</button>
+		<strong>Key Left </strong>
+		<button id="leftkeybtn" class="btn btn-info btn-sm" onclick="chooseLeft()" width="5%">Left</button>
 		<br>
-        <div id="ghostsnum">
-            <label for="ghostsNumber">&diams;  Choose number of ghosts:</label>
-            <select id="ghostsNumber">
-                <option value=1>1</option>
-                <option value=2>2</option>
-                <option value=3>3</option>
-                <option value=4>4</option>
-            </select>
-        </div>
-    </div>
-<canvas id="canvas" height="600" width="600" class="tab" style="display:none;"></canvas>
+		<strong>Key Up </strong>
+		<button id="upkeybtn" class="btn btn-info btn-sm" onclick="chooseUp()" width="5%">Up</button>
+		<strong>Key Down </strong>
+		<button id="downkeybtn" class="btn btn-info btn-sm" onclick="chooseDown()" width="5%">Down</button>
+
+		<strong><p>&diams;  Choose number of balls and hit enter:</p></strong>
+		<input type="text" id="ballsnumin" name="ballsnumin" placeholder="50 to 90" size="3">
+		<br>
+		<strong><p>&diams;  Choose colors for balls:</p></strong>
+		<strong>5 points balls color:</strong>
+		<input id="sixtyColor" type="color" value="#33ffbd"><br>
+		<strong>10 points balls color:</strong>
+		<input id="thirtyColor" type="color" value="#333EFF"><br>
+		<strong>15 points balls color:</strong>
+		<input id="tenColor" type="color" value="#FF333F">
+		<br>
+		<label for="ghostsNumber">&diams;  Choose number of ghosts:</label>
+		<select id="ghostsNumber">
+			<option value=1>1</option>
+			<option value=2>2</option>
+			<option value=3>3</option>
+			<option value=4>4</option>
+		</select>
+		<br>
+		<br>
+		<button type="submit" class="btn btn-info btn-" id="startgame">Start game</button>
+<!--		<button class="btn btn-info" id="startgame" onclick="showCanvas()" disabled>Start Game</button>-->
+	</form>
 </div>
+
+
+<div id="game" class="tab" onload="clearCanvas()">
+	<div id="labels">
+		<label for="lblScore">SCORE:</label>
+		<input id="lblScore" type="text" height="3" size="4"/>
+		<label for="lblTime">TIME:</label>
+		<input id="lblTime" type="text" height="3" size="4"/>
+		<label for="lblLifes" width="10px">LIVES:</label>
+		<input id="lblLifes" type="text" height="3" size="4"/>
+		<br>
+		<br>
+	</div>
+	<button class="btn btn-info" id="reset" class="reset" onclick="reset()" style="display: none;">Reset</button>
+	<canvas id="canvas" height="600" width="600" class="tab" style="display:none;"></canvas>
+</div>
+
+
 <div id="welcome" class="tab" align="center">
     <div class="imgcontainer" id="welcomeCon">
         <img class="images" src="images/logopac.png" id="logo" alt="images" width="430" height="250" margin-left=30%>
@@ -133,10 +127,10 @@
 </div>
 
 <div id="register" class="tab" style="display:none;">
-	<script type="text/javascript" src="jqueryvalidation.js"></script>
-	<script type="text/javascript" src="form.js"></script>
-	<script type="text/javascript" src="dobpicker.js"></script>
-	<link rel="stylesheet" type="text/css" href="styleLogin.css"/>
+    <script type="text/javascript" src="jqueryvalidation.js"></script>
+    <script type="text/javascript" src="form.js"></script>
+    <script type="text/javascript" src="dobpicker.js"></script>
+    <link rel="stylesheet" type="text/css" href="styleLogin.css"/>
 
     <form id="reg_form" style="border:1px solid #ccc">
         <div class="container" id="containerForm">
@@ -251,13 +245,13 @@
         }
     }
 
-		function showCanvas(){
-			document.getElementById("startgame").className.replace("active","");
-    		startGame();
-			document.getElementById('canvas').style.display = "block";
-			document.getElementById('reset').style.display = "block";
+    function showCanvas() {
+        document.getElementById("startgame").className.replace("active", "");
+        startGame();
+        document.getElementById('canvas').style.display = "block";
+        document.getElementById('reset').style.display = "block";
 
-		}
+    }
 
     function reset() {
         Start();
