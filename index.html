@@ -29,7 +29,7 @@
                 </button>
                 <button id="tabL" class="btn btn-info btn-lg" onclick="replaceWindow(event,'login')">Login</button>
                 <button id="tabA" class="btn btn-info btn-lg" onclick="about()">About</button>
-                <button id="tabS" class="btn btn-info btn-lg" onclick="replaceWindow(event,'settings')">Game settings
+                <button id="tabS" class="btn btn-info btn-lg" onclick="replaceWindow(event,'settings')" disabled>Game settings
                 </button>
             </div>
         </nav>
@@ -92,8 +92,6 @@
         <strong><p>&diams; Choose time for the game: &nbsp;&nbsp;
             <input type="number" id="timenumin" name="timenumin" placeholder="min 60" size="2" min="60" value="60"></p>
         </strong>
-        <br>
-
         <button type="submit" class="btn btn-danger btn-lg" id="startgame">Start game
         </button>
         <!--		<button class="btn btn-info" id="startgame" onclick="showCanvas()" disabled>Start Game</button>-->
@@ -110,12 +108,10 @@
             <input id="lblTime" type="text"/>
             <label for="lblLifes" width="10px">LIVES:</label>
             <input id="lblLifes" type="text"/>
-            <button class="btn btn-danger btn-lg" id="reset" class="reset" size="2" onclick="reset()" style="display: none;">Reset
-            </button>
+            <button class="btn btn-danger btn-lg" id="reset" class="reset"  onclick="reset()" >Reset</button>
         </p>
     </div>
     <canvas id="canvas" height="600" width="600" class="tab" style="display:none;"></canvas>
-
 </div>
 
 
