@@ -1,6 +1,25 @@
 var context;
 var shape = new Object();
-var board;
+var board = [[4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4],
+	[4,0,0,0,0,0,0,0,0,0,0,0,0,4,4,0,0,0,0,4],
+	[4,0,4,4,4,4,0,4,0,4,4,4,0,4,4,0,4,4,0,4],
+	[4,0,0,0,0,4,0,4,0,0,0,4,0,4,4,0,4,0,0,4],
+	[4,0,4,4,4,4,0,4,4,4,4,4,0,4,4,0,4,4,4,4],
+	[4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4],
+	[4,0,4,4,4,4,0,4,4,0,4,4,4,4,4,4,4,4,0,4],
+	[4,0,4,4,4,4,0,4,4,0,4,4,4,4,4,4,4,4,0,4],
+	[4,0,0,0,0,0,0,4,4,0,0,0,0,4,4,0,0,0,0,4],
+	[4,0,0,0,0,0,0,4,4,4,4,4,0,4,4,0,4,4,4,4],
+	[4,4,4,4,4,4,0,4,4,4,4,4,0,4,4,0,4,4,4,4],
+	[4,4,0,0,0,4,0,4,4,0,0,0,0,0,0,0,0,0,0,4],
+	[4,4,0,0,0,4,0,4,4,0,4,4,4,4,4,4,4,4,0,4],
+	[4,4,0,0,0,4,0,4,4,0,4,4,0,0,0,0,4,4,0,4],
+	[4,4,0,0,0,4,0,0,0,0,4,4,0,0,0,0,4,4,0,4],
+	[4,4,0,0,0,4,0,4,4,0,0,0,0,0,0,0,4,4,0,4],
+	[4,4,0,0,0,4,0,4,4,0,4,4,4,4,4,4,4,4,0,4],
+	[4,4,0,0,0,4,0,4,4,0,0,0,0,0,0,0,0,0,0,4],
+	[4,4,0,0,0,0,0,4,4,0,4,4,4,4,4,4,4,4,0,4],
+	[4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4]];
 var dotsBoard;
 var score;
 var remain_lives;
@@ -38,6 +57,7 @@ function stopInterval(){
 function startGame() {
 	canvas = document.getElementById("canvas");
 	context = canvas.getContext("2d");
+	canvas.width = canvas.width;
 	clearCanvas(context,canvas);
 	//canvas.style.width = window.innerWidth;
 	//canvas.style.height = window.innerHeight;
@@ -52,7 +72,7 @@ function Start() {
 	clearInterval(interval);
 	clearInterval(ghostInterval);
 	//clearInterval(labelInterval);
-	board = new Array();
+	//board = new Array();
 	dotsBoard = new Array();
 	score = 0;
 	remain_lives = 5;
@@ -73,53 +93,49 @@ function Start() {
 	remain_monster = 1;
 	start_time = new Date();
 	for (var i = 0; i < 20; i++) {
-		board[i] = new Array();
+		//board[i] = new Array();
 		dotsBoard[i] = new Array();
 		//put obstacles in (i=3,j=3) and (i=3,j=4) and (i=3,j=5), (i=6,j=1) and (i=6,j=2)
 		for (var j = 0; j < 20; j++) {
-			if (
-				(i == 3 && j == 3) ||
-				(i == 3 && j == 4) ||
-				(i == 3 && j == 5) ||
-				(i == 6 && j == 1) ||
-				(i == 6 && j == 2) || 
-				(i == 5 && j == 8) ||
-				(i == 6 && j == 8) ||
-				(i == 7 && j == 8) 
-			) {
-				board[i][j] = 4;
-			} else {
+				if (board[i][j] != 4){
+					board[i][j] = 0;
+				}
 				var randomNum = Math.random();
-				if (randomNum <= (1.0 * food_remain) / cnt) {
-					food_remain--;
-					//var num = Math.random();
+				if (randomNum <= (1.0 * food_remain) / cnt && board[i][j] != 4) {
+					//food_remain--;
 
-					if(numSixtyPercent > 0){
+					var num = Math.random();
+
+					if(num < 0.6 && numSixtyPercent > 0 ){
 						numSixtyPercent--;
+						food_remain--;
 						dotsBoard[i][j] = 1;
 					}
-					else if(numThirtyPercent > 0){
+					else if(num < 0.9 && numThirtyPercent > 0){
 						numThirtyPercent--;
+						food_remain--;
 						dotsBoard[i][j] = 2;
 					}
-					else{
+					else if(numTenPercent > 0){
 						numTenPercent--;
+						food_remain--;
 						dotsBoard[i][j] = 3;
 					}
 
-				} else if (randomNum < (1.0 * (pacman_remain + food_remain)) / cnt) {
+				} else if (randomNum < (1.0 * (pacman_remain + food_remain)) / cnt && board[i][j] != 4) {
 					shape.i = i;
 					shape.j = j;
 					pacman_remain--;
 					board[i][j] = 2;
-				} else {
+				} else if (board[i][j] != 4) {
 					board[i][j] = 0;
 					dotsBoard[i][j] = 0;
 				}
 				cnt--;
-			}
+			//}
 		}
 	}
+
 	while (food_remain > 0) {
 		var emptyCell = findRandomEmptyCell(dotsBoard);
 
@@ -174,7 +190,7 @@ function Start() {
 function findRandomEmptyCell(board) {
 	var i = Math.floor(Math.random() * 9 + 1);
 	var j = Math.floor(Math.random() * 9 + 1);
-	while (board[i][j] != 0) {
+	while (board[i][j] != 0 && this.board[i][j] != 0) {
 		i = Math.floor(Math.random() * 9 + 1);
 		j = Math.floor(Math.random() * 9 + 1);
 	}
@@ -392,32 +408,32 @@ function UpdatePosition() {
 }
 
 function placeGhosts() {
-	board[0][0] = 5; // First ghost
-	ghostPosition[0][0] = 0;
-	ghostPosition[0][1] = 0;
+	board[1][1] = 5; // First ghost
+	ghostPosition[0][0] = 1;
+	ghostPosition[0][1] = 1;
 	if(numOfGhosts == 2){
-		board[0][9] = 5;
-		ghostPosition[1][0] = 0;
-		ghostPosition[1][1] = 9;
+		board[1][18] = 5;
+		ghostPosition[1][0] = 1;
+		ghostPosition[1][1] = 18;
 	}
 	else if(numOfGhosts == 3){
-		board[0][9] = 5;
-		board[9][9] = 5;
-		ghostPosition[1][0] = 0;
-		ghostPosition[1][1] = 9;
-		ghostPosition[2][0] = 9;
-		ghostPosition[2][1] = 9;
+		board[1][18] = 5;
+		board[18][18] = 5;
+		ghostPosition[1][0] = 1;
+		ghostPosition[1][1] = 18;
+		ghostPosition[2][0] = 18;
+		ghostPosition[2][1] = 18;
 	}
 	else if(numOfGhosts == 4){
-		board[0][9] = 5;
-		board[9][9] = 5;
-		board[9][0] = 5;
-		ghostPosition[1][0] = 0;
-		ghostPosition[1][1] = 9;
-		ghostPosition[2][0] = 9;
-		ghostPosition[2][1] = 9;
-		ghostPosition[3][0] = 9;
-		ghostPosition[3][1] = 0;
+		board[1][18] = 5;
+		board[18][18] = 5;
+		board[18][1] = 5;
+		ghostPosition[1][0] = 1;
+		ghostPosition[1][1] = 18;
+		ghostPosition[2][0] = 18;
+		ghostPosition[2][1] = 18;
+		ghostPosition[3][0] = 18;
+		ghostPosition[3][1] = 1;
 	}
 }
 
