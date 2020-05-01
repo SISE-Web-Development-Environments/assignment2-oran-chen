@@ -128,13 +128,13 @@ h4{
     font-size: 20px;
     width:200px;
 }
-#upkeybtn, #downkeybtn, #rightkeybtn, #leftkeybtn, #startgame{
+#upkeybtn, #downkeybtn, #rightkeybtn, #leftkeybtn, #startgame, #randomButton{
     width:80px;
     margin: 10px 0 10px 0;
     font-weight: bold;
     font-size: 14px;
 }
-#startgame{
+#startgame, #randomButton{
     width:100px;
     display: inline-block;
 }
