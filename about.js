@@ -4,14 +4,12 @@ function about(){
     var span = document.getElementsByClassName("close")[0];
     span.onclick = function() {
         $("#about").fadeOut(50);
-        replaceWindow(event, 'welcome');
     };
 }
 
 $(document).keydown(function(event) {
     if (event.keyCode == 27) {
         $("#about").fadeOut(50);
-        replaceWindow(event, 'welcome');
     }
 });
 
@@ -20,7 +18,6 @@ window.onclick = function(event) {
     modal = document.getElementById("about");
     if (event.target == modal) {
         $("#about").fadeOut(50);
-        replaceWindow(event, 'welcome');
     }
 }
 

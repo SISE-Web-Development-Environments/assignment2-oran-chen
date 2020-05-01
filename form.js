@@ -52,12 +52,13 @@ $().ready(function () {
                 }
             },
             submitHandler: function () {
+                debugger
                 var isFormValid = $("#reg_form").valid();
                 if (isFormValid) {
                     userManagerRegSubmit();
                     document.getElementById("reg_form").reset();
+                }
             }
-        }
         });
 
     //set date picker
@@ -69,6 +70,7 @@ $().ready(function () {
             monthDefault: 'Month',
             yearDefault: 'Year',
         });
+
 
 });
 $(function () {
