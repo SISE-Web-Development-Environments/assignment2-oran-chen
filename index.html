@@ -108,6 +108,7 @@
             <label for="lblLifes" width="10px">LIVES:</label>
             <input id="lblLifes" type="text"/>
             <button class="btn btn-danger btn-lg" id="reset" class="reset"  onclick="reset()" >Reset</button>
+            <button class="btn btn-danger btn-lg" id="pause" class="reset"  onclick="pauseGame()" >Pause</button>
         </p>
     </div>
     <canvas id="canvas" height="600" width="600" class="tab" style="display:none;"></canvas>
@@ -277,6 +278,17 @@
 
         if (canvas.height < window.innerHeight) {
             canvas.height = window.innerHeight;
+        }
+    }
+
+    function pauseGame() {
+        if(pause){
+            pause = false;
+            document.getElementById('pause').textContent = "Pause";
+        }
+        else{
+            document.getElementById('pause').textContent = "Resume";
+            pause = true;
         }
     }
 </script>

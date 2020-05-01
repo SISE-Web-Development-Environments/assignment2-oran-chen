@@ -44,6 +44,7 @@ var keyLeft = 37;
 var keyUp = 38;
 var keyDown = 40;
 var time;
+var pause;
 // $(document).ready(function() {
 // 	context = canvas.getContext("2d");
 // 	Start();
@@ -65,6 +66,7 @@ function startGame() {
 }
 
 function Start() {
+	pause = false;
 	packBody.x = 0.15;
 	packBody.y = 1.85;
 	eye.x = 5;
@@ -314,96 +316,98 @@ function Draw() {
 }
 
 function UpdatePosition() {
-	board[shape.i][shape.j] = 0;
-	var x = GetKeyPressed();
-	if (x == 1) {
-		if (shape.j > 0 && board[shape.i][shape.j - 1] != 4) {
-			shape.j--;
-		}
-	}
-	if (x == 2) {
-		if (shape.j < 19 && board[shape.i][shape.j + 1] != 4) {
-			shape.j++;
-		}
-	}
-	if (x == 3) {
-		if (shape.i > 0 && board[shape.i - 1][shape.j] != 4) {
-			shape.i--;
-		}
-	}
-	if (x == 4) {
-		if (shape.i < 19 && board[shape.i + 1][shape.j] != 4) {
-			shape.i++;
-		}
-	}
-	if (dotsBoard[shape.i][shape.j] == 1) {
-		score+= 5;
-		dotsBoard[shape.i][shape.j] = 0;
-	}
-	else if(dotsBoard[shape.i][shape.j] == 2){
-		score+= 15;
-		dotsBoard[shape.i][shape.j] = 0;
-	}
-	else if(dotsBoard[shape.i][shape.j] == 3){
-		score+= 25;
-		dotsBoard[shape.i][shape.j] = 0;
-	}
-	
-	if (dotsBoard[shape.i][shape.j] == 6) { // Medicine
-		remain_lives += 1;
-		dotsBoard[shape.i][shape.j] = 0;
-	}
-
-	if (board[shape.i][shape.j] == 7) { // Monster
-		score = score + 50;
-		remain_monster--;
-	}
-
-	board[shape.i][shape.j] = 2;
-	var currentTime = new Date();
-	time_elapsed = (currentTime - start_time) / 1000;
-
-	if(eatMeGhost()){
-		remain_lives--;
-		score = score - 10;
+	if(!pause) {
 		board[shape.i][shape.j] = 0;
-		var emptyCell = findRandomEmptyCell(board);
-		shape.i = emptyCell[0];
-		shape.j = emptyCell[1];
-		deleteGhosts();
-		placeGhosts();
-	}
-
-	lblScore.value = score;
-	lblTime.value = time_elapsed;
-	lblLifes.value = remain_lives;
-
-	if (score >= 20 && time_elapsed <= 10) {
-		pac_color = "green";
-	}
-
-	if(time_elapsed >= time){ //Maximum time game
-		window.clearInterval(interval);
-		if(score < 100){
-			setTimeout(function () {window.alert("You are better than " + score + " points!");},50);
+		var x = GetKeyPressed();
+		if (x == 1) {
+			if (shape.j > 0 && board[shape.i][shape.j - 1] != 4) {
+				shape.j--;
+			}
 		}
-		else{
-				setTimeout(function () {window.alert("Winner!!!");},50);
+		if (x == 2) {
+			if (shape.j < 19 && board[shape.i][shape.j + 1] != 4) {
+				shape.j++;
+			}
 		}
-	}
-	// else if (score >= 100) {
-	// 	window.clearInterval(interval);
-	// 	setTimeout(function () {window.alert("Winner!!!");},50);
-	//
-	// } else
-		if(remain_lives == 0){
-			setTimeout(function () {
-			window.alert("Loser!");
+		if (x == 3) {
+			if (shape.i > 0 && board[shape.i - 1][shape.j] != 4) {
+				shape.i--;
+			}
+		}
+		if (x == 4) {
+			if (shape.i < 19 && board[shape.i + 1][shape.j] != 4) {
+				shape.i++;
+			}
+		}
+		if (dotsBoard[shape.i][shape.j] == 1) {
+			score += 5;
+			dotsBoard[shape.i][shape.j] = 0;
+		} else if (dotsBoard[shape.i][shape.j] == 2) {
+			score += 15;
+			dotsBoard[shape.i][shape.j] = 0;
+		} else if (dotsBoard[shape.i][shape.j] == 3) {
+			score += 25;
+			dotsBoard[shape.i][shape.j] = 0;
+		}
+
+		if (dotsBoard[shape.i][shape.j] == 6) { // Medicine
+			remain_lives += 1;
+			dotsBoard[shape.i][shape.j] = 0;
+		}
+
+		if (board[shape.i][shape.j] == 7) { // Monster
+			score = score + 50;
+			remain_monster--;
+		}
+
+		board[shape.i][shape.j] = 2;
+		var currentTime = new Date();
+		time_elapsed = (currentTime - start_time) / 1000;
+
+		if (eatMeGhost()) {
+			remain_lives--;
+			score = score - 10;
+			board[shape.i][shape.j] = 0;
+			var emptyCell = findRandomEmptyCell(board);
+			shape.i = emptyCell[0];
+			shape.j = emptyCell[1];
+			deleteGhosts();
+			placeGhosts();
+		}
+
+		lblScore.value = score;
+		lblTime.value = time_elapsed;
+		lblLifes.value = remain_lives;
+
+		if (score >= 20 && time_elapsed <= 10) {
+			pac_color = "green";
+		}
+
+		if (time_elapsed >= time) { //Maximum time game
 			window.clearInterval(interval);
-		},50);
-	}
-	else{
-		Draw();
+			if (score < 100) {
+				setTimeout(function () {
+					window.alert("You are better than " + score + " points!");
+				}, 50);
+			} else {
+				setTimeout(function () {
+					window.alert("Winner!!!");
+				}, 50);
+			}
+		}
+		// else if (score >= 100) {
+		// 	window.clearInterval(interval);
+		// 	setTimeout(function () {window.alert("Winner!!!");},50);
+		//
+		// } else
+		if (remain_lives == 0) {
+			setTimeout(function () {
+				window.alert("Loser!");
+				window.clearInterval(interval);
+			}, 50);
+		} else {
+			Draw();
+		}
 	}
 }
 
@@ -438,81 +442,80 @@ function placeGhosts() {
 }
 
 function updateGhostPosition(){
-	var num;
-	var direction;
-	for (var i =0; i < numOfGhosts; i++) {
-		num = Math.random();
-		board[ghostPosition[i][0]][ghostPosition[i][1]] = 0;
-		if (num < 0.2) {
-			direction = getRandomDirection();
+	if(!pause) {
+		var num;
+		var direction;
+		for (var i = 0; i < numOfGhosts; i++) {
+			num = Math.random();
+			board[ghostPosition[i][0]][ghostPosition[i][1]] = 0;
+			if (num < 0.2) {
+				direction = getRandomDirection();
 
-			if(direction == 1){ //Up
-				if(ghostPosition[i][1] - 1 >= 0 && board[ghostPosition[i][0]][ghostPosition[i][1] - 1] != 4 && board[ghostPosition[i][0]][ghostPosition[i][1] - 1]!= 5){
+				if (direction == 1) { //Up
+					if (ghostPosition[i][1] - 1 >= 0 && board[ghostPosition[i][0]][ghostPosition[i][1] - 1] != 4 && board[ghostPosition[i][0]][ghostPosition[i][1] - 1] != 5) {
+						ghostPosition[i][1]--;
+					}
+				} else if (direction == 2) { //Down
+					if (ghostPosition[i][1] + 1 < 20 && board[ghostPosition[i][0]][ghostPosition[i][1] + 1] != 4 && board[ghostPosition[i][0]][ghostPosition[i][1] + 1] != 5) {
+						ghostPosition[i][1]++;
+					}
+				} else if (direction == 3) { //Left
+					if (ghostPosition[i][0] - 1 >= 0 && board[ghostPosition[i][0] - 1][ghostPosition[i][1]] != 4 && board[ghostPosition[i][0] - 1][ghostPosition[i][1]] != 5) {
+						ghostPosition[i][0]--;
+					}
+				} else if (direction == 4) { //Right
+					if (ghostPosition[i][0] + 1 < 20 && board[ghostPosition[i][0] + 1][ghostPosition[i][1]] != 4 && board[ghostPosition[i][0] + 1][ghostPosition[i][1]] != 5) {
+						ghostPosition[i][0]++;
+					}
+				}
+			} else {
+				let currentDistance = distanceSum(shape.i, ghostPosition[i][0], shape.j, ghostPosition[i][1]);
+				if (currentDistance >= distanceSum(shape.i, ghostPosition[i][0] + 1, shape.j, ghostPosition[i][1]) &&
+					board[ghostPosition[i][0] + 1][ghostPosition[i][1]] != 4 && board[ghostPosition[i][0] + 1][ghostPosition[i][1]] != 5 &&
+					ghostPosition[i][0] + 1 < 20 && board[ghostPosition[i][0] + 1][ghostPosition[i][1]] != 7) {
+					ghostPosition[i][0]++;
+				} else if (currentDistance >= distanceSum(shape.i, ghostPosition[i][0], shape.j, ghostPosition[i][1] + 1) &&
+					board[ghostPosition[i][0]][ghostPosition[i][1] + 1] != 4 && board[ghostPosition[i][0]][ghostPosition[i][1] + 1] != 5 &&
+					ghostPosition[i][1] + 1 < 20 && board[ghostPosition[i][0]][ghostPosition[i][1] + 1] != 7) {
+					ghostPosition[i][1]++;
+				} else if (currentDistance >= distanceSum(shape.i, ghostPosition[i][0] - 1, shape.j, ghostPosition[i][1]) &&
+					board[ghostPosition[i][0] - 1][ghostPosition[i][1]] != 4 && board[ghostPosition[i][0] - 1][ghostPosition[i][1]] != 5 &&
+					ghostPosition[i][0] - 1 >= 0 && board[ghostPosition[i][0] - 1][ghostPosition[i][1]] != 7) {
+					ghostPosition[i][0]--;
+				} else if (currentDistance >= distanceSum(shape.i, ghostPosition[i][0], shape.j, ghostPosition[i][1] - 1) &&
+					board[ghostPosition[i][0]][ghostPosition[i][1] - 1] != 4 && board[ghostPosition[i][0]][ghostPosition[i][1] - 1] != 5 &&
+					ghostPosition[i][1] - 1 >= 0 && board[ghostPosition[i][0]][ghostPosition[i][1] - 1] != 7) {
 					ghostPosition[i][1]--;
 				}
 			}
-			else if(direction == 2){ //Down
-				if(ghostPosition[i][1] + 1 < 20 && board[ghostPosition[i][0]][ghostPosition[i][1] + 1] != 4 && board[ghostPosition[i][0]][ghostPosition[i][1] + 1]!= 5){
-					ghostPosition[i][1]++;
-				}
-			}
-			else if(direction == 3){ //Left
-				if(ghostPosition[i][0] - 1 >= 0 && board[ghostPosition[i][0] - 1][ghostPosition[i][1]] != 4 && board[ghostPosition[i][0] - 1][ghostPosition[i][1]]!= 5){
-					ghostPosition[i][0]--;
-				}
-			}
-			else if(direction == 4){ //Right
-				if(ghostPosition[i][0] + 1 < 20 && board[ghostPosition[i][0] + 1][ghostPosition[i][1]] != 4 && board[ghostPosition[i][0] + 1][ghostPosition[i][1]]!= 5){
-					ghostPosition[i][0]++;
-				}
-			}
-		} else {
-			let currentDistance = distanceSum(shape.i, ghostPosition[i][0], shape.j, ghostPosition[i][1]);
-			if (currentDistance >= distanceSum(shape.i, ghostPosition[i][0] + 1, shape.j, ghostPosition[i][1]) &&
-				board[ghostPosition[i][0] + 1][ghostPosition[i][1]] != 4 && board[ghostPosition[i][0] + 1][ghostPosition[i][1]]!= 5 &&
-				ghostPosition[i][0] + 1 < 20 && board[ghostPosition[i][0] + 1][ghostPosition[i][1]] != 7) {
-				ghostPosition[i][0]++;
-			} else if (currentDistance >= distanceSum(shape.i, ghostPosition[i][0], shape.j, ghostPosition[i][1] + 1) &&
-				board[ghostPosition[i][0]][ghostPosition[i][1] + 1] != 4 && board[ghostPosition[i][0]][ghostPosition[i][1] + 1]!= 5 &&
-				ghostPosition[i][1] + 1 < 20 && board[ghostPosition[i][0]][ghostPosition[i][1] + 1] != 7) {
-				ghostPosition[i][1]++;
-			} else if (currentDistance >= distanceSum(shape.i, ghostPosition[i][0] - 1, shape.j, ghostPosition[i][1]) &&
-				board[ghostPosition[i][0] - 1][ghostPosition[i][1]] != 4 && board[ghostPosition[i][0] - 1][ghostPosition[i][1]]!= 5 &&
-				ghostPosition[i][0] - 1 >= 0 && board[ghostPosition[i][0] - 1][ghostPosition[i][1]] != 7) {
-				ghostPosition[i][0]--;
-			} else if (currentDistance >= distanceSum(shape.i, ghostPosition[i][0], shape.j, ghostPosition[i][1] - 1) &&
-				board[ghostPosition[i][0]][ghostPosition[i][1] - 1] != 4 && board[ghostPosition[i][0]][ghostPosition[i][1] - 1]!= 5 &&
-				ghostPosition[i][1] - 1 >= 0  && board[ghostPosition[i][0]][ghostPosition[i][1] - 1] != 7) {
-				ghostPosition[i][1]--;
-			}
+			board[ghostPosition[i][0]][ghostPosition[i][1]] = 5;
 		}
-		board[ghostPosition[i][0]][ghostPosition[i][1]] = 5;
-	}
 
 
-	if(remain_monster > 0) {
-		//Update monster move
-		direction = getRandomDirection();
-		board[monsterLocation.i][monsterLocation.j] = 0;
-		if (direction == 1) { //Up
+		if (remain_monster > 0) {
+			//Update monster move
+			direction = getRandomDirection();
+			board[monsterLocation.i][monsterLocation.j] = 0;
+			if (direction == 1) { //Up
 
-			if (monsterLocation.j - 1 >= 0 && board[monsterLocation.i][monsterLocation.j - 1] != 4 && board[monsterLocation.i][monsterLocation.j - 1] != 5 ) {
-				monsterLocation.j--;
+				if (monsterLocation.j - 1 >= 0 && board[monsterLocation.i][monsterLocation.j - 1] != 4 && board[monsterLocation.i][monsterLocation.j - 1] != 5) {
+					monsterLocation.j--;
+				}
+			} else if (direction == 2) { //Down
+				if (monsterLocation.j + 1 < 20 && board[monsterLocation.i][monsterLocation.j + 1] != 4 && board[monsterLocation.i][monsterLocation.j + 1] != 4) {
+					monsterLocation.j++;
+				}
+			} else if (direction == 3) { //Left
+				if (monsterLocation.i - 1 >= 0 && board[monsterLocation.i - 1][monsterLocation.j] != 4 && board[monsterLocation.i - 1][monsterLocation.j] != 4) {
+					monsterLocation.i--;
+				}
+			} else if (direction == 4) { //Right
+				if (monsterLocation.i + 1 < 20 && board[monsterLocation.i + 1][monsterLocation.j] != 4 && board[monsterLocation.i + 1][monsterLocation.j] != 4) {
+					monsterLocation.i++;
+				}
 			}
-		} else if (direction == 2) { //Down
-			if (monsterLocation.j + 1 < 20 && board[monsterLocation.i][monsterLocation.j + 1] != 4&& board[monsterLocation.i][monsterLocation.j + 1] != 4 ) {
-				monsterLocation.j++;
-			}
-		} else if (direction == 3) { //Left
-			if (monsterLocation.i - 1 >= 0 && board[monsterLocation.i - 1][monsterLocation.j] != 4&& board[monsterLocation.i - 1][monsterLocation.j] != 4 ) {
-				monsterLocation.i--;
-			}
-		} else if (direction == 4) { //Right
-			if (monsterLocation.i + 1 < 20 && board[monsterLocation.i + 1][monsterLocation.j] != 4 && board[monsterLocation.i + 1][monsterLocation.j] != 4 ) {
-				monsterLocation.i++;
-			}
+			board[monsterLocation.i][monsterLocation.j] = 7;
 		}
-		board[monsterLocation.i][monsterLocation.j] = 7;
 	}
 }
 
