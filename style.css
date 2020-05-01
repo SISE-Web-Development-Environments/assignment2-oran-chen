@@ -6,6 +6,11 @@
     width:100%;
     float: left;
 }
+#logopac{
+    font-family: myFont;
+    font-size: 20px;
+    color:white;
+}
 #game{
    display: none; 
 }
@@ -33,7 +38,7 @@
 .footer {
     position: fixed;
     margin: 0 auto;
-    padding: 5px 0 5px 0;
+    padding: 0 0 0 0;
     clear: both;
     overflow: hidden;
     left: 0;
@@ -43,13 +48,13 @@
     color: white;
     text-align: left;
     text-indent: 1%;
-    font-size: 14px;
-    font-family: 'source_sans_proregular', Arial, Helvetica, sans-serif;
+    font-size: 13px;
+    font-family: Calibri
 }
 #footerright {
     float: right;
     text-align: center;
-
+    position: relative;
 }
 #footerleft {
     float: left;
@@ -89,8 +94,12 @@ logo{
     font-family: Calibri;
     font-weight: bold;
 }
-#welcomeCon, #settingsform{
+#welcomeCon {
     padding-bottom: 100px;
+}
+#settingsform{
+    padding-bottom: 100px;
+    font-size: 16px;
 }
 #canvas{
     padding: 10px 0 80px 0;
@@ -135,8 +144,9 @@ h4{
     font-size: 14px;
 }
 #startgame, #randomButton{
-    width:100px;
+    width:150px;
     display: inline-block;
+    font-size: 20px;
 }
 #lblScore, #lblTime, #lblLifes{
     font-size: 14px;
@@ -148,6 +158,10 @@ h4{
 }
 #reset{
     width:150px;
+}
+#music{
+    padding-bottom: 100px;
+    background: url(images/background2.webp)
 }
 
 
