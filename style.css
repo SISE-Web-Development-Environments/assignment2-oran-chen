@@ -152,12 +152,13 @@ h4{
     font-size: 20px;
 }
 #lblScore, #lblTime, #lblLifes{
-    font-size: 14px;
+    font-size: 16px;
     color: white;
-    padding: 5px 5px 5px 5px;
+    padding: 1px 5px 1px 5px;
     width:70px;
     text-align: center;
-    background: darkgray;
+    background: black;
+    font-weight: bold;
 }
 #reset{
     width:150px;
@@ -167,7 +168,22 @@ h4{
     background: url(images/background2.webp)
 }
 #playpause{
+    float: right;
+}
+#showSettings{
+    font-family: 'Lucida Fax';
+    font-size: 16px;
+    text-align: left;
     float: left;
+    font-weight: bold;
+    color: deepskyblue;
+}
+h5 {
+    font-family: myFont;
+    color: black;
+    text-align: left;
+    font-size: 35px;
+    font-weight: bold;
 }
 
 

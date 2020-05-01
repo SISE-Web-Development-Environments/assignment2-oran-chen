@@ -1,8 +1,12 @@
-let rightPressed;
-let leftPressed;
-let upPressed;
-let downPressed;
-let playing = false;
+var rightPressed;
+var leftPressed;
+var upPressed;
+var downPressed;
+var playing = false;
+var right= 'ArrowRight';
+var left = 'ArrowLeft';
+var up = 'ArrowUp';
+var down = 'ArrowDown';
 
 //choose keys
 function chooseRight() {
@@ -11,7 +15,8 @@ function chooseRight() {
         if (rightPressed == false) {
             keyRight = event.keyCode;
             rightPressed = true;
-           document.getElementById("rightkeybtn").innerText = event.key;
+            right = event.key;
+           document.getElementById("rightkeybtn").innerText = right;
         }
     });
 }
@@ -22,7 +27,8 @@ function chooseLeft() {
         if (leftPressed == false) {
             keyLeft = event.keyCode;
             leftPressed = true
-            document.getElementById("leftkeybtn").innerText = event.key;
+            left = event.key;
+            document.getElementById("leftkeybtn").innerText = left;
         }
     });
 }
@@ -33,7 +39,8 @@ function chooseDown() {
         if (downPressed == false) {
             keyDown = event.keyCode;
             downPressed = true;
-            document.getElementById("downkeybtn").innerText = event.key;
+            down = event.key;
+            document.getElementById("downkeybtn").innerText = down;
         }
     });
 }
@@ -44,7 +51,8 @@ function chooseUp() {
         if (upPressed == false) {
             keyUp = event.keyCode;
             upPressed = true;
-            document.getElementById("upkeybtn").innerText = event.key;
+            up = event.key;
+            document.getElementById("upkeybtn").innerText = up;
         }
     });
 }
@@ -92,6 +100,17 @@ function setSettings(){
     tenPercentColor = $("#tenColor").val();
     numOfGhosts = $('#ghostsNumber :selected').val();
     time = $("#timenumin").val();
+    showSettings();
+}
+
+function showSettings() {
+    document.getElementById('showSettings').innerText=
+        "* Keys: " + '\n'
+        + '\t\t' + "RIGHT- " + right.valueOf() + '\n' + '\t\t' + "LEFT- " + left.valueOf()
+        + '\n' + '\t\t' + "UP- " + up.valueOf() + '\n' + '\t\t' + "DOWN- " + down.valueOf()
+        + '\n' + '* Balls #: ' + numOfBalls.valueOf()
+        + '\n' + '* Ghosts #: ' + numOfGhosts.valueOf()
+        + '\n' + '* Game time: ' + time.valueOf();
 }
 
 function randomInputs() {
