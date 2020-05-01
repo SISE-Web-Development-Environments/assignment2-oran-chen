@@ -64,7 +64,7 @@ $().ready(function () {
             }
         },
         submitHandler: function () {
-            debugger
+            //debugger
             var validSettings = $("#settingsform").valid();
             if (validSettings) {
                 numOfBalls = $('#ballsnumin').val();

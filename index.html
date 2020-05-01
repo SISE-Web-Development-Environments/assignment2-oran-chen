@@ -283,10 +283,13 @@
 
     function pauseGame() {
         if(pause){
+            //var temp = tempTime - start_time;
+            //start_time = temp;
             pause = false;
             document.getElementById('pause').textContent = "Pause";
         }
         else{
+            //tempTime = new Date();
             document.getElementById('pause').textContent = "Resume";
             pause = true;
         }
