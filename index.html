@@ -62,7 +62,6 @@
         </div>
         <br>
         <form id="settingsform" align="center">
-
             <strong><p> &diams; Choose colors for balls: &nbsp;&nbsp;
                 5 points balls color: <input id="sixtyColor" type="color" value="#33ffbd">&nbsp;&nbsp;&nbsp;
                 10 points balls color: <input id="thirtyColor" type="color" value="#333EFF">&nbsp;&nbsp;&nbsp;
@@ -186,7 +185,7 @@
         </form>
     </div>
 
-    <div id="login" class="tab" style="display:none;">
+    <div id="login" class="tab" style="display:none;" >
         <link rel="stylesheet" type="text/css" href="styleLogin.css"/>
 
         <form margin-left=40% margin-right=40%>
@@ -253,6 +252,9 @@
 <script>
     //windows
     function replaceWindow(evt, param_div) {
+        if (evt != "game"){
+            pauseMusic();
+        }
         stopInterval();
         clearCellsValue();
         clearWindow();

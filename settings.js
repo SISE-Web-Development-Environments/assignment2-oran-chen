@@ -16,7 +16,7 @@ function chooseRight() {
             keyRight = event.keyCode;
             rightPressed = true;
             right = event.key;
-           document.getElementById("rightkeybtn").innerText = right;
+            document.getElementById("rightkeybtn").innerText = right;
         }
     });
 }
@@ -87,7 +87,7 @@ $().ready(function () {
                 setSettings();
                 replaceWindow(event, 'game');
                 showCanvas();
-                playPause();
+                playMusic();
             }
         }
     });
@@ -108,8 +108,9 @@ function showSettings() {
     document.getElementById('showSettingsKeys').innerText=
         "* Keys: " + '\n'
         + '\t\t' + "RIGHT- " + right.valueOf() + '\n' + '\t\t' + "LEFT- " + left.valueOf()
-        + '\n' + '\t\t' + "UP- " + up.valueOf() + '\n' + '\t\t' + "DOWN- " + down.valueOf();
-    document.getElementById('showSettings5points').innerText= "* 5 points, ";
+        + '\n' + '\t\t' + "UP- " + up.valueOf() + '\n' + '\t\t' + "DOWN- " + down.valueOf()
+        + '\n' + "* Balls colors: ";
+    document.getElementById('showSettings5points').innerText= "5 points, ";
     document.getElementById('showSettings5points').style.color= sixtyPercentColor.valueOf();
     document.getElementById('showSettings10points').innerText= "10 points, ";
     document.getElementById('showSettings10points').style.color= thirtyPercentColor.valueOf();
@@ -151,12 +152,21 @@ function randomInputs() {
 function playPause() {
     const song = document.getElementById("music");
     if (playing) {
-        song.pause();
-        playing = false;
+        pauseMusic();
     } else {
-        song.play(); //play the audio track
-        playing = true;
+        playMusic();
     }
+}
+
+function pauseMusic(){
+    const song = document.getElementById("music");
+    song.pause();
+    playing = false;
+}
+function playMusic() {
+    const song = document.getElementById("music");
+    song.play(); //play the audio track
+    playing = true;
 }
 
 function pauseGame() {
@@ -167,16 +177,12 @@ function pauseGame() {
         //start_time = temp;
         pause = false;
         pauseGame.textContent = "Pause";
-        //play music
-        song.play();
-        playing = true;
+        playMusic();
     }
     else{
         //tempTime = new Date();
         pauseGame.textContent = "Resume";
         pause = true;
-        //stop music
-        song.pause();
-        playing = false;
+        pauseMusic();
     }
 }

@@ -60,6 +60,7 @@ function transferToLogin(username,password){
         session_user = JSON.parse(sessionStorage.getItem(username));
         $('#tabS').prop('disabled', false); //to enable playing the game
         document.getElementById('front_display').innerHTML = "The user " + session_user.username + " is currently logged in.";
+        document.getElementById("settingsform").reset();
         replaceWindow(event, 'settings');
     }
 }
