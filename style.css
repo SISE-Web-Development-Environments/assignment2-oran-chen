@@ -160,7 +160,7 @@ h4{
     background: black;
     font-weight: bold;
 }
-#reset{
+#reset, #pause{
     width:150px;
 }
 #music{
