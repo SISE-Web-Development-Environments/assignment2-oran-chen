@@ -104,13 +104,20 @@ function setSettings(){
 }
 
 function showSettings() {
-    document.getElementById('showSettings').innerText=
+    debugger
+    document.getElementById('showSettingsKeys').innerText=
         "* Keys: " + '\n'
         + '\t\t' + "RIGHT- " + right.valueOf() + '\n' + '\t\t' + "LEFT- " + left.valueOf()
-        + '\n' + '\t\t' + "UP- " + up.valueOf() + '\n' + '\t\t' + "DOWN- " + down.valueOf()
-        + '\n' + '* Balls #: ' + numOfBalls.valueOf()
-        + '\n' + '* Ghosts #: ' + numOfGhosts.valueOf()
-        + '\n' + '* Game time: ' + time.valueOf();
+        + '\n' + '\t\t' + "UP- " + up.valueOf() + '\n' + '\t\t' + "DOWN- " + down.valueOf();
+    document.getElementById('showSettings5points').innerText= "* 5 points, ";
+    document.getElementById('showSettings5points').style.color= sixtyPercentColor.valueOf();
+    document.getElementById('showSettings10points').innerText= "10 points, ";
+    document.getElementById('showSettings10points').style.color= thirtyPercentColor.valueOf();
+    document.getElementById('showSettings15points').innerText= "15 points ";
+    document.getElementById('showSettings15points').style.color= tenPercentColor.valueOf();
+    document.getElementById('showSettingsNums').innerText= "* Balls #: " + numOfBalls.valueOf()
+        + '\n' + "* Ghosts #: " + numOfGhosts.valueOf()
+        + '\n' + "* Game time: " + time.valueOf();
 }
 
 function randomInputs() {
@@ -143,10 +150,32 @@ function randomInputs() {
 //music
 function playPause() {
     const song = document.getElementById("music");
-    if (playing==false) {
+    if (playing) {
+        song.pause();
+        playing = false;
+    } else {
         song.play(); //play the audio track
         playing = true;
-    } else {
+    }
+}
+
+function pauseGame() {
+    const song = document.getElementById("music");
+    const pauseGame =  document.getElementById("pause");
+    if(pause){
+        //var temp = tempTime - start_time;
+        //start_time = temp;
+        pause = false;
+        pauseGame.textContent = "Pause";
+        //play music
+        song.play();
+        playing = true;
+    }
+    else{
+        //tempTime = new Date();
+        pauseGame.textContent = "Resume";
+        pause = true;
+        //stop music
         song.pause();
         playing = false;
     }
