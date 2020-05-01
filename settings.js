@@ -2,7 +2,7 @@ let rightPressed;
 let leftPressed;
 let upPressed;
 let downPressed;
-
+let playing = false;
 
 //choose keys
 function chooseRight() {
@@ -11,7 +11,7 @@ function chooseRight() {
         if (rightPressed == false) {
             keyRight = event.keyCode;
             rightPressed = true;
-           $("#rightkeybtn").innerText = event.key;
+           document.getElementById("rightkeybtn").innerText = event.key;
         }
     });
 }
@@ -22,7 +22,7 @@ function chooseLeft() {
         if (leftPressed == false) {
             keyLeft = event.keyCode;
             leftPressed = true
-            $("#leftkeybtn").innerText = event.key;
+            document.getElementById("leftkeybtn").innerText = event.key;
         }
     });
 }
@@ -33,7 +33,7 @@ function chooseDown() {
         if (downPressed == false) {
             keyDown = event.keyCode;
             downPressed = true;
-           $("#downkeybtn").innerText = event.key;
+            document.getElementById("downkeybtn").innerText = event.key;
         }
     });
 }
@@ -44,7 +44,7 @@ function chooseUp() {
         if (upPressed == false) {
             keyUp = event.keyCode;
             upPressed = true;
-            $("#upkeybtn").innerText = event.key;
+            document.getElementById("upkeybtn").innerText = event.key;
         }
     });
 }
@@ -54,30 +54,47 @@ $().ready(function () {
         rules: {
             ballsnumin: {
                 required: true,
-                regex: /^[5-8][0-9]$|^90$/
+            },
+            timenumin: {
+                required: true,
+            },
+            ghostsNumber:{
+                required: true,
             }
         },
         messages: {
             ballsnumin:{
-                required: "Please enter a number between 50 and 90",
-                regex: "Please enter a number between 50 and 90"
+                required: "Please choose balls number (50-90)",
+            },
+            timenumin: {
+                required: "Please choose time (min 60)",
+            },
+            ghostsNumber: {
+                required: "Please choose ghosts number (1-4)",
             }
         },
         submitHandler: function () {
-            //debugger
             var validSettings = $("#settingsform").valid();
             if (validSettings) {
-                numOfBalls = $('#ballsnumin').val();
-               // $('#startgame').prop('disabled', false); //to enable playing the game
+                setSettings();
                 replaceWindow(event, 'game');
                 showCanvas();
+                playPause();
             }
         }
     });
 });
 
-function randomInputs() {
+function setSettings(){
+    numOfBalls= $('#ballsnumin').val();
+    sixtyPercentColor = $("#sixtyColor").val();
+    thirtyPercentColor = $("#thirtyColor").val();
+    tenPercentColor = $("#tenColor").val();
+    numOfGhosts = $('#ghostsNumber :selected').val();
+    time = $("#timenumin").val();
+}
 
+function randomInputs() {
     //Change number of balls
     var randomNumber = Math.random()*100;
     while (randomNumber < 50 || randomNumber > 90){
@@ -102,4 +119,16 @@ function randomInputs() {
     }
     randomNumber = Math.floor(randomNumber);
     document.getElementById('timenumin'). value = randomNumber;
+}
+
+//music
+function playPause() {
+    const song = document.getElementById("music");
+    if (playing==false) {
+        song.play(); //play the audio track
+        playing = true;
+    } else {
+        song.pause();
+        playing = false;
+    }
 }

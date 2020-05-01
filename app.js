@@ -39,12 +39,12 @@ var numOfGhosts;
 var ghostPosition;
 var monsterLocation = new Object();
 var remain_monster;
-var numOfBalls;
 var keyRight= 39;
 var keyLeft = 37;
 var keyUp = 38;
 var keyDown = 40;
 var time;
+var numOfBalls;
 var pause;
 var seconds;
 // $(document).ready(function() {
@@ -57,7 +57,7 @@ function stopInterval(){
 	clearInterval(ghostInterval);
 	clearInterval(checkInterval)
 	clearInterval(timeInterval);
-} 
+}
 
 function startGame() {
 	canvas = document.getElementById("canvas");
@@ -86,11 +86,6 @@ function Start() {
 	remain_lives = 5;
 	pac_color = "yellow";
 	var food_remain= numOfBalls;
-	sixtyPercentColor = $("#sixtyColor").val();
-	thirtyPercentColor = $("#thirtyColor").val();
-	tenPercentColor = $("#tenColor").val();
-	numOfGhosts = $('#ghostsNumber :selected').val();
-	time = $("#timenumin").val();
 	ghostPosition = new Array(numOfGhosts);
 	initializeGhostPos();
 		var cnt = 400;
