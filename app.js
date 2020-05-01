@@ -183,7 +183,7 @@ function Start() {
 		false
 	);
 	interval = setInterval(UpdatePosition, 100);
-	ghostInterval = setInterval(updateGhostPosition, 800);
+	ghostInterval = setInterval(updateGhostPosition, 400);
 	//labelInterval = setInterval(updateLabels, 10);
 }
 
@@ -443,7 +443,7 @@ function updateGhostPosition(){
 	for (var i =0; i < numOfGhosts; i++) {
 		num = Math.random();
 		board[ghostPosition[i][0]][ghostPosition[i][1]] = 0;
-		if (num < 0.1) {
+		if (num < 0.2) {
 			direction = getRandomDirection();
 
 			if(direction == 1){ //Up
@@ -468,19 +468,19 @@ function updateGhostPosition(){
 			}
 		} else {
 			let currentDistance = distanceSum(shape.i, ghostPosition[i][0], shape.j, ghostPosition[i][1]);
-			if (currentDistance > distanceSum(shape.i, ghostPosition[i][0] + 1, shape.j, ghostPosition[i][1]) &&
+			if (currentDistance >= distanceSum(shape.i, ghostPosition[i][0] + 1, shape.j, ghostPosition[i][1]) &&
 				board[ghostPosition[i][0] + 1][ghostPosition[i][1]] != 4 && board[ghostPosition[i][0] + 1][ghostPosition[i][1]]!= 5 &&
 				ghostPosition[i][0] + 1 < 20 && board[ghostPosition[i][0] + 1][ghostPosition[i][1]] != 7) {
 				ghostPosition[i][0]++;
-			} else if (currentDistance > distanceSum(shape.i, ghostPosition[i][0], shape.j, ghostPosition[i][1] + 1) &&
+			} else if (currentDistance >= distanceSum(shape.i, ghostPosition[i][0], shape.j, ghostPosition[i][1] + 1) &&
 				board[ghostPosition[i][0]][ghostPosition[i][1] + 1] != 4 && board[ghostPosition[i][0]][ghostPosition[i][1] + 1]!= 5 &&
 				ghostPosition[i][1] + 1 < 20 && board[ghostPosition[i][0]][ghostPosition[i][1] + 1] != 7) {
 				ghostPosition[i][1]++;
-			} else if (currentDistance > distanceSum(shape.i, ghostPosition[i][0] - 1, shape.j, ghostPosition[i][1]) &&
+			} else if (currentDistance >= distanceSum(shape.i, ghostPosition[i][0] - 1, shape.j, ghostPosition[i][1]) &&
 				board[ghostPosition[i][0] - 1][ghostPosition[i][1]] != 4 && board[ghostPosition[i][0] - 1][ghostPosition[i][1]]!= 5 &&
 				ghostPosition[i][0] - 1 >= 0 && board[ghostPosition[i][0] - 1][ghostPosition[i][1]] != 7) {
 				ghostPosition[i][0]--;
-			} else if (currentDistance > distanceSum(shape.i, ghostPosition[i][0], shape.j, ghostPosition[i][1] - 1) &&
+			} else if (currentDistance >= distanceSum(shape.i, ghostPosition[i][0], shape.j, ghostPosition[i][1] - 1) &&
 				board[ghostPosition[i][0]][ghostPosition[i][1] - 1] != 4 && board[ghostPosition[i][0]][ghostPosition[i][1] - 1]!= 5 &&
 				ghostPosition[i][1] - 1 >= 0  && board[ghostPosition[i][0]][ghostPosition[i][1] - 1] != 7) {
 				ghostPosition[i][1]--;
