@@ -2,7 +2,7 @@ let rightPressed;
 let leftPressed;
 let upPressed;
 let downPressed;
-
+let playing = false;
 
 //choose keys
 function chooseRight() {
@@ -79,6 +79,7 @@ $().ready(function () {
                 setSettings();
                 replaceWindow(event, 'game');
                 showCanvas();
+                playPause();
             }
         }
     });
@@ -118,4 +119,16 @@ function randomInputs() {
     }
     randomNumber = Math.floor(randomNumber);
     document.getElementById('timenumin'). value = randomNumber;
+}
+
+//music
+function playPause() {
+    const song = document.getElementById("music");
+    if (playing==false) {
+        song.play(); //play the audio track
+        playing = true;
+    } else {
+        song.pause();
+        playing = false;
+    }
 }

@@ -166,6 +166,9 @@ h4{
     padding-bottom: 100px;
     background: url(images/background2.webp)
 }
+#playpause{
+    float: left;
+}
 
 
 

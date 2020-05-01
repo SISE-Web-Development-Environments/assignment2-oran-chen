@@ -99,6 +99,9 @@
 
 
 <div id="game" class="tab" onload="clearCanvas()">
+    <div id=playpause" class="container-fluid" >
+    <img src="images/play.webp" onclick="playPause()" id="play-pause" height="30" width="60" />
+    </div>
     <div id="labels" align="center">
         <p>
             <label for="lblScore">SCORE:</label>
@@ -111,8 +114,7 @@
         </p>
     </div>
     <canvas id="canvas" height="600" width="600" class="tab" style="display:none;"></canvas>
-    <embed id="music" src="music/PacMan.mp3"  autostart="true" loop="false" width="200" height="100" >
-
+    <audio autoplay loop src="music/PacMan.mp3" id="music"></audio>
 </div>
 
 
