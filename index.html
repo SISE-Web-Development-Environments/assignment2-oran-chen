@@ -57,20 +57,19 @@
 
     <h3>Game Settings </h3>
     <h4>Change the game settings and click on "Start game"</h4><br>
+    <div id="keybuttons" align="center">
+        <strong><p id="keybuttonstxt">
+        &diams; Choose Keys: &nbsp;&nbsp; Key Right &rarr; &nbsp;
+        <button id="rightkeybtn" class="btn btn-info btn-sm" onclick="chooseRight()" width="5%">Right</button>&nbsp;
+        Key Left &larr; &nbsp;
+        <button id="leftkeybtn" class="btn btn-info btn-sm" onclick="chooseLeft()" width="5%">Left</button>&nbsp;
+        Key Up &uarr; &nbsp;
+        <button id="upkeybtn" class="btn btn-info btn-sm" onclick="chooseUp()" width="5%">Up</button>&nbsp;
+        Key Down &darr;&nbsp;
+        <button id="downkeybtn" class="btn btn-info btn-sm" onclick="chooseDown()" width="5%">Down</button></p></strong>
+    </div>
+    <br>
     <form id="settingsform" align="center">
-
-        <strong>
-            <p>&diams; Choose Keys: &nbsp;&nbsp; Key Right &rarr; &nbsp;
-                <button id="rightkeybtn" class="btn btn-info btn-sm" onclick="chooseRight()" width="5%">Right</button>&nbsp;
-                <strong>Key Left &larr; &nbsp;</strong>
-                <button id="leftkeybtn" class="btn btn-info btn-sm" onclick="chooseLeft()" width="5%">Left</button>&nbsp;
-                <!--		<br>-->
-                <strong>Key Up &uarr; &nbsp;</strong>
-                <button id="upkeybtn" class="btn btn-info btn-sm" onclick="chooseUp()" width="5%">Up</button>&nbsp;
-                <strong>Key Down &darr;&nbsp; </strong>
-                <button id="downkeybtn" class="btn btn-info btn-sm" onclick="chooseDown()" width="5%">Down</button>
-            </p>
-        </strong>
 
         <strong><p> &diams; Choose colors for balls: &nbsp;&nbsp;
             5 points balls color: <input id="sixtyColor" type="color" value="#33ffbd">&nbsp;&nbsp;&nbsp;
@@ -78,9 +77,10 @@
             15 points balls color: <input id="tenColor" type="color" value="#FF333F"></p></strong>&nbsp;&nbsp;&nbsp;
         <strong>
             <p>&diams; Choose number of balls:
-                <input type="text" id="ballsnumin" name="ballsnumin" placeholder="50 to 90" size="3">&nbsp;&nbsp;&nbsp;
+                <input type="number" id="ballsnumin" name="ballsnumin" placeholder="min 50" size="2" min="50" max="90" autocomplete="off" >&nbsp;&nbsp;&nbsp;
+
                 <label for="ghostsNumber">&diams; Choose number of ghosts:</label>
-                <select id="ghostsNumber">
+                <select id="ghostsNumber" name="ghostsNumber" autocomplete="off">
                     <option value=1>1</option>
                     <option value=2>2</option>
                     <option value=3>3</option>
@@ -89,9 +89,9 @@
         </strong>
 
         <strong><p>&diams; Choose time for the game: &nbsp;&nbsp;
-            <input type="number" id="timenumin" name="timenumin" placeholder="min 60" size="2" min="60" value="60"></p>
+            <input type="number" id="timenumin" name="timenumin" placeholder="min 60" size="2" min="60" autocomplete="off"></p>
         </strong>
-        <button type="button" class="btn btn-danger btn-lg" id="randomButton" onclick="randomInputs()">Randomize</button>
+        <button type="button" class="btn btn-info btn-lg" id="randomButton" onclick="randomInputs()">Randomize</button>
         <button type="submit" class="btn btn-danger btn-lg" id="startgame">Start game</button>
         <!--		<button class="btn btn-info" id="startgame" onclick="showCanvas()" disabled>Start Game</button>-->
     </form>
@@ -260,6 +260,7 @@
     }
 
     function reset() {
+        setSettings();
         startGame();
     }
 

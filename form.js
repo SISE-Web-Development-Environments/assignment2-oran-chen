@@ -52,7 +52,6 @@ $().ready(function () {
                 }
             },
             submitHandler: function () {
-                debugger
                 var isFormValid = $("#reg_form").valid();
                 if (isFormValid) {
                     userManagerRegSubmit();
