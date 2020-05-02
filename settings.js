@@ -104,7 +104,7 @@ function setSettings(){
 }
 
 function showSettings() {
-    debugger
+    //debugger
     document.getElementById('showSettingsKeys').innerText=
         "* Keys: " + '\n'
         + '\t\t' + "RIGHT- " + right.valueOf() + '\n' + '\t\t' + "LEFT- " + left.valueOf()
