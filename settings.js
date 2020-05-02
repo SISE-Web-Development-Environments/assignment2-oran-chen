@@ -1,8 +1,12 @@
-let rightPressed;
-let leftPressed;
-let upPressed;
-let downPressed;
-
+var rightPressed;
+var leftPressed;
+var upPressed;
+var downPressed;
+var playing = false;
+var right= 'ArrowRight';
+var left = 'ArrowLeft';
+var up = 'ArrowUp';
+var down = 'ArrowDown';
 
 //choose keys
 function chooseRight() {
@@ -11,7 +15,8 @@ function chooseRight() {
         if (rightPressed == false) {
             keyRight = event.keyCode;
             rightPressed = true;
-           $("#rightkeybtn").innerText = event.key;
+            right = event.key;
+            document.getElementById("rightkeybtn").innerText = right;
         }
     });
 }
@@ -22,7 +27,8 @@ function chooseLeft() {
         if (leftPressed == false) {
             keyLeft = event.keyCode;
             leftPressed = true
-            $("#leftkeybtn").innerText = event.key;
+            left = event.key;
+            document.getElementById("leftkeybtn").innerText = left;
         }
     });
 }
@@ -33,7 +39,8 @@ function chooseDown() {
         if (downPressed == false) {
             keyDown = event.keyCode;
             downPressed = true;
-           $("#downkeybtn").innerText = event.key;
+            down = event.key;
+            document.getElementById("downkeybtn").innerText = down;
         }
     });
 }
@@ -44,7 +51,8 @@ function chooseUp() {
         if (upPressed == false) {
             keyUp = event.keyCode;
             upPressed = true;
-            $("#upkeybtn").innerText = event.key;
+            up = event.key;
+            document.getElementById("upkeybtn").innerText = up;
         }
     });
 }
@@ -54,30 +62,66 @@ $().ready(function () {
         rules: {
             ballsnumin: {
                 required: true,
-                regex: /^[5-8][0-9]$|^90$/
+            },
+            timenumin: {
+                required: true,
+            },
+            ghostsNumber:{
+                required: true,
             }
         },
         messages: {
             ballsnumin:{
-                required: "Please enter a number between 50 and 90",
-                regex: "Please enter a number between 50 and 90"
+                required: "Please choose balls number (50-90)",
+            },
+            timenumin: {
+                required: "Please choose time (min 60)",
+            },
+            ghostsNumber: {
+                required: "Please choose ghosts number (1-4)",
             }
         },
         submitHandler: function () {
-            debugger
             var validSettings = $("#settingsform").valid();
             if (validSettings) {
-                numOfBalls = $('#ballsnumin').val();
-               // $('#startgame').prop('disabled', false); //to enable playing the game
+                setSettings();
                 replaceWindow(event, 'game');
                 showCanvas();
+                playMusic();
             }
         }
     });
 });
 
-function randomInputs() {
+function setSettings(){
+    numOfBalls= $('#ballsnumin').val();
+    sixtyPercentColor = $("#sixtyColor").val();
+    thirtyPercentColor = $("#thirtyColor").val();
+    tenPercentColor = $("#tenColor").val();
+    numOfGhosts = $('#ghostsNumber :selected').val();
+    time = $("#timenumin").val();
+    showSettings();
+}
 
+function showSettings() {
+    debugger
+    document.getElementById('showSettingsKeys').innerText=
+        "* Keys: " + '\n'
+        + '\t\t' + "RIGHT- " + right.valueOf() + '\n' + '\t\t' + "LEFT- " + left.valueOf()
+        + '\n' + '\t\t' + "UP- " + up.valueOf() + '\n' + '\t\t' + "DOWN- " + down.valueOf()
+        + '\n' + "* Balls colors: ";
+    document.getElementById('showSettings5points').innerText= "5 points, ";
+    document.getElementById('showSettings5points').style.color= sixtyPercentColor.valueOf();
+    document.getElementById('showSettings10points').innerText= "10 points, ";
+    document.getElementById('showSettings10points').style.color= thirtyPercentColor.valueOf();
+    document.getElementById('showSettings15points').innerText= "15 points ";
+    document.getElementById('showSettings15points').style.color= tenPercentColor.valueOf();
+    document.getElementById('showSettingsNums').innerText= "* Balls #: " + numOfBalls.valueOf()
+        + '\n' + "* Ghosts #: " + numOfGhosts.valueOf()
+        + '\n' + "* Game time: " + time.valueOf();
+}
+
+function randomInputs() {
     //Change number of balls
     var randomNumber = Math.random()*100;
     while (randomNumber < 50 || randomNumber > 90){
@@ -102,4 +146,43 @@ function randomInputs() {
     }
     randomNumber = Math.floor(randomNumber);
     document.getElementById('timenumin'). value = randomNumber;
+}
+
+//music
+function playPause() {
+    const song = document.getElementById("music");
+    if (playing) {
+        pauseMusic();
+    } else {
+        playMusic();
+    }
+}
+
+function pauseMusic(){
+    const song = document.getElementById("music");
+    song.pause();
+    playing = false;
+}
+function playMusic() {
+    const song = document.getElementById("music");
+    song.play(); //play the audio track
+    playing = true;
+}
+
+function pauseGame() {
+    const song = document.getElementById("music");
+    const pauseGame =  document.getElementById("pause");
+    if(pause){
+        //var temp = tempTime - start_time;
+        //start_time = temp;
+        pause = false;
+        pauseGame.textContent = "Pause";
+        playMusic();
+    }
+    else{
+        //tempTime = new Date();
+        pauseGame.textContent = "Resume";
+        pause = true;
+        pauseMusic();
+    }
 }

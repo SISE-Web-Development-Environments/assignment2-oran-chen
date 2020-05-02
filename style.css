@@ -6,6 +6,11 @@
     width:100%;
     float: left;
 }
+#logopac{
+    font-family: myFont;
+    font-size: 20px;
+    color:white;
+}
 #game{
    display: none; 
 }
@@ -30,10 +35,20 @@
     float: right;
     width:32%;
 }
+html, body {
+    height: 100%;
+}
+body {
+    display: flex;
+    flex-direction: column;
+}
+.Site-content {
+    flex: 1 0 auto;
+}
 .footer {
-    position: fixed;
+    flex-shrink: 0;
     margin: 0 auto;
-    padding: 5px 0 5px 0;
+    padding: 0 0 0 0;
     clear: both;
     overflow: hidden;
     left: 0;
@@ -43,13 +58,13 @@
     color: white;
     text-align: left;
     text-indent: 1%;
-    font-size: 14px;
-    font-family: 'source_sans_proregular', Arial, Helvetica, sans-serif;
+    font-size: 15px;
+    font-family: Calibri
 }
 #footerright {
     float: right;
     text-align: center;
-
+    position: relative;
 }
 #footerleft {
     float: left;
@@ -89,8 +104,12 @@ logo{
     font-family: Calibri;
     font-weight: bold;
 }
-#welcomeCon, #settingsform{
-    padding-bottom: 100px;
+#welcomeCon {
+    padding-bottom: 10px;
+}
+#settingsform{
+    padding-bottom: 10px;
+    font-size: 16px;
 }
 #canvas{
     padding: 10px 0 80px 0;
@@ -114,14 +133,17 @@ h4{
     text-align: center;
 
 }
-#ballsnumin, #ghostsNumber, #timenumin{
+#ballsnumin, #ghostsNumber, #timenumin {
     font-size: 12px;
     color: black;
     padding: 8px 5px 8px 5px;
     width:80px;
     text-align: center;
 }
-
+#keybuttonstxt{
+    font-size: 16px;
+    color: black;
+}
 #tabW, #tabL, #tabR, #tabA, #tabS{
     /*font-weight: bold;*/
     font-family: Calibri;
@@ -135,19 +157,50 @@ h4{
     font-size: 14px;
 }
 #startgame, #randomButton{
-    width:100px;
+    width:150px;
     display: inline-block;
+    font-size: 20px;
 }
 #lblScore, #lblTime, #lblLifes{
-    font-size: 14px;
+    font-size: 16px;
     color: white;
-    padding: 5px 5px 5px 5px;
+    padding: 1px 5px 1px 5px;
     width:70px;
     text-align: center;
-    background: darkgray;
+    background: black;
+    font-weight: bold;
 }
-#reset{
-    width:150px;
+#reset, #pause{
+    padding: 5px 5px;
+    margin: 3px 0;
+    display:inline-block;
+    width:120px;
+    text-align: center;
+    font-size: 20px;
+    font-family: Calibri;
+    font-weight: bold;
+}
+#music{
+    padding-bottom: 100px;
+    background: url(images/background2.webp)
+}
+#playpause{
+    float: right;
+}
+#showSettings{
+    font-family: "TwCen", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    text-align: left;
+    float: left;
+    font-weight: bold;
+    color: black;
+}
+h5 {
+    font-family: myFont;
+    color: black;
+    text-align: left;
+    font-size: 35px;
+    font-weight: bold;
 }
 
 

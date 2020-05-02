@@ -7,7 +7,7 @@ h1{
     color: #2f80eb;
     font-family: 'Calibri';
     font-weight: bold;
-    font-size: 40px;
+    font-size: 45px;
     text-align: center;
 }
   /* Full-width inputs */
@@ -34,7 +34,7 @@ h1{
   
   hr {
     border: 1px solid #f1f1f1;
-    margin-bottom: 25px;
+    margin-bottom: 20px;
   }
 
   /* Set a style for all buttons */
@@ -76,7 +76,7 @@ h1{
   /* Add padding to containers */
 #containerForm, #containerForm2 {
     text-align: center;
-    margin-bottom: 8%;
+    margin-bottom: 2%;
     /* margin: 24px 0 12px 0; */
   }
   
