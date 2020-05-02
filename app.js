@@ -1,25 +1,25 @@
 var context;
 var shape = new Object();
 var board = [[4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4],
-	[4,0,0,0,0,0,0,0,0,0,0,0,0,4,4,0,0,0,0,4],
-	[4,0,4,4,4,4,0,4,0,4,4,4,0,4,4,0,4,4,0,4],
-	[4,0,0,0,0,4,0,4,0,0,0,4,0,4,4,0,4,0,0,4],
-	[4,0,4,4,0,4,0,4,4,4,4,4,0,4,4,0,4,4,0,4],
-	[4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4],
-	[4,0,4,4,4,4,0,4,4,0,4,4,4,4,4,4,4,4,0,4],
-	[4,0,4,4,4,4,0,4,4,0,4,4,4,4,4,4,4,4,0,4],
-	[4,0,0,0,0,0,0,4,4,0,0,0,0,4,4,0,0,0,0,4],
-	[4,0,0,0,0,0,0,4,4,4,4,4,0,4,4,0,4,4,4,4],
-	[4,4,4,0,4,4,0,4,4,4,4,4,0,4,4,0,4,4,4,4],
-	[4,0,0,0,0,4,0,4,4,0,0,0,0,0,0,0,0,0,0,4],
-	[4,0,0,0,0,4,0,4,4,0,4,4,4,4,4,4,4,4,0,4],
-	[4,0,0,0,0,4,0,4,4,0,4,4,0,0,0,0,4,4,0,4],
-	[4,0,0,0,0,4,0,0,0,0,4,4,0,0,0,0,4,4,0,4],
-	[4,0,0,0,0,4,0,4,4,0,0,0,0,0,0,0,4,4,0,4],
-	[4,0,0,0,0,4,0,4,4,0,4,4,4,4,4,4,4,4,0,4],
-	[4,0,0,0,0,4,0,4,4,0,0,0,0,0,0,0,0,0,0,4],
-	[4,0,0,0,0,0,0,4,4,0,4,4,4,4,4,4,4,4,0,4],
-	[4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4]];
+			 [4,0,0,0,0,0,0,0,0,0,0,0,0,4,4,0,0,0,0,4],
+			 [4,0,4,4,4,4,0,4,0,4,4,4,0,4,4,0,4,4,0,4],
+			 [4,0,0,0,0,4,0,4,0,0,0,4,0,4,4,0,4,0,0,4],
+			 [4,0,4,4,0,4,0,4,4,4,4,4,0,4,4,0,4,4,0,4],
+			 [4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4],
+			 [4,0,4,4,4,4,0,4,4,0,4,4,4,4,4,4,4,4,0,4],
+			 [4,0,4,4,4,4,0,4,4,0,4,4,4,4,4,4,4,4,0,4],
+			 [4,0,0,0,0,0,0,4,4,0,0,0,0,4,4,0,0,0,0,4],
+			 [4,0,0,0,0,0,0,4,4,4,4,4,0,4,4,0,4,4,4,4],
+			 [4,4,4,0,4,4,0,4,4,4,4,4,0,4,4,0,4,4,4,4],
+			 [4,0,0,0,0,4,0,4,4,0,0,0,0,0,0,0,0,0,0,4],
+			 [4,0,0,0,0,4,0,4,4,0,4,4,4,4,4,4,4,4,0,4],
+			 [4,0,0,0,0,4,0,4,4,0,4,4,0,0,0,0,4,4,0,4],
+			 [4,0,0,0,0,4,0,0,0,0,4,4,0,0,0,0,4,4,0,4],
+			 [4,0,0,0,0,4,0,4,4,0,0,0,0,0,0,0,4,4,0,4],
+			 [4,0,0,0,0,4,0,4,4,0,4,4,4,4,4,4,4,4,0,4],
+			 [4,0,0,0,0,4,0,4,4,0,0,0,0,0,0,0,0,0,0,4],
+			 [4,0,0,0,0,0,0,4,4,0,4,4,4,4,4,4,4,4,0,4],
+			 [4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4]];
 var dotsBoard;
 var score;
 var remain_lives;
@@ -148,6 +148,12 @@ function Start() {
 		}
 	}
 
+	if(pacman_remain > 0){
+		var emptyCell = findRandomEmptyCell();
+		shape.i = emptyCell[0];
+		shape.j = emptyCell[1];
+	}
+
 	while (food_remain > 0) {
 		var emptyCell = findRandomEmptyCell();
 
@@ -201,7 +207,7 @@ function Start() {
 	);
 	interval = setInterval(UpdatePosition, 150);
 	ghostInterval = setInterval(updateGhostPosition, 400);
-	checkInterval = setInterval(isEatPackman, 1);
+	checkInterval = setInterval(isEatPackman, 50);
 	timeInterval = setInterval(function () {
 		if(!pause){
 			seconds++;
@@ -378,12 +384,24 @@ function UpdatePosition() {
 			dotsBoard[shape.i][shape.j] = 0;
 		}
 
+		if (dotsBoard[shape.i][shape.j] == 8) { // Clock
+			time = time + 10;
+			dotsBoard[shape.i][shape.j] = 0;
+		}
+
 		board[shape.i][shape.j] = 2;
 		//var currentTime = new Date();
 		//time_elapsed = (currentTime - start_time) / 1000;
 		//time_elapsed += tempTime;
 
-
+		if(remain_monster > 0) {
+			if (monsterLocation.i == shape.i && monsterLocation.j == shape.j) { // Monster
+				score = score + 50;
+				remain_monster--;
+				board[shape.i][shape.j] = 0;
+				//board[monsterLocation.i][monsterLocation.j] = 0;
+			}
+		}
 		lblScore.value = score;
 		lblTime.value = seconds;
 		lblLifes.value = remain_lives;
@@ -427,12 +445,14 @@ function UpdatePosition() {
 }
 function isEatPackman() {
 
-	if (board[shape.i][shape.j] == 7) { // Monster
-		score = score + 50;
-		remain_monster--;
-		board[shape.i][shape.j] = 0;
-	}
-
+	// if(remain_monster > 0) {
+	// 	if (monsterLocation.i == shape.i && monsterLocation.j == shape.j) { // Monster
+	// 		score = score + 50;
+	// 		remain_monster--;
+	// 		board[shape.i][shape.j] = 0;
+	// 		//board[monsterLocation.i][monsterLocation.j] = 0;
+	// 	}
+	// }
 	if (eatMeGhost()) {
 		remain_lives--;
 		score = score - 10;
@@ -443,6 +463,7 @@ function isEatPackman() {
 		deleteGhosts();
 		placeGhosts();
 	}
+	Draw();
 }
 function placeGhosts() {
 	board[1][1] = 5; // First ghost
@@ -559,6 +580,13 @@ function updateGhostPosition(){
 			// 	}
 			// }
 			board[monsterLocation.i][monsterLocation.j] = 7;
+		}
+
+		if (board[shape.i][shape.j] == 7) { // Monster
+			score = score + 50;
+			remain_monster--;
+			board[shape.i][shape.j] = 0;
+			board[monsterLocation.i][monsterLocation.j] = 0;
 		}
 	}
 }
