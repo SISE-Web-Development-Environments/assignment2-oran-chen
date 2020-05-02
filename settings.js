@@ -16,7 +16,7 @@ function chooseRight() {
             keyRight = event.keyCode;
             rightPressed = true;
             right = event.key;
-           document.getElementById("rightkeybtn").innerText = right;
+            document.getElementById("rightkeybtn").innerText = right;
         }
     });
 }
@@ -87,7 +87,7 @@ $().ready(function () {
                 setSettings();
                 replaceWindow(event, 'game');
                 showCanvas();
-                playPause();
+                playMusic();
             }
         }
     });
@@ -104,13 +104,21 @@ function setSettings(){
 }
 
 function showSettings() {
-    document.getElementById('showSettings').innerText=
+    debugger
+    document.getElementById('showSettingsKeys').innerText=
         "* Keys: " + '\n'
         + '\t\t' + "RIGHT- " + right.valueOf() + '\n' + '\t\t' + "LEFT- " + left.valueOf()
         + '\n' + '\t\t' + "UP- " + up.valueOf() + '\n' + '\t\t' + "DOWN- " + down.valueOf()
-        + '\n' + '* Balls #: ' + numOfBalls.valueOf()
-        + '\n' + '* Ghosts #: ' + numOfGhosts.valueOf()
-        + '\n' + '* Game time: ' + time.valueOf();
+        + '\n' + "* Balls colors: ";
+    document.getElementById('showSettings5points').innerText= "5 points, ";
+    document.getElementById('showSettings5points').style.color= sixtyPercentColor.valueOf();
+    document.getElementById('showSettings10points').innerText= "10 points, ";
+    document.getElementById('showSettings10points').style.color= thirtyPercentColor.valueOf();
+    document.getElementById('showSettings15points').innerText= "15 points ";
+    document.getElementById('showSettings15points').style.color= tenPercentColor.valueOf();
+    document.getElementById('showSettingsNums').innerText= "* Balls #: " + numOfBalls.valueOf()
+        + '\n' + "* Ghosts #: " + numOfGhosts.valueOf()
+        + '\n' + "* Game time: " + time.valueOf();
 }
 
 function randomInputs() {
@@ -143,11 +151,38 @@ function randomInputs() {
 //music
 function playPause() {
     const song = document.getElementById("music");
-    if (playing==false) {
-        song.play(); //play the audio track
-        playing = true;
+    if (playing) {
+        pauseMusic();
     } else {
-        song.pause();
-        playing = false;
+        playMusic();
+    }
+}
+
+function pauseMusic(){
+    const song = document.getElementById("music");
+    song.pause();
+    playing = false;
+}
+function playMusic() {
+    const song = document.getElementById("music");
+    song.play(); //play the audio track
+    playing = true;
+}
+
+function pauseGame() {
+    const song = document.getElementById("music");
+    const pauseGame =  document.getElementById("pause");
+    if(pause){
+        //var temp = tempTime - start_time;
+        //start_time = temp;
+        pause = false;
+        pauseGame.textContent = "Pause";
+        playMusic();
+    }
+    else{
+        //tempTime = new Date();
+        pauseGame.textContent = "Resume";
+        pause = true;
+        pauseMusic();
     }
 }

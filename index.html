@@ -12,7 +12,7 @@
     <script type="text/javascript" src="./about.js"></script>
 </head>
 
-<body onresize="resize_canvas()">
+<body class="Site" onresize="resize_canvas()">
 <img id="wall" src="images/back6.webp" alt="wall" width="220" height="277" style="display: none;">
 <img id="medicine" src="images/medicine.jpg" alt="medicine" width="220" height="277" style="display: none;">
 <img id="ghost" src="images/ghostRed.webp" alt="ghost" width="220" height="277" style="display: none;">
@@ -29,19 +29,216 @@
                 </button>
                 <button id="tabL" class="btn btn-info btn-lg" onclick="replaceWindow(event,'login')">Login</button>
                 <button id="tabA" class="btn btn-info btn-lg" onclick="about()">About</button>
-                <button id="tabS" class="btn btn-info btn-lg" onclick="replaceWindow(event,'settings')" disabled="true">Game settings
+                <button id="tabS" class="btn btn-info btn-lg" onclick="replaceWindow(event,'settings')" disabled="true">
+                    Game settings
                 </button>
             </div>
         </nav>
     </menu>
     <p id="front_display" align="center"></p>
 </div>
+
+<main class="Site-content">
+    <div id="settings" class="tab" style="display:none;">
+        <script type="text/javascript" src="settings.js"></script>
+        <script type="text/javascript" src="jqueryvalidation.js"></script>
+
+        <h3>Game Settings </h3>
+        <h4>Change the game settings and click on "Start game"</h4><br>
+        <div id="keybuttons" align="center">
+            <strong>
+                <p id="keybuttonstxt">
+                    &diams; Choose Keys: &nbsp;&nbsp; Key Right &rarr; &nbsp;
+                    <button id="rightkeybtn" class="btn btn-info btn-sm" onclick="chooseRight()" width="5%">Right
+                    </button>&nbsp;
+                    Key Left &larr; &nbsp;
+                    <button id="leftkeybtn" class="btn btn-info btn-sm" onclick="chooseLeft()" width="5%">Left</button>&nbsp;
+                    Key Up &uarr; &nbsp;
+                    <button id="upkeybtn" class="btn btn-info btn-sm" onclick="chooseUp()" width="5%">Up</button>&nbsp;
+                    Key Down &darr;&nbsp;
+                    <button id="downkeybtn" class="btn btn-info btn-sm" onclick="chooseDown()" width="5%">Down</button>
+                </p>
+            </strong>
+        </div>
+        <br>
+        <form id="settingsform" align="center">
+            <strong><p> &diams; Choose colors for balls: &nbsp;&nbsp;
+                5 points balls color: <input id="sixtyColor" type="color" value="#33ffbd">&nbsp;&nbsp;&nbsp;
+                10 points balls color: <input id="thirtyColor" type="color" value="#333EFF">&nbsp;&nbsp;&nbsp;
+                15 points balls color: <input id="tenColor" type="color" value="#FF333F"></p></strong>&nbsp;&nbsp;&nbsp;
+            <strong>
+                <p>&diams; Choose number of balls:
+                    <input type="number" id="ballsnumin" name="ballsnumin" placeholder="min 50" size="2" min="50"
+                           max="90" autocomplete="off">&nbsp;&nbsp;&nbsp;
+
+                    <label for="ghostsNumber">&diams; Choose number of ghosts:</label>
+                    <select id="ghostsNumber" name="ghostsNumber" autocomplete="off">
+                        <option value=1>1</option>
+                        <option value=2>2</option>
+                        <option value=3>3</option>
+                        <option value=4>4</option>
+                    </select></p>
+            </strong>
+
+            <strong><p>&diams; Choose time for the game: &nbsp;&nbsp;
+                <input type="number" id="timenumin" name="timenumin" placeholder="min 60" size="2" min="60"
+                       autocomplete="off"></p>
+            </strong>
+            <button type="button" class="btn btn-info btn-lg" id="randomButton" onclick="randomInputs()">Randomize
+            </button>
+            <button type="submit" class="btn btn-danger btn-lg" id="startgame">Start game</button>
+            <!--		<button class="btn btn-info" id="startgame" onclick="showCanvas()" disabled>Start Game</button>-->
+        </form>
+    </div>
+
+
+    <div id="game" class="tab" onload="clearCanvas()">
+        <div id=playpause" class="controls">
+            <img src="images/play.webp" onclick="playPause()" id="play-pause" height="35" width="70" align="right"/>
+        </div>
+        <div id="labels" align="center">
+            <p>
+                <label for="lblScore">SCORE:</label>
+                <input id="lblScore" type="text"/>
+                <label for="lblTime">TIME:</label>
+                <input id="lblTime" type="text"/>
+                <label for="lblLifes" width="10px">LIVES:</label>
+                <input id="lblLifes" type="text"/>
+            </p>
+        </div>
+
+        <div class="wrapper" style="margin: 0 auto; width: 600px; position: relative;">
+            <canvas id="canvas" style="border: none;" width="600" height="600" align="center"></canvas>
+            <div class="controls" align="left" style="position: fixed; top:120px; left:20px; bottom: 20px">
+                <p align="center">
+                    <button class="btn btn-info" id="reset" onclick="reset()">Reset</button>
+                    <button class="btn btn-danger" id="pause" onclick="pauseGame()">Pause</button>
+                </p>
+                <br>
+                <h5>Settings</h5>
+                <div id = "showsettings">
+                <strong><p id="showSettingsKeys"></p>
+                <p id="showSettings5points" style="margin: 0; display: inline";></p>
+                    <p id="showSettings10points" style="margin: 0; display: inline";></p>
+                    <p id="showSettings15points" style="margin: 0; display: inline";></p>
+                <p id="showSettingsNums"></p></strong></div>
+            </div>
+        </div>
+
+        <audio autoplay loop src="music/PacMan.mp3" id="music"></audio>
+    </div>
+
+
+    <div id="welcome" class="tab" align="center">
+        <div class="imgcontainer" id="welcomeCon">
+            <br>
+            <img class="images" src="images/logopac.png" id="logo" alt="images" width="460" height="250"
+                 margin-left=30%>
+            <br>
+            <br>
+            <button id="reg" class="btn btn-info btn-lg" onclick="replaceWindow(event,'register')" align="center">Register
+            </button>
+            <button id="log" class="btn btn-info btn-lg" onclick="replaceWindow(event,'login')" align="center">Login
+            </button>
+        </div>
+    </div>
+
+    <div id="register" class="tab" style="display:none;">
+        <script type="text/javascript" src="jqueryvalidation.js"></script>
+        <script type="text/javascript" src="form.js"></script>
+        <script type="text/javascript" src="dobpicker.js"></script>
+        <link rel="stylesheet" type="text/css" href="styleLogin.css"/>
+
+        <form id="reg_form" style="border:1px solid #ccc">
+            <div class="container" id="containerForm">
+                <strong><h1>Register</h1></strong>
+                <img class="images" src="images/packman.webp" alt="packman" width="50" height="50">
+
+                <strong><p> Please fill in this form to create a new account for playing our game </p></strong>
+                <p>
+                    ---------------------------------------------------------------------------------------------------</p>
+                <!--				  <hr>-->
+
+                <label for="uname_reg"><b>Username </b></label>
+                <input type="text" placeholder="Enter Username" id="uname_reg" name="uname_reg" size="45">
+                <br>
+                <label for="psw_reg"><b>Password </b></label>
+                <input type="password" placeholder="Enter Password" id="psw_reg" name="psw_reg" size="45">
+                <br>
+                <label for="fname_reg"><b>Full Name </b></label>
+                <input type="text" placeholder="Enter Full Name" id="fname_reg" name="fname_reg" size="45">
+                <br>
+                <label for="email_reg"><b>Email&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; </b></label>
+                <input type="email" placeholder="Enter Email" id="email_reg" name="email_reg" size="45">
+                <br>
+                <label for="bdate_reg" id="bdate_reg">Birth date</label>
+                <select id="Bday" name="Bday" class='group'></select>
+                <select id="Bmonth" name="Bmonth" class='group'></select>
+                <select id="Byear" name="Byear" class='group'></select>
+                <div class="clearfix">
+                    <button type="submit" class="btn btn-info btn-lg" id="submit_reg">Register</button>
+                    <br>
+                    <button type="button" onclick="replaceWindow(event,'welcome')" class="btn btn-danger btn-lg">Cancel
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div id="login" class="tab" style="display:none;" >
+        <link rel="stylesheet" type="text/css" href="styleLogin.css"/>
+
+        <form margin-left=40% margin-right=40%>
+            <strong><h1>Login</h1></strong>
+            <div class="imgcontainer">
+                <img src="images/avatar2.webp" alt="Avatar" class="avatar">
+            </div>
+
+            <div class="container" id="containerForm2">
+                <label for="uname_log"><b>Username</b></label>
+                <input type="text" placeholder="Enter Username" id="uname_log" name="uname_login" required
+                       align="center"
+                       size="40">
+                <br>
+                <label for="psw_log"><b>Password</b></label>
+                <input type="password" placeholder="Enter Password" id="psw_log" name="psw_login" required
+                       align="center"
+                       size="40">
+                <br>
+                <div class="clearfix">
+                    <button type="button" class="btn btn-info btn-lg" onclick="userManagerLogin()">Login</button>
+                    <br>
+                    <button type="button" onclick="replaceWindow(event,'welcome')" class="btn btn-danger btn-lg"
+                            align="center">Cancel
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div id="about" class="modal">
+        <link rel="stylesheet" type="text/css" href="styleModal.css"/>
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <img class="images" src="images/packman.webp" alt="packman" width="20" height="20" align="left">
+            <img class="images" src="images/packman.webp" alt="packman" width="20" height="20" align="right">
+            <strong><h2>About the game</h2></strong>
+            <p>This packman game was created by Oran and Chen.</p>
+            <p>The challenges we encountered while creating the game were: </p>
+            <br>
+            <br>
+            <img class="images" src="images/packman.webp" alt="packman" width="20" height="20" align="left">
+            <img class="images" src="images/packman.webp" alt="packman" width="20" height="20" align="right">
+            <br>
+        </div>
+    </div>
+</main>
 <div class="footer">
     <div id="footerright">
         <div id=ftrcontact">
             <strong><p>Contact us at: <br>
-            Chen: <a href="mailto:chengal@post.bgu.ac.il">chengal@post.bgu.ac.il&nbsp;</a>
-            <br>Oran: <a href="mailto:shichman@post.bgu.ac.il">shichman@post.bgu.ac.il&nbsp;</a></p></strong>
+                Chen: <a href="mailto:chengal@post.bgu.ac.il">chengal@post.bgu.ac.il&nbsp;</a>
+                <br>Oran: <a href="mailto:shichman@post.bgu.ac.il">shichman@post.bgu.ac.il&nbsp;</a></p></strong>
         </div>
     </div>
     <div id="footerleft">
@@ -50,194 +247,14 @@
         <p>Created on April,2020.</p>
     </div>
 </div>
-
-<div id="settings" class="tab" style="display:none;">
-    <script type="text/javascript" src="settings.js"></script>
-    <script type="text/javascript" src="jqueryvalidation.js"></script>
-
-    <h3>Game Settings </h3>
-    <h4>Change the game settings and click on "Start game"</h4><br>
-    <div id="keybuttons" align="center">
-        <strong><p id="keybuttonstxt">
-        &diams; Choose Keys: &nbsp;&nbsp; Key Right &rarr; &nbsp;
-        <button id="rightkeybtn" class="btn btn-info btn-sm" onclick="chooseRight()" width="5%">Right</button>&nbsp;
-        Key Left &larr; &nbsp;
-        <button id="leftkeybtn" class="btn btn-info btn-sm" onclick="chooseLeft()" width="5%">Left</button>&nbsp;
-        Key Up &uarr; &nbsp;
-        <button id="upkeybtn" class="btn btn-info btn-sm" onclick="chooseUp()" width="5%">Up</button>&nbsp;
-        Key Down &darr;&nbsp;
-        <button id="downkeybtn" class="btn btn-info btn-sm" onclick="chooseDown()" width="5%">Down</button></p></strong>
-    </div>
-    <br>
-    <form id="settingsform" align="center">
-
-        <strong><p> &diams; Choose colors for balls: &nbsp;&nbsp;
-            5 points balls color: <input id="sixtyColor" type="color" value="#33ffbd">&nbsp;&nbsp;&nbsp;
-            10 points balls color: <input id="thirtyColor" type="color" value="#333EFF">&nbsp;&nbsp;&nbsp;
-            15 points balls color: <input id="tenColor" type="color" value="#FF333F"></p></strong>&nbsp;&nbsp;&nbsp;
-        <strong>
-            <p>&diams; Choose number of balls:
-                <input type="number" id="ballsnumin" name="ballsnumin" placeholder="min 50" size="2" min="50" max="90" autocomplete="off" >&nbsp;&nbsp;&nbsp;
-
-                <label for="ghostsNumber">&diams; Choose number of ghosts:</label>
-                <select id="ghostsNumber" name="ghostsNumber" autocomplete="off">
-                    <option value=1>1</option>
-                    <option value=2>2</option>
-                    <option value=3>3</option>
-                    <option value=4>4</option>
-                </select></p>
-        </strong>
-
-        <strong><p>&diams; Choose time for the game: &nbsp;&nbsp;
-            <input type="number" id="timenumin" name="timenumin" placeholder="min 60" size="2" min="60" autocomplete="off"></p>
-        </strong>
-        <button type="button" class="btn btn-info btn-lg" id="randomButton" onclick="randomInputs()">Randomize</button>
-        <button type="submit" class="btn btn-danger btn-lg" id="startgame">Start game</button>
-        <!--		<button class="btn btn-info" id="startgame" onclick="showCanvas()" disabled>Start Game</button>-->
-    </form>
-</div>
-
-
-<div id="game" class="tab" onload="clearCanvas()">
-    <div id=playpause" class="controls" >
-    <img src="images/play.webp" onclick="playPause()" id="play-pause" height="35" width="70" align="right"/>
-    </div>
-    <div id="labels" align="center">
-        <p>
-            <label for="lblScore">SCORE:</label>
-            <input id="lblScore" type="text"/>
-            <label for="lblTime">TIME:</label>
-            <input id="lblTime" type="text"/>
-            <label for="lblLifes" width="10px">LIVES:</label>
-            <input id="lblLifes" type="text"/>
-        </p>
-    </div>
-
-    <div class="wrapper" style="margin: 0 auto; width: 800px; position: relative;">
-<!--        <canvas id="canvas" height="600" width="600" class="tab" style="display:none;"></canvas>-->
-        <canvas id="canvas" style="border: none;" width="600" height="600" align="center"></canvas>
-        <div class="controls" align="left" style="position: fixed; top:120px; left:50px;">
-            <button class="btn btn-info btn-lg" id="reset" class="reset"  onclick="reset()" >Reset</button>
-            <button class="btn btn-info btn-lg" id="pause" class="reset"  onclick="pauseGame()" >Pause</button>
-            <br>
-            <h5>Settings</h5>
-            <p id="showSettings"></p>
-        </div>
-    </div>
-
-    <audio autoplay loop src="music/PacMan.mp3" id="music"></audio>
-</div>
-
-
-<div id="welcome" class="tab" align="center">
-    <div class="imgcontainer" id="welcomeCon">
-        <br>
-        <img class="images" src="images/logopac.png" id="logo" alt="images" width="460" height="250" margin-left=30%>
-        <br>
-        <br>
-        <button id="reg" class="btn btn-info btn-lg" onclick="replaceWindow(event,'register')" align="center"
-                padding=10px margin=4px>Register
-        </button>
-        <button id="log" class="btn btn-info btn-lg" onclick="replaceWindow(event,'login')" align="center" padding=10px
-                margin=4px>Login
-        </button>
-        <br>
-        <br>
-    </div>
-</div>
-
-<div id="register" class="tab" style="display:none;">
-    <script type="text/javascript" src="jqueryvalidation.js"></script>
-    <script type="text/javascript" src="form.js"></script>
-    <script type="text/javascript" src="dobpicker.js"></script>
-    <link rel="stylesheet" type="text/css" href="styleLogin.css"/>
-
-    <form id="reg_form" style="border:1px solid #ccc">
-        <div class="container" id="containerForm">
-            <strong><h1>Register</h1></strong>
-            <img class="images" src="images/packman.webp" alt="packman" width="50" height="50">
-
-            <strong><p> Please fill in this form to create a new account for playing our game </p></strong>
-            <p> ---------------------------------------------------------------------------------------------------</p>
-            <!--				  <hr>-->
-
-            <label for="uname_reg"><b>Username </b></label>
-            <input type="text" placeholder="Enter Username" id="uname_reg" name="uname_reg" size="45">
-            <br>
-            <label for="psw_reg"><b>Password </b></label>
-            <input type="password" placeholder="Enter Password" id="psw_reg" name="psw_reg" size="45">
-            <br>
-            <label for="fname_reg"><b>Full Name </b></label>
-            <input type="text" placeholder="Enter Full Name" id="fname_reg" name="fname_reg" size="45">
-            <br>
-            <label for="email_reg"><b>Email&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; </b></label>
-            <input type="email" placeholder="Enter Email" id="email_reg" name="email_reg" size="45">
-            <br>
-            <label for="bdate_reg" id="bdate_reg">Birth date</label>
-            <select id="Bday" name="Bday" class='group'></select>
-            <select id="Bmonth" name="Bmonth" class='group'></select>
-            <select id="Byear" name="Byear" class='group'></select>
-            <div class="clearfix">
-                <button type="submit" class="btn btn-info btn-lg" id="submit_reg">Register</button>
-                <br>
-                <button type="button" onclick="replaceWindow(event,'welcome')" class="btn btn-danger btn-lg">Cancel
-                </button>
-            </div>
-        </div>
-    </form>
-</div>
-
-<div id="login" class="tab" style="display:none;">
-    <link rel="stylesheet" type="text/css" href="styleLogin.css"/>
-
-    <form margin-left=40% margin-right=40%>
-        <strong><h1>Login</h1></strong>
-        <div class="imgcontainer">
-            <img src="images/avatar2.webp" alt="Avatar" class="avatar">
-        </div>
-
-        <div class="container" id="containerForm2">
-            <label for="uname_log"><b>Username</b></label>
-            <input type="text" placeholder="Enter Username" id="uname_log" name="uname_login" required align="center"
-                   size="40">
-            <br>
-            <label for="psw_log"><b>Password</b></label>
-            <input type="password" placeholder="Enter Password" id="psw_log" name="psw_login" required align="center"
-                   size="40">
-            <br>
-            <div class="clearfix">
-                <button type="button" class="btn btn-info btn-lg" onclick="userManagerLogin()">Login</button>
-                <br>
-                <button type="button" onclick="replaceWindow(event,'welcome')" class="btn btn-danger btn-lg"
-                        align="center">Cancel
-                </button>
-            </div>
-        </div>
-    </form>
-</div>
-
-\
-<div id="about" class="modal">
-    <link rel="stylesheet" type="text/css" href="styleModal.css"/>
-    <div class="modal-content">
-        <span class="close">&times;</span>
-        <img class="images" src="images/packman.webp" alt="packman" width="20" height="20" align="left">
-        <img class="images" src="images/packman.webp" alt="packman" width="20" height="20" align="right">
-        <strong><h2>About the game</h2></strong>
-        <p>This packman game was created by Oran and Chen.</p>
-        <p>The challenges we encountered while creating the game were: </p>
-        <br>
-        <br>
-        <img class="images" src="images/packman.webp" alt="packman" width="20" height="20" align="left">
-        <img class="images" src="images/packman.webp" alt="packman" width="20" height="20" align="right">
-        <br>
-    </div>
-</div>
 </body>
 
 <script>
     //windows
     function replaceWindow(evt, param_div) {
+        if (evt != "game"){
+            pauseMusic();
+        }
         stopInterval();
         clearCellsValue();
         clearWindow();
@@ -288,24 +305,10 @@
         if (canvas.width < window.innerWidth) {
             canvas.width = window.innerWidth;
         }
-
         if (canvas.height < window.innerHeight) {
             canvas.height = window.innerHeight;
         }
     }
 
-    function pauseGame() {
-        if(pause){
-            //var temp = tempTime - start_time;
-            //start_time = temp;
-            pause = false;
-            document.getElementById('pause').textContent = "Pause";
-        }
-        else{
-            //tempTime = new Date();
-            document.getElementById('pause').textContent = "Resume";
-            pause = true;
-        }
-    }
 </script>
 </html>

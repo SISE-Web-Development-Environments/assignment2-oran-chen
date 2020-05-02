@@ -56,6 +56,7 @@ $().ready(function () {
                 if (isFormValid) {
                     userManagerRegSubmit();
                     document.getElementById("reg_form").reset();
+
                 }
             }
         });
