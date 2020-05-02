@@ -420,22 +420,34 @@ function UpdatePosition() {
 		}
 
 		if (seconds >= time) { //Maximum time game
-			window.clearInterval(interval);
+			stopInterval();
+			pauseMusic();
 			if (score < 100) {
-				setTimeout(function () {
-					window.alert("You are better than " + score + " points!");
-				}, 50);
+				playDieSound();
+				setTimeout(function(){
+					alert("You are better than " + score + " points!", function(){
+						console.log("Callback executed");
+					});
+				}, 500);
+
 			} else {
-				setTimeout(function () {
-					window.alert("Winner!!!");
-				}, 50);
+				playWinSound();
+				setTimeout(function(){
+					alert("Winner!!!", function(){
+						console.log("Callback executed");
+					});
+				}, 500);
 			}
 		}
 		if(currentFood == 0){
-			window.clearInterval(interval);
-			setTimeout(function () {
-				window.alert("Winner!!!");
-			}, 50);
+			stopInterval();
+			pauseMusic();
+			playWinSound();
+			setTimeout(function(){
+				alert("Winner!!!", function(){
+					console.log("Callback executed");
+				});
+			}, 500);
 		}
 		// else if (score >= 100) {
 		// 	window.clearInterval(interval);
@@ -443,10 +455,14 @@ function UpdatePosition() {
 		//
 		// } else
 		if (remain_lives == 0) {
-			setTimeout(function () {
-				window.alert("Loser!");
-				window.clearInterval(interval);
-			}, 50);
+			stopInterval();
+			pauseMusic();
+			playDieSound();
+			setTimeout(function(){
+				alert("Loser!", function(){
+					console.log("Callback executed");
+				});
+			}, 500);
 		} else {
 			Draw();
 		}

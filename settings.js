@@ -2,7 +2,6 @@ var rightPressed;
 var leftPressed;
 var upPressed;
 var downPressed;
-var playing = false;
 var right= 'ArrowRight';
 var left = 'ArrowLeft';
 var up = 'ArrowUp';
@@ -146,43 +145,4 @@ function randomInputs() {
     }
     randomNumber = Math.floor(randomNumber);
     document.getElementById('timenumin'). value = randomNumber;
-}
-
-//music
-function playPause() {
-    const song = document.getElementById("music");
-    if (playing) {
-        pauseMusic();
-    } else {
-        playMusic();
-    }
-}
-
-function pauseMusic(){
-    const song = document.getElementById("music");
-    song.pause();
-    playing = false;
-}
-function playMusic() {
-    const song = document.getElementById("music");
-    song.play(); //play the audio track
-    playing = true;
-}
-
-function pauseGame() {
-    const song = document.getElementById("music");
-    const pauseGame =  document.getElementById("pause");
-    if(pause){
-        //var temp = tempTime - start_time;
-        //start_time = temp;
-        pause = false;
-        pauseGame.textContent = "Pause";
-        playMusic();
-    }
-    else{
-        //tempTime = new Date();
-        pauseGame.textContent = "Resume";
-        pause = true;
-        pauseMusic();
-    }
 }

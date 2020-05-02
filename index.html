@@ -10,6 +10,7 @@
     <link rel="stylesheet" type="text/css" href="style.css"/>
     <script type="text/javascript" src="./UserManager.js"></script>
     <script type="text/javascript" src="./about.js"></script>
+    <script type="text/javascript" src="./main.js"></script>
 </head>
 
 <body class="Site" onresize="resize_canvas()">
@@ -17,7 +18,7 @@
 <img id="medicine" src="images/medicine.jpg" alt="medicine" width="220" height="277" style="display: none;">
 <img id="ghost" src="images/ghostRed.webp" alt="ghost" width="220" height="277" style="display: none;">
 <img id="mon" src="images/covid19-cart.jpg" alt="mon" width="220" height="277" style="display: none;">
-<img id="clock" src="images/stopwatch.webp" alt="clock" width="220" height="277" style="display: none;">
+<img id="clock" src="images/stopwatch2.webp" alt="clock" width="220" height="277" style="display: none;">
 <div id="menue_bar">
     <menu type="toolbar" align="left">
         <nav class="navbar navbar-inverse">
@@ -40,6 +41,12 @@
 </div>
 
 <main class="Site-content">
+    <!--alert-->
+    <div class='customAlert' id="alertmain">
+        <p class='message' id="msgmain"></p>
+        <input type='button' class='confirmButton' id="okalert" value='Ok'>
+    </div>
+
     <div id="settings" class="tab" style="display:none;">
         <script type="text/javascript" src="settings.js"></script>
         <script type="text/javascript" src="jqueryvalidation.js"></script>
@@ -112,7 +119,7 @@
             <canvas id="canvas" style="border: none;" width="600" height="600" align="center"></canvas>
             <div class="controls" align="left" style="position: fixed; top:120px; left:20px; bottom: 20px">
                 <p align="center">
-                    <button class="btn btn-info" id="reset" onclick="reset()">Reset</button>
+                    <button class="btn btn-info" id="reset" onclick="reset()">New game</button>
                     <button class="btn btn-danger" id="pause" onclick="pauseGame()">Pause</button>
                 </p>
                 <br>
@@ -122,11 +129,22 @@
                 <p id="showSettings5points" style="margin: 0; display: inline";></p>
                     <p id="showSettings10points" style="margin: 0; display: inline";></p>
                     <p id="showSettings15points" style="margin: 0; display: inline";></p>
-                <p id="showSettingsNums"></p></strong></div>
+                <p id="showSettingsNums"></p>
+                </strong></div>
+                <br>
+                <br>
             </div>
         </div>
 
         <audio autoplay loop src="music/PacMan.mp3" id="music"></audio>
+        <audio src="music/pacman_death.wav" id="diemusic"></audio>
+        <audio src="music/we-did-it_1.mp3" id="winmusic"></audio>
+
+        <!--alert-->
+        <div class='customAlert' id="alertgame">
+            <p class='message' id="msggame"></p>
+            <input type='button' class='confirmButton' id="okalertgame" value='Ok'>
+        </div>
     </div>
 
 
@@ -250,66 +268,4 @@
 </div>
 </body>
 
-<script>
-    //windows
-    function replaceWindow(evt, param_div) {
-        if (evt != "game"){
-            pauseMusic();
-        }
-        stopInterval();
-        clearCellsValue();
-        clearWindow();
-        document.getElementById(param_div).style.display = "block";
-        evt.currentTarget.className += " active";
-    }
-
-    function clearWindow() {
-        element = document.getElementsByClassName("tab");
-        for (i = 0; i < element.length; i++) {
-            element[i].style.display = "none";
-        }
-
-        tablinks = document.getElementsByClassName("tablinks");
-        for (i = 0; i < tablinks.length; i++) {
-            tablinks[i].className = tablinks[i].className.replace(" active", "");
-        }
-    }
-
-    function clearCanvas() {
-        element = document.getElementById('canvas');
-        for (i = 0; i < element.length; i++) {
-            element[i].style.display = "none";
-        }
-    }
-
-    function showCanvas() {
-        document.getElementById("startgame").className.replace("active", "");
-        startGame();
-        document.getElementById('canvas').style.display = "block";
-        document.getElementById('reset').style.display = "block";
-
-    }
-
-    function reset() {
-        setSettings();
-        startGame();
-    }
-
-    function clearCellsValue() {
-        document.getElementById("lblScore").value = "";
-        document.getElementById("lblTime").value = "";
-        document.getElementById("lblLifes").value = "";
-    }
-
-    function resize_canvas() {
-        canvas = document.getElementById("canvas");
-        if (canvas.width < window.innerWidth) {
-            canvas.width = window.innerWidth;
-        }
-        if (canvas.height < window.innerHeight) {
-            canvas.height = window.innerHeight;
-        }
-    }
-
-</script>
 </html>
