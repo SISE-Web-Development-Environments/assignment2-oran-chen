@@ -172,20 +172,23 @@ function Start() {
 		food_remain--;
 	}
 
-	for (var i = 0; i < 20; i++) {
-		for (var j = 0; j < 20; j++) {
-			if(board[i][j] == 4 && (dotsBoard[i][j] == 1 || dotsBoard[i][j] == 2 || dotsBoard[i][j] == 3)){
-				window.alert("collpas!!");
-			}
-		}
-	}
+	// for (var i = 0; i < 20; i++) {
+	// 	for (var j = 0; j < 20; j++) {
+	// 		if(board[i][j] == 4 && (dotsBoard[i][j] == 1 || dotsBoard[i][j] == 2 || dotsBoard[i][j] == 3)){
+	// 			window.alert("collpas!!");
+	// 		}
+	// 	}
+	// }
 	// var emptyCell = findRandomEmptyCell(board);
 	// board[emptyCell[0]][emptyCell[1]] = 6; //Medicine
 
 
 
 	var emptyCell = findRandomEmptyCell();
-	dotsBoard[emptyCell[0]][emptyCell[1]] = 6;
+	dotsBoard[emptyCell[0]][emptyCell[1]] = 6; // Eatable monster
+
+	emptyCell = findRandomEmptyCell();
+	dotsBoard[emptyCell[0]][emptyCell[1]] = 8;// Clock
 
 	keysDown = {};
 	addEventListener(
@@ -336,6 +339,11 @@ function Draw() {
 				img = document.getElementById("mon");
 				context.drawImage(img, center.x - 15, center.y - 15, 30, 30);
 			}
+			else if (dotsBoard[i][j] == 8) { //Clock
+				var img;
+				img = document.getElementById("clock");
+				context.drawImage(img, center.x - 15, center.y - 15, 30, 30);
+			}
 		}
 	}
 }
@@ -385,7 +393,8 @@ function UpdatePosition() {
 		}
 
 		if (dotsBoard[shape.i][shape.j] == 8) { // Clock
-			time = time + 10;
+			time = parseInt(time) + 10;
+			showSettings();
 			dotsBoard[shape.i][shape.j] = 0;
 		}
 
