@@ -421,6 +421,7 @@ function UpdatePosition() {
 
 		if (seconds >= time) { //Maximum time game
 			window.clearInterval(interval);
+			window.clearInterval(ghostInterval);
 			if (score < 100) {
 				setTimeout(function () {
 					window.alert("You are better than " + score + " points!");
@@ -433,6 +434,7 @@ function UpdatePosition() {
 		}
 		if(currentFood == 0){
 			window.clearInterval(interval);
+			window.clearInterval(ghostInterval);
 			setTimeout(function () {
 				window.alert("Winner!!!");
 			}, 50);
@@ -446,6 +448,7 @@ function UpdatePosition() {
 			setTimeout(function () {
 				window.alert("Loser!");
 				window.clearInterval(interval);
+				window.clearInterval(ghostInterval);
 			}, 50);
 		} else {
 			Draw();
