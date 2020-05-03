@@ -415,9 +415,6 @@ function UpdatePosition() {
 		lblTime.value = seconds;
 		lblLifes.value = remain_lives;
 
-		if (score >= 20 && seconds <= 10) {
-			pac_color = "green";
-		}
 
 		if (seconds >= time) { //Maximum time game
 			stopInterval();
