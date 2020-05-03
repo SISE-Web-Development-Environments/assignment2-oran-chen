@@ -68,6 +68,7 @@ $().ready(function () {
             ghostsNumber:{
                 required: true,
             }
+
         },
         messages: {
             ballsnumin:{
@@ -82,24 +83,30 @@ $().ready(function () {
         },
         submitHandler: function () {
             var validSettings = $("#settingsform").valid();
-            if (validSettings && checkDifferentKeys()) {
+            if (validSettings && checkDifferentKeys() && checkDifferentColors()) {
+                $('#keyswarning').text("");
+                $('#colorswarning').text("");
                 setSettings();
                 replaceWindow(event, 'game');
                 showCanvas();
                 playMusic();
             }
-            if (checkDifferentKeys()==false)
-                setTimeout(function(){
-                    alert("Please select different keys", function(){
-                        console.log("Callback executed");
-                    });
-                }, 200);
+            else if (checkDifferentKeys()==false) {
+                $('#keyswarning').text("Please select unique keys");
+            }
+            else if(checkDifferentColors()==false){
+                $('#colorswarning').text("Please select unique colors");
+            }
         }
     });
 });
 
 function checkDifferentKeys() {
  return keyRight != keyLeft && keyRight != keyUp && keyRight != keyDown && keyLeft != keyUp && keyLeft != keyDown && keyUp != keyDown;
+}
+
+function checkDifferentColors() {
+return $("#sixtyColor").val() != $("#thirtyColor").val() && $("#sixtyColor").val() != $("#tenColor").val() && $("#thirtyColor").val() !=  $("#tenColor").val();
 }
 
 function setSettings(){
@@ -121,9 +128,9 @@ function showSettings() {
         + '\n' + "* Balls colors: ";
     document.getElementById('showSettings5points').innerText= "5 points, ";
     document.getElementById('showSettings5points').style.color= sixtyPercentColor.valueOf();
-    document.getElementById('showSettings10points').innerText= "10 points, ";
+    document.getElementById('showSettings10points').innerText= "15 points, ";
     document.getElementById('showSettings10points').style.color= thirtyPercentColor.valueOf();
-    document.getElementById('showSettings15points').innerText= "15 points ";
+    document.getElementById('showSettings15points').innerText= "25 points ";
     document.getElementById('showSettings15points').style.color= tenPercentColor.valueOf();
     document.getElementById('showSettingsNums').innerText= "* Balls #: " + numOfBalls.valueOf()
         + '\n' + "* Ghosts #: " + numOfGhosts.valueOf()

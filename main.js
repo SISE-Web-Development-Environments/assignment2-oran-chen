@@ -87,10 +87,18 @@ function playMusic() {
 
 function playDieSound() {
     document.getElementById("diemusic").play();
+
 }
 
 function playWinSound() {
     document.getElementById("winmusic").play();
+
+}
+
+function playGhostSound() {
+    if (playing) {
+        document.getElementById("ghostmusic").play();
+    }
 }
 
 function pauseGame() {
