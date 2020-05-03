@@ -267,8 +267,10 @@ h5 {
  }
 
 
-
-
+body{
+    min-width: 768px;
+    min-height: 1366px;
+}
 
 
 
