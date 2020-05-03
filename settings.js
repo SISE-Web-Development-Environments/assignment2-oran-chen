@@ -82,15 +82,25 @@ $().ready(function () {
         },
         submitHandler: function () {
             var validSettings = $("#settingsform").valid();
-            if (validSettings) {
+            if (validSettings && checkDifferentKeys()) {
                 setSettings();
                 replaceWindow(event, 'game');
                 showCanvas();
                 playMusic();
             }
+            if (checkDifferentKeys()==false)
+                setTimeout(function(){
+                    alert("Please select different keys", function(){
+                        console.log("Callback executed");
+                    });
+                }, 200);
         }
     });
 });
+
+function checkDifferentKeys() {
+ return keyRight != keyLeft && keyRight != keyUp && keyRight != keyDown && keyLeft != keyUp && keyLeft != keyDown && keyUp != keyDown;
+}
 
 function setSettings(){
     numOfBalls= $('#ballsnumin').val();

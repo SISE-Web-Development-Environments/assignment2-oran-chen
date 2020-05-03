@@ -208,7 +208,7 @@ function Start() {
 		},
 		false
 	);
-	interval = setInterval(UpdatePosition, 150);
+	interval = setInterval(UpdatePosition, 100);
 	ghostInterval = setInterval(updateGhostPosition, 400);
 	checkInterval = setInterval(isEatPackman, 50);
 	timeInterval = setInterval(function () {

@@ -14,16 +14,16 @@
 /* Modal Content/Box */
 .modal-content {
     color: black;
-    font-size: 24px;
+    font-size: 18px;
     font-weight: bold;
     background-image: url(images/back8.webp);
     background-color: rgba(255,255,255,0.8);
     background-blend-mode: lighten;
     font-family: Calibri;
-    margin: 10% auto; /* 15% from the top and centered */
-    padding: 20px;
+    margin: 8% auto;
+    padding: 10px;
     border: white;
-    width: 60%; /* Could be more or less, depending on screen size */
+    width: 62%; /* depending on screen size */
 }
 
 /* The Close Button */
