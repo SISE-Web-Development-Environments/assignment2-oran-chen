@@ -93,6 +93,10 @@ function playWinSound() {
     document.getElementById("winmusic").play();
 }
 
+function playGhostSound() {
+    document.getElementById("ghostmusic").play();
+}
+
 function pauseGame() {
     const song = document.getElementById("music");
     const pauseGame =  document.getElementById("pause");

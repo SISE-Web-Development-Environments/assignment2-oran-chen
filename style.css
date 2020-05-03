@@ -265,7 +265,16 @@ h5 {
      cursor: pointer;
      background: crimson;
  }
-
+#keyswarning, #ballsnumin-error, #ghostsNumber-error, #timenumin-error {
+    color: white;
+    background: #e20822;
+    font-size: 16px;
+    line-height: 20px;
+    font-weight: bold;
+    text-align: center;
+    font-family: Calibri;
+    width: 20%;
+}
 
 body{
     min-width: 768px;

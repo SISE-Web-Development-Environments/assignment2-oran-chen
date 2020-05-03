@@ -66,6 +66,7 @@
                     Key Down &darr;&nbsp;
                     <button id="downkeybtn" class="btn btn-info btn-sm" onclick="chooseDown()" width="5%">Down</button>
                 </p>
+                <p id="keyswarning"></p>
             </strong>
         </div>
         <br>
@@ -137,8 +138,10 @@
         </div>
 
         <audio autoplay loop src="music/PacMan.mp3" id="music"></audio>
-        <audio src="music/pacman_death.wav" id="diemusic"></audio>
+        <audio src="music/gameover.mp3" id="diemusic"></audio>
         <audio src="music/we-did-it_1.mp3" id="winmusic"></audio>
+        <audio src="music/pacman_death.wav" id="ghostmusic"></audio>
+
 
         <!--alert-->
         <div class='customAlert' id="alertgame">

@@ -428,7 +428,7 @@ function UpdatePosition() {
 					alert("You are better than " + score + " points!", function(){
 						console.log("Callback executed");
 					});
-				}, 500);
+				}, 300);
 
 			} else {
 				playWinSound();
@@ -436,7 +436,7 @@ function UpdatePosition() {
 					alert("Winner!!!", function(){
 						console.log("Callback executed");
 					});
-				}, 500);
+				}, 300);
 			}
 		}
 		if(currentFood == 0){
@@ -447,7 +447,7 @@ function UpdatePosition() {
 				alert("Winner!!!", function(){
 					console.log("Callback executed");
 				});
-			}, 500);
+			}, 300);
 		}
 		// else if (score >= 100) {
 		// 	window.clearInterval(interval);
@@ -462,7 +462,7 @@ function UpdatePosition() {
 				alert("Loser!", function(){
 					console.log("Callback executed");
 				});
-			}, 500);
+			}, 300);
 		} else {
 			Draw();
 		}
@@ -479,6 +479,7 @@ function isEatPackman() {
 	// 	}
 	// }
 	if (eatMeGhost()) {
+		playGhostSound();
 		remain_lives--;
 		score = score - 10;
 		board[shape.i][shape.j] = 0;
