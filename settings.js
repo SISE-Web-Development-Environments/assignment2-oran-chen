@@ -83,17 +83,19 @@ $().ready(function () {
         submitHandler: function () {
             var validSettings = $("#settingsform").valid();
             if (validSettings && checkDifferentKeys()) {
+                $('#keyswarning').text("");
                 setSettings();
                 replaceWindow(event, 'game');
                 showCanvas();
                 playMusic();
             }
             if (checkDifferentKeys()==false)
-                setTimeout(function(){
-                    alert("Please select different keys", function(){
-                        console.log("Callback executed");
-                    });
-                }, 200);
+                // setTimeout(function(){
+                //     alert("Please select different keys", function(){
+                //         console.log("Callback executed");
+                //     });
+                // }, 200);
+                $('#keyswarning').text("Please select unique keys");
         }
     });
 });
