@@ -98,3 +98,68 @@ h1{
       width: 30%;
     }
   }
+
+#alertmain {
+  display: none;
+  position: fixed;
+  max-width: 25%;
+  min-width: 250px !important;
+  min-height: 20%;
+  height: 300px;
+  width: 400px;
+  left: 50%;
+  top: 40%;
+  padding: 1px;
+  box-sizing: border-box;
+  margin-left: -12.5%;
+  margin-top: -5.2%;
+  background-image: url(images/back1.webp);
+  background-color: rgba(255, 255, 255, 0.4);
+  background-blend-mode: lighten;
+}
+#msgmain{
+  padding: 20px;
+  color: white;
+  font-size: 20px;
+  line-height: 20px;
+  text-align: justify;
+  font-weight: bold;
+  text-align: center;
+  font-family: Calibri;
+}
+
+@keyframes fadeOut{
+  from{
+    opacity: 1;
+  }
+  to{
+    opacity: 0;
+  }
+}
+@keyframes fadeIn{
+  from{
+    opacity: 0;
+  }
+  to{
+    opacity: 1;
+  }
+}
+#okalert {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  width: 50%;
+  height: 36px;
+  margin-top: -45px;
+  margin-left: -25%;
+  outline: 0;
+  border: 0;
+  background: #5cdaf8;
+  color: white;
+}
+#okalert:hover{
+  transition: 0.3s;
+  cursor: pointer;
+  background: crimson;
+}
+

@@ -46,7 +46,11 @@ function userManagerRegSubmit() {
     let newuser = new User({username:usernameR, password:passwordR, fullname:fullnameR, email:emailR,
         bday:bdayR, bmonth:bmonthR, byear:byearR});
     if(!addUserToStorage(newuser)){
-        alert("Username already exist!");
+        setTimeout(function(){
+            alert("Username already exist!", function(){
+                console.log("Callback executed");
+            });
+        }, 500);
     }else{
         transferToLogin(usernameR, passwordR);
     }
@@ -55,7 +59,11 @@ function userManagerRegSubmit() {
 function transferToLogin(username,password){
     //if a user with such user name and password does not exist
     if(!validateUserExists(username, password)){
-        alert("The user doesn't exist in the system, please enter the details again");
+        setTimeout(function(){
+            alert("The user doesn't exist in the system!", function(){
+                console.log("Callback executed");
+            });
+        }, 500);
     }else{ //does exist, connect him
         session_user = JSON.parse(sessionStorage.getItem(username));
         $('#tabS').prop('disabled', false); //to enable playing the game

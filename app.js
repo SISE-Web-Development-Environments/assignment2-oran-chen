@@ -1,25 +1,25 @@
 var context;
 var shape = new Object();
 var board = [[4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4],
-	[4,0,0,0,0,0,0,0,0,0,0,0,0,4,4,0,0,0,0,4],
-	[4,0,4,4,4,4,0,4,0,4,4,4,0,4,4,0,4,4,0,4],
-	[4,0,0,0,0,4,0,4,0,0,0,4,0,4,4,0,4,0,0,4],
-	[4,0,4,4,0,4,0,4,4,4,4,4,0,4,4,0,4,4,0,4],
-	[4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4],
-	[4,0,4,4,4,4,0,4,4,0,4,4,4,4,4,4,4,4,0,4],
-	[4,0,4,4,4,4,0,4,4,0,4,4,4,4,4,4,4,4,0,4],
-	[4,0,0,0,0,0,0,4,4,0,0,0,0,4,4,0,0,0,0,4],
-	[4,0,0,0,0,0,0,4,4,4,4,4,0,4,4,0,4,4,4,4],
-	[4,4,4,0,4,4,0,4,4,4,4,4,0,4,4,0,4,4,4,4],
-	[4,0,0,0,0,4,0,4,4,0,0,0,0,0,0,0,0,0,0,4],
-	[4,0,0,0,0,4,0,4,4,0,4,4,4,4,4,4,4,4,0,4],
-	[4,0,0,0,0,4,0,4,4,0,4,4,0,0,0,0,4,4,0,4],
-	[4,0,0,0,0,4,0,0,0,0,4,4,0,0,0,0,4,4,0,4],
-	[4,0,0,0,0,4,0,4,4,0,0,0,0,0,0,0,4,4,0,4],
-	[4,0,0,0,0,4,0,4,4,0,4,4,4,4,4,4,4,4,0,4],
-	[4,0,0,0,0,4,0,4,4,0,0,0,0,0,0,0,0,0,0,4],
-	[4,0,0,0,0,0,0,4,4,0,4,4,4,4,4,4,4,4,0,4],
-	[4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4]];
+			 [4,0,0,0,0,0,0,0,0,0,0,0,0,4,4,0,0,0,0,4],
+			 [4,0,4,4,4,4,0,4,0,4,4,4,0,4,4,0,4,4,0,4],
+			 [4,0,0,0,0,4,0,4,0,0,0,4,0,4,4,0,4,0,0,4],
+			 [4,0,4,4,0,4,0,4,4,4,4,4,0,4,4,0,4,4,0,4],
+			 [4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4],
+			 [4,0,4,4,4,4,0,4,4,0,4,4,4,4,4,4,4,4,0,4],
+			 [4,0,4,4,4,4,0,4,4,0,4,4,4,4,4,4,4,4,0,4],
+			 [4,0,0,0,0,0,0,4,4,0,0,0,0,4,4,0,0,0,0,4],
+			 [4,0,0,0,0,0,0,4,4,4,4,4,0,4,4,0,4,4,4,4],
+			 [4,4,4,0,4,4,0,4,4,4,4,4,0,4,4,0,4,4,4,4],
+			 [4,0,0,0,0,4,0,4,4,0,0,0,0,0,0,0,0,0,0,4],
+			 [4,0,0,0,0,4,0,4,4,0,4,4,4,4,4,4,4,4,0,4],
+			 [4,0,0,0,0,4,0,4,4,0,4,4,0,0,0,0,4,4,0,4],
+			 [4,0,0,0,0,4,0,0,0,0,4,4,0,0,0,0,4,4,0,4],
+			 [4,0,0,0,0,4,0,4,4,0,0,0,0,0,0,0,4,4,0,4],
+			 [4,0,0,0,0,4,0,4,4,0,4,4,4,4,4,4,4,4,0,4],
+			 [4,0,0,0,0,4,0,4,4,0,0,0,0,0,0,0,0,0,0,4],
+			 [4,0,0,0,0,0,0,4,4,0,4,4,4,4,4,4,4,4,0,4],
+			 [4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4]];
 var dotsBoard;
 var score;
 var remain_lives;
@@ -148,6 +148,12 @@ function Start() {
 		}
 	}
 
+	if(pacman_remain > 0){
+		var emptyCell = findRandomEmptyCell();
+		shape.i = emptyCell[0];
+		shape.j = emptyCell[1];
+	}
+
 	while (food_remain > 0) {
 		var emptyCell = findRandomEmptyCell();
 
@@ -166,20 +172,23 @@ function Start() {
 		food_remain--;
 	}
 
-	for (var i = 0; i < 20; i++) {
-		for (var j = 0; j < 20; j++) {
-			if(board[i][j] == 4 && (dotsBoard[i][j] == 1 || dotsBoard[i][j] == 2 || dotsBoard[i][j] == 3)){
-				window.alert("collpas!!");
-			}
-		}
-	}
+	// for (var i = 0; i < 20; i++) {
+	// 	for (var j = 0; j < 20; j++) {
+	// 		if(board[i][j] == 4 && (dotsBoard[i][j] == 1 || dotsBoard[i][j] == 2 || dotsBoard[i][j] == 3)){
+	// 			window.alert("collpas!!");
+	// 		}
+	// 	}
+	// }
 	// var emptyCell = findRandomEmptyCell(board);
 	// board[emptyCell[0]][emptyCell[1]] = 6; //Medicine
 
 
 
 	var emptyCell = findRandomEmptyCell();
-	dotsBoard[emptyCell[0]][emptyCell[1]] = 6;
+	dotsBoard[emptyCell[0]][emptyCell[1]] = 6; // Eatable monster
+
+	emptyCell = findRandomEmptyCell();
+	dotsBoard[emptyCell[0]][emptyCell[1]] = 8;// Clock
 
 	keysDown = {};
 	addEventListener(
@@ -201,7 +210,7 @@ function Start() {
 	);
 	interval = setInterval(UpdatePosition, 150);
 	ghostInterval = setInterval(updateGhostPosition, 400);
-	checkInterval = setInterval(isEatPackman, 1);
+	checkInterval = setInterval(isEatPackman, 50);
 	timeInterval = setInterval(function () {
 		if(!pause){
 			seconds++;
@@ -330,6 +339,11 @@ function Draw() {
 				img = document.getElementById("mon");
 				context.drawImage(img, center.x - 15, center.y - 15, 30, 30);
 			}
+			else if (dotsBoard[i][j] == 8) { //Clock
+				var img;
+				img = document.getElementById("clock");
+				context.drawImage(img, center.x - 15, center.y - 15, 30, 30);
+			}
 		}
 	}
 }
@@ -378,12 +392,25 @@ function UpdatePosition() {
 			dotsBoard[shape.i][shape.j] = 0;
 		}
 
+		if (dotsBoard[shape.i][shape.j] == 8) { // Clock
+			time = parseInt(time) + 10;
+			showSettings();
+			dotsBoard[shape.i][shape.j] = 0;
+		}
+
 		board[shape.i][shape.j] = 2;
 		//var currentTime = new Date();
 		//time_elapsed = (currentTime - start_time) / 1000;
 		//time_elapsed += tempTime;
 
-
+		if(remain_monster > 0) {
+			if (monsterLocation.i == shape.i && monsterLocation.j == shape.j) { // Monster
+				score = score + 50;
+				remain_monster--;
+				board[shape.i][shape.j] = 0;
+				//board[monsterLocation.i][monsterLocation.j] = 0;
+			}
+		}
 		lblScore.value = score;
 		lblTime.value = seconds;
 		lblLifes.value = remain_lives;
@@ -393,22 +420,34 @@ function UpdatePosition() {
 		}
 
 		if (seconds >= time) { //Maximum time game
-			window.clearInterval(interval);
+			stopInterval();
+			pauseMusic();
 			if (score < 100) {
-				setTimeout(function () {
-					window.alert("You are better than " + score + " points!");
-				}, 50);
+				playDieSound();
+				setTimeout(function(){
+					alert("You are better than " + score + " points!", function(){
+						console.log("Callback executed");
+					});
+				}, 500);
+
 			} else {
-				setTimeout(function () {
-					window.alert("Winner!!!");
-				}, 50);
+				playWinSound();
+				setTimeout(function(){
+					alert("Winner!!!", function(){
+						console.log("Callback executed");
+					});
+				}, 500);
 			}
 		}
 		if(currentFood == 0){
-			window.clearInterval(interval);
-			setTimeout(function () {
-				window.alert("Winner!!!");
-			}, 50);
+			stopInterval();
+			pauseMusic();
+			playWinSound();
+			setTimeout(function(){
+				alert("Winner!!!", function(){
+					console.log("Callback executed");
+				});
+			}, 500);
 		}
 		// else if (score >= 100) {
 		// 	window.clearInterval(interval);
@@ -416,10 +455,14 @@ function UpdatePosition() {
 		//
 		// } else
 		if (remain_lives == 0) {
-			setTimeout(function () {
-				window.alert("Loser!");
-				window.clearInterval(interval);
-			}, 50);
+			stopInterval();
+			pauseMusic();
+			playDieSound();
+			setTimeout(function(){
+				alert("Loser!", function(){
+					console.log("Callback executed");
+				});
+			}, 500);
 		} else {
 			Draw();
 		}
@@ -427,12 +470,14 @@ function UpdatePosition() {
 }
 function isEatPackman() {
 
-	if (board[shape.i][shape.j] == 7) { // Monster
-		score = score + 50;
-		remain_monster--;
-		board[shape.i][shape.j] = 0;
-	}
-
+	// if(remain_monster > 0) {
+	// 	if (monsterLocation.i == shape.i && monsterLocation.j == shape.j) { // Monster
+	// 		score = score + 50;
+	// 		remain_monster--;
+	// 		board[shape.i][shape.j] = 0;
+	// 		//board[monsterLocation.i][monsterLocation.j] = 0;
+	// 	}
+	// }
 	if (eatMeGhost()) {
 		remain_lives--;
 		score = score - 10;
@@ -443,6 +488,7 @@ function isEatPackman() {
 		deleteGhosts();
 		placeGhosts();
 	}
+	Draw();
 }
 function placeGhosts() {
 	board[1][1] = 5; // First ghost
@@ -559,6 +605,13 @@ function updateGhostPosition(){
 			// 	}
 			// }
 			board[monsterLocation.i][monsterLocation.j] = 7;
+		}
+
+		if (board[shape.i][shape.j] == 7) { // Monster
+			score = score + 50;
+			remain_monster--;
+			board[shape.i][shape.j] = 0;
+			board[monsterLocation.i][monsterLocation.j] = 0;
 		}
 	}
 }
