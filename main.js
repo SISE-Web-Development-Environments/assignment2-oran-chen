@@ -113,7 +113,6 @@ function pauseGame() {
 
 // override default browser alert
 window.alert = function(msg, callback){
-    debugger
     $('.message').text(msg);
     // $('.customAlert').css('animation', 'fadeIn 0.3s linear');
     $('.customAlert').css('display', 'inline');
