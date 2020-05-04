@@ -45,7 +45,7 @@ body {
     background: url(images/background2.webp)
 }
 .Site-content {
-    flex: 1 0 auto;
+    flex: 1 0 0;
 }
 .footer {
     flex-shrink: 0;
