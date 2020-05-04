@@ -117,22 +117,24 @@
             </p>
         </div>
 
-        <div class="wrapper" style="margin: 0 auto; width: 600px; position: relative;">
-            <canvas id="canvas" style="border: none;" width="600" height="600" align="center"></canvas>
-            <div class="controls" align="left" style="position: fixed; top:110px; left:20px; bottom: 20px">
+        <div class="wrapper" style="position: relative;">
+            <div id="can">
+                <canvas id="canvas" style="border: none;" width="600" height="600" align="right"></canvas>
+            </div>
+            <div class="controls" id="ctrl" style="position: fixed; top:110px;">
                 <p align="center">
                     <button class="btn btn-info" id="reset" onclick="reset()">New game</button>
                     <button class="btn btn-danger" id="pause" onclick="pauseGame()">Pause</button>
                 </p>
                 <br>
-                <h5>Settings</h5>
-                <div id = "showsettings">
-                <strong><p id="showSettingsKeys"></p>
-                <p id="showSettings5points" style="margin: 0; display: inline";></p>
-                    <p id="showSettings10points" style="margin: 0; display: inline";></p>
-                    <p id="showSettings15points" style="margin: 0; display: inline";></p>
-                <p id="showSettingsNums"></p>
-                </strong></div>
+                <div id="showsettings" align="center">
+                    <h5>Settings</h5>
+                    <strong><p id="showSettingsKeys"></p>
+                        <p id="showSettings5points" style="margin: 0; display: inline" ;></p>
+                        <p id="showSettings10points" style="margin: 0; display: inline" ;></p>
+                        <p id="showSettings15points" style="margin: 0; display: inline" ;></p>
+                        <p id="showSettingsNums"></p>
+                    </strong></div>
                 <br>
                 <br>
                 <br>
@@ -160,7 +162,8 @@
                  margin-left=30%>
             <br>
             <br>
-            <button id="reg" class="btn btn-info btn-lg" onclick="replaceWindow(event,'register')" align="center">Register
+            <button id="reg" class="btn btn-info btn-lg" onclick="replaceWindow(event,'register')" align="center">
+                Register
             </button>
             <button id="log" class="btn btn-info btn-lg" onclick="replaceWindow(event,'login')" align="center">Login
             </button>
@@ -209,7 +212,7 @@
         </form>
     </div>
 
-    <div id="login" class="tab" style="display:none;" >
+    <div id="login" class="tab" style="display:none;">
         <link rel="stylesheet" type="text/css" href="styleLogin.css"/>
 
         <form margin-left=40% margin-right=40%>
@@ -250,9 +253,11 @@
             <p>This pacman game was created by Oran and Chen.</p>
             <p>The challenges we encountered while creating the game:<br>
                 In general, we discovered that there were many options to accomplish every feature,
-                so we had to try different things until we found the one that worked best. For example, overriding window alerts.
-            <br>In Addition, we found it a bit hard to fit the canvas to the window size.</p>
-            <p>Use of Jquery Plugin: "jqueryvalidation.js" - for registration and settings form validation, "dobpicker.js"
+                so we had to try different things until we found the one that worked best. For example, overriding
+                window alerts.
+                <br>In Addition, we found it a bit hard to fit the canvas to the window size.</p>
+            <p>Use of Jquery Plugin: "jqueryvalidation.js" - for registration and settings form validation,
+                "dobpicker.js"
                 - for picking birth date in the registration form.</p>
 
             <img class="images" src="images/packman.webp" alt="packman" width="20" height="20" align="left">
