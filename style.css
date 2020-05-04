@@ -277,8 +277,8 @@ h5 {
 }
 
 body{
-    min-width: 768px;
-    min-height: 1366px;
+     min-width: 1366px;
+    min-height: 768px;
 }
 
 
