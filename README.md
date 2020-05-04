@@ -17,10 +17,10 @@ Instructions:
  *  The default selection for move keys are the keyboard arrows.
  * Click on 'Start game' to play the pacman game. 
  * Your selected settings are presented to you on your left during the game. 
- * To change any settings go to 'Settings' tab and click again on 'Play game".
+ * To change any settings go to 'Settings' tab and click again on 'Play game'.
  * To start a new game while playing or after you've lost, click on 'New Game'.
- * You can pause the game by clicking 'Pause', and then resume it by cliking on 'Resume'
+ * You can pause the game by clicking 'Pause', and then resume it by clicking on 'Resume'
 
 ### Additional Functionality:
-* Medicine: <img src="https://github.com/SISE-Web-Development-Environments/assignment2-oran-chen/blob/master/images/medicine.jpg" height="24"> - Increasing the amount of lives by one.
-* Clock: <img src="https://github.com/SISE-Web-Development-Environments/assignment2-oran-chen/blob/master/images/stopwatch2.webp" height="24"> - Increasing the amount of time he can play by ten seconds.
+* Medicine: <img src="https://github.com/SISE-Web-Development-Environments/assignment2-oran-chen/blob/master/images/medicine.jpg" height="24"> - Increasing the amount of lives by 1.
+* Clock: <img src="https://github.com/SISE-Web-Development-Environments/assignment2-oran-chen/blob/master/images/stopwatch2.webp" height="24"> - Increasing the game duration by 10 seconds.
