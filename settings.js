@@ -132,8 +132,8 @@ function showSettings() {
     document.getElementById('showSettings10points').style.color= thirtyPercentColor.valueOf();
     document.getElementById('showSettings15points').innerText= "25 points ";
     document.getElementById('showSettings15points').style.color= tenPercentColor.valueOf();
-    document.getElementById('showSettingsNums').innerText= "* Balls #: " + numOfBalls.valueOf()
-        + '\n' + "* Ghosts #: " + numOfGhosts.valueOf()
+    document.getElementById('showSettingsNums').innerText= "* Balls number: " + numOfBalls.valueOf()
+        + '\n' + "* Ghosts number: " + numOfGhosts.valueOf()
         + '\n' + "* Game time: " + time.valueOf();
 }
 

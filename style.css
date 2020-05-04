@@ -25,22 +25,24 @@
     font-size: 15px;
     text-align: center;
 }
-#gameleft{
-    float: left;
-    list-style: none;
-    width: 60%;
-    /*margin: 14px 0 12px 0;*/
-}
-#gameright{
-    float: right;
-    width:32%;
-}
+/*#gameleft{*/
+/*    float: left;*/
+/*    list-style: none;*/
+/*    width: 60%;*/
+/*    !*margin: 14px 0 12px 0;*!*/
+/*}*/
+/*#gameright{*/
+/*    float: right;*/
+/*    width:32%;*/
+/*}*/
 html, body {
     height: 100%;
+    width:100%;
 }
 body {
     display: flex;
     flex-direction: column;
+    background: url(images/background2.webp)
 }
 .Site-content {
     flex: 1 0 auto;
@@ -81,10 +83,6 @@ body {
     font-family: 'source_sans_problack', "Arial Black", Gadget, sans-serif;
     font-weight: normal;
 }
-body{
-    background: url(images/background2.webp)
-}
-
 .btn:hover {
     background-color: black;
 }
@@ -112,9 +110,9 @@ logo{
     font-size: 16px;
 }
 #canvas{
-    padding: 10px 0 70px 0;
-    margin-left: auto;
-    margin-right: auto;
+    padding: 10px 0 10px 0;
+    /*margin-left: auto;*/
+    margin-left: 10%;
     display: block;
 }
 
@@ -181,7 +179,7 @@ h4{
     font-weight: bold;
 }
 #music{
-    padding-bottom: 100px;
+    /*padding-bottom: 100px;*/
     background: url(images/background2.webp)
 }
 #playpause{
@@ -194,13 +192,13 @@ h4{
     float: left;
     font-weight: bold;
     color: black;
-    padding-bottom: 20px;
+    /*padding-bottom: 40px;*/
 }
 h5 {
     font-family: myFont;
     color: black;
-    text-align: left;
-    font-size: 35px;
+    text-align: center;
+    font-size: 25px;
     font-weight: bold;
 }
 #alertgame{
@@ -209,8 +207,8 @@ h5 {
     max-width: 25%;
     min-width: 250px !important;
     min-height: 20%;
-    height: 285px;
-    width: 500px;
+    height: 300px;
+    width: 400px;
     left: 50%;
     top: 40%;
     padding: 1px;
@@ -275,11 +273,17 @@ h5 {
     font-family: Calibri;
     width: 20%;
 }
-
-body{
-     min-width: 1366px;
-    min-height: 768px;
+#can{
+    float: right;
+    width: 82%;
+    overflow: hidden;
 }
+#ctrl{
+    float: left;
+    width: 18%;
+    overflow: hidden;
+}
+
 
 
 
