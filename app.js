@@ -135,10 +135,12 @@ function Start() {
 					}
 
 				} else if (randomNum < (1.0 * (pacman_remain + food_remain)) / cnt && board[i][j] != 4) {
-					shape.i = i;
-					shape.j = j;
-					pacman_remain--;
-					board[i][j] = 2;
+					if(i > 5 && i < 17 &&  j > 5 && j < 17){
+						shape.i = i;
+						shape.j = j;
+						pacman_remain--;
+						board[i][j] = 2;
+					}
 				} else if (board[i][j] != 4) {
 					board[i][j] = 0;
 					dotsBoard[i][j] = 0;
@@ -152,6 +154,13 @@ function Start() {
 		var emptyCell = findRandomEmptyCell();
 		shape.i = emptyCell[0];
 		shape.j = emptyCell[1];
+
+		while(i > 5 && i < 17 &&  j > 5 && j < 17){
+			emptyCell = findRandomEmptyCell();
+			shape.i = emptyCell[0];
+			shape.j = emptyCell[1];
+		}
+
 	}
 
 	while (food_remain > 0) {
@@ -697,4 +706,3 @@ function randomDirection(i,j){
 
 	return [i,j];
 }
-
