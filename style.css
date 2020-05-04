@@ -37,6 +37,8 @@
 }
 html, body {
     height: 100%;
+    /*min-width: 1366px;*/
+    /*min-height: 768px;*/
 }
 body {
     display: flex;
@@ -194,7 +196,7 @@ h4{
     float: left;
     font-weight: bold;
     color: black;
-    padding-bottom: 20px;
+    padding-bottom: 40px;
 }
 h5 {
     font-family: myFont;
@@ -276,10 +278,6 @@ h5 {
     width: 20%;
 }
 
-body{
-     min-width: 1366px;
-    min-height: 768px;
-}
 
 
 
