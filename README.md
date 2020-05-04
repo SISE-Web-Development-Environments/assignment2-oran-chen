@@ -9,7 +9,8 @@
 ### Play our pacman game via this link:
 https://sise-web-development-environments.github.io/assignment2-oran-chen/
 
-- Instructions:
+Instructions:
+-------------
  * To play the game you have to either register, thus create a new user, or login with an existing user. The settings cannot be accessed until then
  * Only once you are loggen you are directed to the settings window.
  * You can set you own settings or choose random values. You cannot go forward to Play game if settings are not set.
