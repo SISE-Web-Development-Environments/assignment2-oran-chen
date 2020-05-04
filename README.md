@@ -22,4 +22,4 @@ https://sise-web-development-environments.github.io/assignment2-oran-chen/
 
 ### Additional Functionality:
 * Medicine: <img src="https://github.com/SISE-Web-Development-Environments/assignment2-oran-chen/blob/master/images/medicine.jpg" height="24"> - Increasing the amount of lives by one.
-* Clock: <img src="(https://github.com/SISE-Web-Development-Environments/assignment2-oran-chen/blob/master/images/stopwatch2.webp" height="24"> - Increasing the amount of time he can play by ten seconds.
+* Clock: <img src="https://github.com/SISE-Web-Development-Environments/assignment2-oran-chen/blob/master/images/stopwatch2.webp" height="24"> - Increasing the amount of time he can play by ten seconds.
