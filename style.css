@@ -110,7 +110,7 @@ logo{
     font-size: 16px;
 }
 #canvas{
-    padding: 10px 0 70px 0;
+    padding: 10px 0 10px 0;
     /*margin-left: auto;*/
     margin-left: 10%;
     display: block;
@@ -179,7 +179,7 @@ h4{
     font-weight: bold;
 }
 #music{
-    padding-bottom: 100px;
+    /*padding-bottom: 100px;*/
     background: url(images/background2.webp)
 }
 #playpause{
@@ -192,7 +192,7 @@ h4{
     float: left;
     font-weight: bold;
     color: black;
-    padding-bottom: 40px;
+    /*padding-bottom: 40px;*/
 }
 h5 {
     font-family: myFont;
