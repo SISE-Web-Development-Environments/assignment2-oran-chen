@@ -3,8 +3,8 @@
 ![](https://github.com/SISE-Web-Development-Environments/assignment2-oran-chen/blob/master/images/logopac%20-%20Copy.png)
 
 ### Submitted by:
-* Oran Shichman - id: 203388426
-* Chen Galed - id: 311123541
+* Oran Shichman
+* Chen Galed
 
 ### Play our pacman game via this link:
 https://sise-web-development-environments.github.io/assignment2-oran-chen/
